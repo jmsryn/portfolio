@@ -8,32 +8,32 @@ const certifications = [
     {
       title: 'Introduction to IoT',
       issuer: 'Cisco Networking Academy',
-      logo: 'https://aurus5.com/upload/blog/images/2017-cisco-logo-3.png',
-      link: 'https://www.credly.com/badges/example-iot',
+      logo: 'https://www.pngall.com/wp-content/uploads/13/Cisco-Logo-PNG-Photos.png',
+      link: 'https://www.credly.com/badges/229808b1-4aa4-4fdf-b099-0bb2cc4520e5',
     },
     {
       title: 'Command Line in Linux',
-      issuer: 'Cisco Networking Academy',
-      logo: 'https://aurus5.com/upload/blog/images/2017-cisco-logo-3.png',
-      link: 'https://www.credly.com/badges/example-linux',
+      issuer: 'Coursera',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Coursera_logo_%282020%29.svg/2560px-Coursera_logo_%282020%29.svg.png',
+      link: 'https://www.coursera.org/account/accomplishments/certificate/KBWRSAF2Q96B',
     },
     {
       title: 'Practical Web App Security & Testing',
       issuer: 'TCM Security',
-      logo: 'https://media.licdn.com/dms/image/v2/C560BAQFdkbctaxZDaA/company-logo_200_200/company-logo_200_200/0/1634049884027/tcm_security_inc_logo?e=2147483647&v=beta&t=Vc9ADsTlVaEnvkpQKOv9c552QfmiL8fwn5jkeNLD3b4',
-      link: 'https://cybertalents.com/certificates/example-web-app-security',
+      logo: 'https://tcm-sec.com/wp-content/uploads/2021/09/logo.png',
+      link: 'https://drive.google.com/file/d/1CBxts736wqNIeH_tzXAPg7mWQuIT7C1Y/view',
     },
     {
       title: 'Introduction to Cybersecurity',
       issuer: 'Cisco Networking Academy',
-      logo: 'https://aurus5.com/upload/blog/images/2017-cisco-logo-3.png',
-      link: 'https://www.credly.com/badges/example-cybersecurity',
+      logo: 'https://www.pngall.com/wp-content/uploads/13/Cisco-Logo-PNG-Photos.png',
+      link: 'https://www.credly.com/badges/bb67cf46-fb4d-412a-9847-a89aeb6df70b',
     },
     {
       title: 'CyberOps Associate',
       issuer: 'Cisco Networking Academy',
-      logo: 'https://aurus5.com/upload/blog/images/2017-cisco-logo-3.png',
-      link: 'https://www.credly.com/badges/example-cyberops',
+      logo: 'https://www.pngall.com/wp-content/uploads/13/Cisco-Logo-PNG-Photos.png',
+      link: 'https://www.credly.com/badges/635df40f-1ae9-48b5-853b-031cc145a133',
     },
 ];
   

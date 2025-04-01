@@ -14,7 +14,7 @@ const navItems = [
 ];
 
 export default function SideNav() {
-  const [active, setActive] = useState<string | null>(null);
+  const [active, setActive] = useState<string | null>('home'); // Default to "Home"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,11 +24,17 @@ export default function SideNav() {
       for (const item of navItems) {
         const section = document.querySelector(item.href);
         if (section) {
-          const offsetTop = (section as HTMLElement).offsetTop - 120;
-          if (scrollY >= offsetTop) {
+          // Use getBoundingClientRect() to check the visibility of the section
+          const rect = (section as HTMLElement).getBoundingClientRect();
+          if (rect.top <= 0 && rect.bottom >= 0) {
             currentSection = item.href;
           }
         }
+      }
+
+      // If the user hasn't scrolled far enough, set active to "home"
+      if (!currentSection && scrollY <= 100) {
+        currentSection = 'home';
       }
 
       setActive(currentSection);
@@ -48,10 +54,9 @@ export default function SideNav() {
               <a
                 href={item.href}
                 className={`block pl-3 py-1 transition-all duration-200 font-medium 
-                  ${
-                    isActive
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                  ${isActive
+                    ? 'text-primary'
+                    : 'text-muted-foreground hover:text-primary'
                   }`}
               >
                 {item.name}
@@ -69,8 +74,8 @@ export default function SideNav() {
         })}
       </ul>
       <div className="pt-6">
-    <ThemeToggle />
-  </div>
+        <ThemeToggle />
+      </div>
     </nav>
   );
 }

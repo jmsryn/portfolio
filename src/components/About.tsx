@@ -50,19 +50,16 @@ export default function About() {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        I&apos;m James Ryan Gaid, a passionate Software QA Engineer at Theoria Medical.
-        With a B.S. in Information Technology, I specialize in building robust and efficient test automation frameworks using JavaScript and Playwright. 
-        My skill set includes API testing, performance testing, and penetration testing — all backed by hands-on experience maintaining CI/CD pipelines.
+        I’m a passionate QA Engineer with a B.S. in Information Technology, specializing in software quality assurance, automation, and cybersecurity. Currently at Theoria Medical, I lead test strategies, build CI/CD pipelines, and conduct API, performance, and penetration testing. Skilled in tools like Cypress, Selenium, Playwright, GraphQL, Jira, and more, I focus on delivering comprehensive testing solutions to ensure product quality.
       </motion.p>
-
+      <br />
       <motion.p
-        className="text-muted-foreground text-lg leading-relaxed mt-4"
+        className="text-muted-foreground text-lg leading-relaxed"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
       >
-        I hold cybersecurity certifications and placed <strong>3rd in a national CTF</strong> competition, which fuels my love for all things tech and secure development. 
-        I&apos;m always seeking opportunities to improve product quality through automation, collaboration, and continuous learning.
+         As a cybersecurity enthusiast, I am committed to staying on top of the latest trends and best practices to help safeguard software. Always eager to learn and deliver secure, high-quality software that makes a difference.
       </motion.p>
       <motion.div
         className="mt-6"

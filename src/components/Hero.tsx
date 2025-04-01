@@ -42,7 +42,7 @@ export default function Hero() {
       </motion.p>
 
       <motion.a
-        href="/path-to-your-cv.pdf"
+        href="/files/James_Ryan_Gaid_Resume.pdf"
         download
         className="inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm font-mono transition-all duration-300
                   text-white bg-gradient-to-br from-[#1e293b] to-[#334155] 
