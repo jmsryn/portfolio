@@ -4,12 +4,11 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import SectionWrapper from './SectionWrapper';
 
-import { Terminal, Bug, ShieldCheck, Zap, Github, Cpu, VenetianMask, FlaskConical, ListChecks } from 'lucide-react';
+import { Terminal, Bug, ShieldCheck , Github, Cpu, VenetianMask, FlaskConical, ListChecks } from 'lucide-react';
 
 const skills = [
   { name: 'Linux CLI', icon: <Terminal className="w-5 h-5 text-primary" /> },
   { name: 'Pen Testing', icon: <ShieldCheck className="w-5 h-5 text-primary" /> },
-//   { name: 'Automation', icon: <Zap className="w-5 h-5 text-primary" /> },
   { name: 'API Testing', icon: <Bug className="w-5 h-5 text-primary" /> },
   { name: 'CI/CD', icon: <Cpu className="w-5 h-5 text-primary" /> },
   { name: 'Git', icon: <Github className="w-5 h-5 text-primary" /> },
@@ -17,20 +16,6 @@ const skills = [
   { name: 'Cypress', icon: <FlaskConical className="w-5 h-5 text-primary" /> },
   { name: 'Jira', icon: <ListChecks className="w-5 h-5 text-primary" /> },
 ];
-
-  
-  const badgeVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.05,
-        duration: 0.4,
-        ease: 'easeOut',
-      },
-    }),
-  };
 
 export default function About() {
   return (
@@ -61,7 +46,7 @@ export default function About() {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        I'm James Ryan Gaid, a passionate Software QA Engineer at Theoria Medical.
+        I&apos;m James Ryan Gaid, a passionate Software QA Engineer at Theoria Medical.
         With a B.S. in Information Technology, I specialize in building robust and efficient test automation frameworks using JavaScript and Playwright. 
         My skill set includes API testing, performance testing, and penetration testing — all backed by hands-on experience maintaining CI/CD pipelines.
       </motion.p>
@@ -73,7 +58,7 @@ export default function About() {
         transition={{ delay: 0.4, duration: 0.6 }}
       >
         I hold cybersecurity certifications and placed <strong>3rd in a national CTF</strong> competition, which fuels my love for all things tech and secure development. 
-        I’m always seeking opportunities to improve product quality through automation, collaboration, and continuous learning.
+        I&apos;m always seeking opportunities to improve product quality through automation, collaboration, and continuous learning.
       </motion.p>
       <motion.div
         className="mt-6"

@@ -21,7 +21,7 @@ export default function Contact() {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        Whether you're hiring, collaborating, or just want to say hi — I'm always open!
+        Whether you&apos;re hiring, collaborating, or just want to say hi — I&apos;m always open!
       </motion.p>
 
       <motion.div
