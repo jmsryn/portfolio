@@ -64,9 +64,12 @@ export default function Certifications() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        >
-        Certifications
-     </motion.h2>
+      >
+        <h2 className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1">
+          ➜ ~ <span className="text-gray-900 dark:text-white">certifications</span>
+          <span className="w-[1px] h-5 bg-gray-900 dark:bg-white animate-blink"></span>
+        </h2>
+      </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {certifications.map((cert, i) => (
