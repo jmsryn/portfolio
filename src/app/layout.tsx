@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: 'James Ryan Gaid | QA Engineer',
   description:
     'QA Engineer passionate about automation, security, and quality. Explore my portfolio and certifications.',
-  metadataBase: new URL('https://your-portfolio.vercel.app'), // Replace with your actual domain
+  metadataBase: new URL('https://jrgaid.site'),
   openGraph: {
     title: 'James Ryan Gaid | QA Engineer',
     description:
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'James Ryan Gaid Portfolio',
     images: [
       {
-        url: '/og-image.png', // Place this image inside /public
+        url: '/images/profile.png',
         width: 1200,
         height: 630,
         alt: 'James Ryan Gaid Portfolio',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'James Ryan Gaid | QA Engineer',
     description: 'QA • Automation • Cybersecurity',
-    images: ['/og-image.png'],
+    images: ['/images/profile.png'],
   },
 };
 
