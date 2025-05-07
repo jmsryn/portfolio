@@ -26,17 +26,17 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
       >
         <motion.h1
-          className="font-mono text-green-600 dark:text-green-400 text-sm mb-3 flex items-center gap-2"
+          className="font-mono text-primary text-sm mb-3 flex items-center gap-2"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          ➜ ~ <span className="font-semibold">jamesgaid@dev</span>
+          ➜ ~ <span className="font-semibold text-foreground">jamesgaid@sec</span>
         </motion.h1>
 
         {/* Name with gradient text */}
         <motion.h2
-          className="text-5xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400"
+          className="text-5xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -46,13 +46,13 @@ export default function Hero() {
 
         {/* Roles with typewriter effect */}
         <motion.p
-          className="font-mono text-sm md:text-base text-gray-600 dark:text-gray-400 mb-8"
+          className="font-mono text-sm md:text-base text-muted-foreground mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           QA Engineer • Automation Specialist • Security Enthusiast
-          <span className="inline-block w-[5px] h-[1em] bg-gray-900 dark:bg-white animate-blink align-middle ml-1"></span>
+          <span className="inline-block w-[5px] h-[1em] bg-foreground animate-blink align-middle ml-1"></span>
         </motion.p>
 
         {/* CTA buttons */}
@@ -66,13 +66,12 @@ export default function Hero() {
             href="/files/James_Ryan_Gaid_Resume.pdf"
             download
             className="inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm font-mono transition-all duration-300
-                      text-white bg-gradient-to-br from-[#1e293b] to-[#334155]
-                      hover:from-[#334155] hover:to-[#475569]
-                      border border-[#475569] shadow-md hover:shadow-lg"
+                      text-primary-foreground bg-primary hover:bg-primary/90
+                      border border-primary/50 shadow-md hover:shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Download className="w-4 h-4 text-teal-400" />
+            <Download className="w-4 h-4 text-primary-foreground" />
             ./Download_CV.pdf
           </motion.a>
 

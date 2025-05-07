@@ -56,16 +56,16 @@ export default function About() {
       />
       <div className="mb-12">
         <motion.div
-          className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1"
+          className="font-mono text-lg text-primary mb-4 flex items-center justify-center gap-1"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          ➜ ~ <span className="text-gray-900 dark:text-white">about_me</span>
-          <span className="w-[1px] h-5 bg-gray-900 dark:bg-white animate-blink"></span>
+          ➜ ~ <span className="text-foreground">about_me</span>
+          <span className="w-[1px] h-5 bg-foreground animate-blink"></span>
         </motion.div>
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
+          className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -121,13 +121,8 @@ export default function About() {
                             {skills.map((skill) => (
                                 <motion.div
                                     key={skill.name}
-                                    className="flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm rounded-lg border border-border shadow-sm hover:shadow-md hover:bg-card transition-all duration-300"
-                                    whileHover={{
-                                        scale: 1.05,
-                                        backgroundColor: 'var(--primary-10)',
-                                        borderColor: 'var(--primary)'
-                                    }}
-                                    style={{ '--primary-10': 'rgba(var(--primary-rgb), 0.1)' } as React.CSSProperties}
+                                    className="flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm rounded-lg border border-border shadow-sm hover:shadow-md hover:bg-primary/10 hover:border-primary transition-all duration-300"
+                                    whileHover={{ scale: 1.05 }}
                                 >
                                     <motion.div
                                         initial={{ rotate: 0 }}

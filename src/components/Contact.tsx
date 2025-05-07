@@ -8,16 +8,16 @@ export default function Contact() {
     <section id="contact" className="py-20 px-4 max-w-3xl mx-auto text-center">
       <div className="mb-12">
         <motion.div
-          className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1"
+          className="font-mono text-lg text-primary mb-4 flex items-center justify-center gap-1"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          ➜ ~ <span className="text-gray-900 dark:text-white">get_in_touch</span>
-          <span className="w-[1px] h-5 bg-gray-900 dark:bg-white animate-blink"></span>
+          ➜ ~ <span className="text-foreground">get_in_touch</span>
+          <span className="w-[1px] h-5 bg-foreground animate-blink"></span>
         </motion.div>
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
+          className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -43,7 +43,7 @@ export default function Contact() {
       >
         <a
           href="mailto:jamesgaid.dev@gmail.com"
-          className="inline-flex items-center gap-2 text-primary text-lg font-medium hover:underline hover:brightness-125 transition"
+          className="inline-flex items-center gap-2 text-primary text-lg font-medium hover:underline transition"
         >
           <Mail className="w-5 h-5" />
           jamesgaid.dev@gmail.com
