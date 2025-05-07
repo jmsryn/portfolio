@@ -48,7 +48,7 @@ export default function SideNav() {
   return (
     <nav className="hidden md:flex fixed left-0 top-0 h-full w-48 flex-col justify-center px-6 z-50">
       <motion.div
-        className="p-4 rounded-2xl backdrop-blur-md bg-background/80 border border-border shadow-lg"
+        className="p-4 rounded-2xl backdrop-blur-md bg-transparent shadow-lg"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}

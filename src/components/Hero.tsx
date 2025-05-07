@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Download, Mail } from 'lucide-react';
 import { BackgroundSwitcher } from '@/components/ui/background-switcher';
+import Terminal from './Terminal'; // Import the Terminal component
 
 export default function Hero() {
   return (
@@ -54,6 +55,16 @@ export default function Hero() {
           QA Engineer • Automation Specialist • Security Enthusiast
           <span className="inline-block w-[5px] h-[1em] bg-foreground animate-blink align-middle ml-1"></span>
         </motion.p>
+
+        {/* Terminal component */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          className="mt-8 mb-8 w-full max-w-lg mx-auto"
+        >
+          <Terminal commands={['./run_diagnostics.sh', 'Scanning system...', 'Analysis complete. No threats detected.']} loop={true} />
+        </motion.div>
 
         {/* CTA buttons */}
         <motion.div

@@ -25,16 +25,21 @@ const skillsByCategory = {
   'Testing': [
     { name: 'API Testing', icon: <Bug className="w-5 h-5 text-primary" /> },
     { name: 'Performance Testing', icon: <Gauge className="w-5 h-5 text-primary" /> },
+    { name: 'Security Testing', icon: <ShieldCheck className="w-5 h-5 text-primary" /> },
+    { name: 'Manual Testing', icon: <ListChecks className="w-5 h-5 text-primary" /> },
+    { name: 'Automation Testing', icon: <Cpu className="w-5 h-5 text-primary" /> },
   ],
   'DevOps & Tools': [
     { name: 'CI/CD', icon: <Cpu className="w-5 h-5 text-primary" /> },
     { name: 'Git', icon: <Github className="w-5 h-5 text-primary" /> },
     { name: 'Linux CLI', icon: <Terminal className="w-5 h-5 text-primary" /> },
     { name: 'Jira', icon: <ListChecks className="w-5 h-5 text-primary" /> },
+    { name: 'Azure DevOps', icon: <Server className="w-5 h-5 text-primary" /> },
+    { name: 'Qase', icon: <Workflow className="w-5 h-5 text-primary" /> },
   ],
   'Security': [
     { name: 'Pen Testing', icon: <ShieldCheck className="w-5 h-5 text-primary" /> },
-    { name: 'Security Testing', icon: <Lock className="w-5 h-5 text-primary" /> },
+    { name: 'Web Security Testing', icon: <Globe className="w-5 h-5 text-primary" /> },
   ]
 };
 
@@ -55,15 +60,6 @@ export default function About() {
         className="rounded-full mx-auto mb-6 shadow-lg"
       />
       <div className="mb-12">
-        <motion.div
-          className="font-mono text-lg text-primary mb-4 flex items-center justify-center gap-1"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          ➜ ~ <span className="text-foreground">about_me</span>
-          <span className="w-[1px] h-5 bg-foreground animate-blink"></span>
-        </motion.div>
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
           initial={{ opacity: 0, y: 20 }}

@@ -12,7 +12,15 @@ const projects = [
     // Using a placeholder image URL that represents a financial tracker website
     image: 'https://placehold.co/600x400/3b82f6/ffffff?text=Financial+Tracker',
     github: 'https://github.com/jmsryn',
-    demo: 'https://financial.jrgaid.site'
+    demo: 'https://financial.jrgaid.site',
+    challenges: [], // Placeholder for technical challenges
+    solutions: [], // Placeholder for innovative solutions
+    testing: [], // Placeholder for testing methodologies
+    impact: '', // Placeholder for impact of work
+    problemSolving: '', // Placeholder for problem-solving details
+    security: '', // Placeholder for security considerations
+    technicalDepth: '', // Placeholder for technical depth
+    postmortem: '' // Placeholder for postmortem/lessons learned
   },
   {
     title: 'AutoTestGen: AI Test Case Generator',
@@ -21,7 +29,15 @@ const projects = [
     // Using a placeholder image URL that represents an AI/testing tool
     image: 'https://placehold.co/600x400/10b981/ffffff?text=AI+Test+Generator',
     github: 'https://github.com/jmsryn',
-    demo: 'https://autotestgen.jrgaid.site'
+    demo: 'https://autotestgen.jrgaid.site',
+    challenges: [],
+    solutions: [],
+    testing: [],
+    impact: '',
+    problemSolving: '',
+    security: '',
+    technicalDepth: '',
+    postmortem: ''
   },
   {
     title: 'Element Selector Tool',
@@ -30,7 +46,15 @@ const projects = [
     // Using a placeholder image URL that represents a web development tool
     image: 'https://placehold.co/600x400/f59e0b/ffffff?text=Element+Selector',
     github: 'https://github.com/jmsryn',
-    demo: '#'
+    demo: '#',
+    challenges: [],
+    solutions: [],
+    testing: [],
+    impact: '',
+    problemSolving: '',
+    security: '',
+    technicalDepth: '',
+    postmortem: ''
   },
   {
     title: 'All-in Security Tool',
@@ -39,7 +63,15 @@ const projects = [
     // Using a placeholder image URL that represents cybersecurity
     image: 'https://placehold.co/600x400/ef4444/ffffff?text=Security+Tool',
     github: 'https://github.com/jmsryn',
-    demo: '#'
+    demo: '#',
+    challenges: [],
+    solutions: [],
+    testing: [],
+    impact: '',
+    problemSolving: '',
+    security: '',
+    technicalDepth: '',
+    postmortem: ''
   }
 ];
 
@@ -48,15 +80,6 @@ export default function ProjectsGrid() {
     <SectionWrapper>
       <section id="projects" className="py-20 px-4 max-w-6xl mx-auto">
         <div className="mb-12">
-          <motion.div
-            className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            ➜ ~ <span className="text-gray-900 dark:text-white">projects</span>
-            <span className="w-[1px] h-5 bg-gray-900 dark:bg-white animate-blink"></span>
-          </motion.div>
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
             initial={{ opacity: 0, y: 20 }}
@@ -104,6 +127,75 @@ export default function ProjectsGrid() {
               {/* Project description */}
               <div className="p-4">
                 <p className="text-muted-foreground">{project.description}</p>
+
+                {/* New sections for technical details */}
+                {project.challenges && project.challenges.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Challenges:</h4>
+                    <ul className="list-disc list-inside text-muted-foreground">
+                      {project.challenges.map((challenge, index) => (
+                        <li key={index}>{challenge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {project.solutions && project.solutions.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Solutions:</h4>
+                    <ul className="list-disc list-inside text-muted-foreground">
+                      {project.solutions.map((solution, index) => (
+                        <li key={index}>{solution}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {project.testing && project.testing.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Testing Methodologies:</h4>
+                    <ul className="list-disc list-inside text-muted-foreground">
+                      {project.testing.map((methodology, index) => (
+                        <li key={index}>{methodology}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {project.impact && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Impact:</h4>
+                    <p className="text-muted-foreground">{project.impact}</p>
+                  </div>
+                )}
+
+                {project.problemSolving && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Problem Solving:</h4>
+                    <p className="text-muted-foreground">{project.problemSolving}</p>
+                  </div>
+                )}
+
+                {project.security && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Security Considerations:</h4>
+                    <p className="text-muted-foreground">{project.security}</p>
+                  </div>
+                )}
+
+                {project.technicalDepth && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Technical Depth:</h4>
+                    <p className="text-muted-foreground">{project.technicalDepth}</p>
+                  </div>
+                )}
+
+                {project.postmortem && (
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold text-foreground">Postmortem/Lessons Learned:</h4>
+                    <p className="text-muted-foreground">{project.postmortem}</p>
+                  </div>
+                )}
 
                 <div className="flex justify-end gap-3 mt-4">
                   {project.github && (
