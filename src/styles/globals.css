@@ -77,6 +77,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Background gradient colors for day mode */
+  --background-gradient-start: var(--background);
+  --background-gradient-end: oklch(0.98 0 0); /* Very light grey */
 }
 
 .dark {
@@ -111,6 +115,10 @@
   --sidebar-accent-foreground: oklch(0.9 0 0);
   --sidebar-border: oklch(0.3 0 0); /* Dark grey border */
   --sidebar-ring: oklch(0.4 0.1 150); /* Teal ring */
+
+  /* Background gradient colors for dark mode */
+  --background-gradient-start: var(--background);
+  --background-gradient-end: oklch(0.12 0 0);
 }
 
 @layer base {
@@ -119,6 +127,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Subtle gradient for QA/Hacker theme */
+    background: linear-gradient(to bottom, var(--background-gradient-start) 0%, var(--background-gradient-end) 100%);
   }
 }
 
