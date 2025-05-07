@@ -6,17 +6,25 @@ import { Mail, Github, Linkedin } from 'lucide-react';
 export default function Contact() {
   return (
     <section id="contact" className="py-20 px-4 max-w-3xl mx-auto text-center">
-      <motion.h2
-        className="text-3xl md:text-4xl font-bold text-center mb-12 relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h2 className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1">
+      <div className="mb-12">
+        <motion.div
+          className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           ➜ ~ <span className="text-gray-900 dark:text-white">get_in_touch</span>
           <span className="w-[1px] h-5 bg-gray-900 dark:bg-white animate-blink"></span>
-        </h2>
-      </motion.h2>
+        </motion.div>
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          Contact Me
+        </motion.h2>
+      </div>
 
       <motion.p
         className="text-muted-foreground text-lg max-w-xl mx-auto mb-10"

@@ -5,7 +5,7 @@ import SideNav from "@/components/SideNav";
 import MobileNav from "@/components/MobileNav";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
-import { ThemeProvider } from "next-themes";
+import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import OpenToWork from "@/components/OpenToWork";
 
 const geistSans = Geist({
@@ -55,18 +55,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+      <head />
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProviderWrapper>
           <ScrollProgress />
           <SideNav />
           <MobileNav />
           <BackToTop />
           <OpenToWork />
           {children}
-        </body>
-      </ThemeProvider>
+        </ThemeProviderWrapper>
+      </body>
     </html>
   );
 }

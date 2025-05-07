@@ -4,26 +4,49 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import SectionWrapper from './SectionWrapper';
 
-import { Terminal, Bug, ShieldCheck , Github, Cpu, VenetianMask, FlaskConical, ListChecks } from 'lucide-react';
+import {
+  Terminal, Bug, ShieldCheck, Github, Cpu, VenetianMask, FlaskConical, ListChecks,
+  Code, Braces, FileCode, Gauge, Lock, Server, Workflow, Database, Globe, Laptop
+} from 'lucide-react';
 
-const skills = [
-  { name: 'Linux CLI', icon: <Terminal className="w-5 h-5 text-primary" /> },
-  { name: 'Pen Testing', icon: <ShieldCheck className="w-5 h-5 text-primary" /> },
-  { name: 'API Testing', icon: <Bug className="w-5 h-5 text-primary" /> },
-  { name: 'CI/CD', icon: <Cpu className="w-5 h-5 text-primary" /> },
-  { name: 'Git', icon: <Github className="w-5 h-5 text-primary" /> },
-  { name: 'Playwright', icon: <VenetianMask className="w-5 h-5 text-primary" /> },
-  { name: 'Cypress', icon: <FlaskConical className="w-5 h-5 text-primary" /> },
-  { name: 'Jira', icon: <ListChecks className="w-5 h-5 text-primary" /> },
-];
+// Skills grouped by category
+const skillsByCategory = {
+  'Programming': [
+    { name: 'JavaScript', icon: <Code className="w-5 h-5 text-primary" /> },
+    { name: 'TypeScript', icon: <Braces className="w-5 h-5 text-primary" /> },
+    { name: 'Python', icon: <FileCode className="w-5 h-5 text-primary" /> },
+    { name: 'HTML/CSS', icon: <Globe className="w-5 h-5 text-primary" /> },
+  ],
+  'Automation': [
+    { name: 'Selenium', icon: <Laptop className="w-5 h-5 text-primary" /> },
+    { name: 'Cypress', icon: <FlaskConical className="w-5 h-5 text-primary" /> },
+    { name: 'Playwright', icon: <VenetianMask className="w-5 h-5 text-primary" /> },
+  ],
+  'Testing': [
+    { name: 'API Testing', icon: <Bug className="w-5 h-5 text-primary" /> },
+    { name: 'Performance Testing', icon: <Gauge className="w-5 h-5 text-primary" /> },
+  ],
+  'DevOps & Tools': [
+    { name: 'CI/CD', icon: <Cpu className="w-5 h-5 text-primary" /> },
+    { name: 'Git', icon: <Github className="w-5 h-5 text-primary" /> },
+    { name: 'Linux CLI', icon: <Terminal className="w-5 h-5 text-primary" /> },
+    { name: 'Jira', icon: <ListChecks className="w-5 h-5 text-primary" /> },
+  ],
+  'Security': [
+    { name: 'Pen Testing', icon: <ShieldCheck className="w-5 h-5 text-primary" /> },
+    { name: 'Security Testing', icon: <Lock className="w-5 h-5 text-primary" /> },
+  ]
+};
 
 export default function About() {
   return (
     <SectionWrapper>
     <section
       id="about"
-      className="py-20 px-4 max-w-3xl mx-auto text-center"
+      className="py-20 px-4 max-w-3xl mx-auto text-center relative"
     >
+      {/* Subtle background effect */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 rounded-3xl blur-3xl opacity-50"></div>
       <Image
         src="/images/profile.jpg"
         alt="James Ryan Gaid"
@@ -31,17 +54,25 @@ export default function About() {
         height={120}
         className="rounded-full mx-auto mb-6 shadow-lg"
       />
-      <motion.h2
-        className="text-3xl md:text-4xl font-bold text-center mb-12 relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h2 className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1">
+      <div className="mb-12">
+        <motion.div
+          className="font-mono text-lg text-green-600 dark:text-green-400 mb-4 flex items-center justify-center gap-1"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           ➜ ~ <span className="text-gray-900 dark:text-white">about_me</span>
           <span className="w-[1px] h-5 bg-gray-900 dark:bg-white animate-blink"></span>
-        </h2>
-      </motion.h2>
+        </motion.div>
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          About Me
+        </motion.h2>
+      </div>
 
 
       <motion.p
@@ -69,20 +100,49 @@ export default function About() {
         >
         </motion.div>
         <motion.div
-            className="mt-8 flex flex-wrap justify-center gap-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            >
-            {skills.map((skill) => (
-                <div
-                key={skill.name}
-                className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg shadow-sm hover:shadow-md transition"
-                >
-                {skill.icon}
-                <span>{skill.name}</span>
-                </div>
-            ))}
+            className="mt-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+        >
+            <h3 className="text-2xl font-bold mb-6 text-center">Technical Skills</h3>
+
+            <div className="space-y-8">
+                {Object.entries(skillsByCategory).map(([category, skills], categoryIndex) => (
+                    <motion.div
+                        key={category}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+                        className="space-y-3"
+                    >
+                        <h4 className="text-lg font-semibold text-primary">{category}</h4>
+                        <div className="flex flex-wrap gap-3">
+                            {skills.map((skill) => (
+                                <motion.div
+                                    key={skill.name}
+                                    className="flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm rounded-lg border border-border shadow-sm hover:shadow-md hover:bg-card transition-all duration-300"
+                                    whileHover={{
+                                        scale: 1.05,
+                                        backgroundColor: 'var(--primary-10)',
+                                        borderColor: 'var(--primary)'
+                                    }}
+                                    style={{ '--primary-10': 'rgba(var(--primary-rgb), 0.1)' } as React.CSSProperties}
+                                >
+                                    <motion.div
+                                        initial={{ rotate: 0 }}
+                                        whileHover={{ rotate: 15 }}
+                                        className="text-primary"
+                                    >
+                                        {skill.icon}
+                                    </motion.div>
+                                    <span>{skill.name}</span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
         </motion.div>
 
 

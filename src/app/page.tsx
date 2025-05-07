@@ -7,19 +7,26 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SectionDivider from '@/components/SectionDivider';
 
+import ProjectsGrid from '@/components/ProjectsGrid';
+
 export default function Home() {
   return (
-    <main>
+    <main className="relative">
+      {/* Background gradient elements */}
+      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-accent/5 blur-3xl z-[-1]" />
+
       <Hero />
-      <SectionDivider />
+      <SectionDivider variant="gradient" />
       <About />
-      <SectionDivider />
+      <SectionDivider variant="gradient" />
       <Experience />
-      <SectionDivider />
+      <SectionDivider variant="dots" />
+      <ProjectsGrid />
+      <SectionDivider variant="gradient" />
       <Education />
-      <SectionDivider />
+      <SectionDivider variant="dots" />
       <Certifications />
-      <SectionDivider />
+      <SectionDivider variant="gradient" />
       <Contact />
       <Footer />
     </main>
