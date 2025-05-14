@@ -27,7 +27,7 @@ export default function Contact() {
       </motion.p>
 
       <motion.div
-        className="space-y-4"
+        className="space-y-4 bg-card rounded-md p-4"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
