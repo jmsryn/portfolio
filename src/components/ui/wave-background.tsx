@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from 'next-themes';
 
 export function WaveBackground({
   waveCount = 3,
@@ -17,7 +16,6 @@ export function WaveBackground({
   animationDuration?: number;
   blur?: number;
 }) {
-  const { theme, systemTheme } = useTheme();
   
   // Generate waves
   const waves = Array.from({ length: waveCount }, (_, i) => {
