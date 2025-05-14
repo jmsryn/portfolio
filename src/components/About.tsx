@@ -6,7 +6,7 @@ import SectionWrapper from './SectionWrapper';
 
 import {
   Terminal, Bug, ShieldCheck, Github, Cpu, VenetianMask, FlaskConical, ListChecks,
-  Code, Braces, FileCode, Gauge, Lock, Server, Workflow, Database, Globe, Laptop
+  Code, Braces, FileCode, Gauge, Server, Workflow, Globe, Laptop
 } from 'lucide-react';
 
 // Skills grouped by category

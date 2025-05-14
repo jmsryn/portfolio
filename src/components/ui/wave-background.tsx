@@ -21,7 +21,6 @@ export function WaveBackground({
   
   // Get the effective theme (handle 'system' setting)
   const effectiveTheme = theme === 'system' ? systemTheme : theme;
-  const isDarkTheme = effectiveTheme === 'dark';
   
   // Generate waves
   const waves = Array.from({ length: waveCount }, (_, i) => {

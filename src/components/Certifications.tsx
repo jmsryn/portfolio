@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import SectionWrapper from './SectionWrapper';
 
 const certifications = [
@@ -91,9 +92,11 @@ export default function Certifications() {
                 className="flex flex-col gap-2"
                 >
                 <div className="flex items-center gap-3">
-                    <img
+                    <Image
                     src={cert.logo}
                     alt={cert.issuer}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain"
                     />
                     <div>

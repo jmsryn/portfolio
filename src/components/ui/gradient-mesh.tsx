@@ -121,7 +121,7 @@ export function GradientMesh({
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrame);
     };
-  }, [theme, systemTheme, cellSize, noiseIntensity, speed, colorIntensity]);
+  }, [theme, systemTheme, cellSize, noiseIntensity, speed, colorIntensity, isDarkTheme]);
 
   return (
     <canvas
