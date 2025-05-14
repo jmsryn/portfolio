@@ -19,9 +19,6 @@ export function WaveBackground({
 }) {
   const { theme, systemTheme } = useTheme();
   
-  // Get the effective theme (handle 'system' setting)
-  const effectiveTheme = theme === 'system' ? systemTheme : theme;
-  
   // Generate waves
   const waves = Array.from({ length: waveCount }, (_, i) => {
     const index = i + 1;
