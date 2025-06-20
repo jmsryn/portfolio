@@ -46,12 +46,31 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      // Replace 'YOUR_FORM_ID' with your actual Formspree form ID
+      const formspreeUrl = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID || 'YOUR_FORM_ID'}`;
+      
+      const response = await fetch(formspreeUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
     } catch (error) {
+      console.error('Error sending email:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -291,4 +310,4 @@ export default function Contact() {
       </section>
     </SectionWrapper>
   );
-}
+} 
