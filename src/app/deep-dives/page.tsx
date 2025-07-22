@@ -2,11 +2,43 @@
 
 import { motion } from 'framer-motion';
 import { 
-  ArrowLeft, Clock, User, Tag, ExternalLink, ChevronRight, 
-  Shield, Bug, Zap, Target, Code, Database, TrendingUp, 
-  CheckCircle2, AlertTriangle, BookOpen, Github
+  ArrowLeft, Clock, User, ChevronRight, BookOpen
 } from 'lucide-react';
 import Link from 'next/link';
+
+interface Metric {
+  label: string;
+  value: string;
+  improvement: string;
+}
+
+interface Section {
+  title: string;
+  content: string;
+  keyPoints?: string[];
+  metrics?: Metric[];
+}
+
+interface DeepDive {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  publishDate: string;
+  author: string;
+  tags: string[];
+  featured: boolean;
+  image: string;
+  content: {
+    introduction: string;
+    sections: Section[];
+    tools: string[];
+    challenges: string[];
+    solutions: string[];
+    lessonsLearned?: string[];
+  };
+}
 
 const deepDives = [
   {
@@ -195,8 +227,6 @@ const deepDives = [
   }
 ];
 
-const categories = ['All', 'Security Testing', 'Test Automation', 'QA Leadership', 'Performance Testing'];
-
 export default function DeepDivesPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -338,9 +368,9 @@ export default function DeepDivesPage() {
                     </p>
 
                     {/* Key metrics preview */}
-                    {article.content.sections[2]?.metrics && (
+                    {article.content.sections[2] && 'metrics' in article.content.sections[2] && article.content.sections[2].metrics && (
                       <div className="flex gap-4 mb-3">
-                        {article.content.sections[2].metrics.slice(0, 2).map((metric, idx) => (
+                        {article.content.sections[2].metrics.slice(0, 2).map((metric: Metric, idx: number) => (
                           <div key={idx} className="text-center">
                             <div className="text-sm font-bold text-primary">{metric.value}</div>
                             <div className="text-xs text-muted-foreground">{metric.label}</div>
@@ -380,7 +410,7 @@ export default function DeepDivesPage() {
               <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4">More Content Coming Soon</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                I'm constantly exploring new testing methodologies and sharing insights from real-world QA challenges. 
+                I&apos;m constantly exploring new testing methodologies and sharing insights from real-world QA challenges. 
                 Follow my journey as I dive deeper into advanced testing strategies.
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">

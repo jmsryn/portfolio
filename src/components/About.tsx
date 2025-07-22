@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle, Award, TrendingUp, Users } from 'lucide-react';
+import { CheckCircle, TrendingUp, Users } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
 const skills = [
@@ -47,15 +47,15 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <p>
-                  I'm a passionate QA Engineer with expertise in automated testing, security testing, and full-stack development. 
+                  I&apos;m a passionate QA Engineer with expertise in automated testing, security testing, and full-stack development. 
                   I specialize in creating robust testing frameworks and ensuring software quality across the development lifecycle.
                 </p>
                 <p>
                   My experience spans web application testing, API testing, security assessments, and test automation. 
-                  I'm committed to delivering high-quality software solutions and continuously learning new technologies.
+                  I&apos;m committed to delivering high-quality software solutions and continuously learning new technologies.
                 </p>
                 <p>
-                  When I'm not testing applications or writing automation scripts, I enjoy contributing to open-source projects 
+                  When I&apos;m not testing applications or writing automation scripts, I enjoy contributing to open-source projects 
                   and staying updated with the latest trends in software testing and cybersecurity.
                 </p>
               </motion.div>

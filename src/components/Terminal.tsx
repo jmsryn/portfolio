@@ -65,7 +65,7 @@ export default function Terminal({
   }, [commandIndex, charIndex, isTyping, commands, typingSpeed, loop]);
 
   return (
-    <div className="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-md overflow-auto">
+    <div className="text-green-400 font-mono text-sm overflow-auto">
       <pre>
         {displayedText}
         {showCursor && <span className="animate-blink">█</span>}

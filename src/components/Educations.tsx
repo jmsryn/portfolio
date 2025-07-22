@@ -8,7 +8,7 @@ const education = {
   institution: 'University of Science and Technology of Southern Philippines',
   period: '2020 – 2024',
   description: 'Focused on Software Engineering, QA practices, and participated in competitive programming and coding competitions.',
-  impact: 'Achieved Dean\'s List honors for multiple semesters.', // Placeholder for quantifiable impact
+  impact: 'Achieved Dean&apos;s List honors for multiple semesters.', // Placeholder for quantifiable impact
   contributions: [ // Placeholder for technical contributions
     'Developed a capstone project on automated web application testing.',
     'Participated in inter-university coding competitions.',

@@ -9,7 +9,7 @@ import { Grid, Waves } from 'lucide-react';
 type BackgroundType = 'gradient' | 'waves';
 
 export function BackgroundSwitcher() {
-  const [activeBackground, setActiveBackground] = useState<BackgroundType>('gradient');
+  const [activeBackground, setActiveBackground] = useState<BackgroundType>('waves');
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => setIsOpen(!isOpen);

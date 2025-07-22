@@ -2,58 +2,97 @@
 
 import { motion } from 'framer-motion';
 import { 
-  Building2, Calendar, MapPin, Users, CheckCircle2, Briefcase 
+  Building2, Calendar, MapPin, CheckCircle2, Briefcase 
 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
+interface Role {
+  title: string;
+  period: string;
+  description: string;
+  achievements: string[];
+}
+
+interface Experience {
+  company: string;
+  location: string;
+  period: string;
+  type: string;
+  description: string;
+  roles: Role[];
+  technologies: string[];
+  color: string;
+}
+
 const experiences = [
   {
-    title: 'Quality Assurance Engineer',
     company: 'Theoria Medical',
     location: 'Remote',
     period: 'June 2023 – Present',
     type: 'Full-time',
-    description: 'Leading test automation efforts and maintaining CI/CD pipelines while executing API, performance, and penetration tests.',
-    achievements: [
-      'Developed and maintained automated testing frameworks',
-      'Implemented CI/CD testing integration',
-      'Performed security testing and vulnerability assessments',
-      'Collaborated with development teams on quality improvements'
+    description: 'Progressed from Software Quality Assurance Engineer to Jr. Software Development Engineer in Test, expanding expertise in test automation and development practices.',
+    roles: [
+      {
+        title: 'Jr. Software Development Engineer in Test',
+        period: 'June 2025 – Present',
+        description: 'Write and maintain automated test scripts in Playwright for UI, API, and integration layers under senior guidance. Execute existing regression and smoke suites in CI and report results.',
+        achievements: [
+          'Write and maintain automated test scripts in Playwright for UI, API, and integration layers under senior guidance',
+          'Execute existing regression and smoke suites in CI and report results in Jira or TestRail',
+          'Debug test failures, isolate environment vs. code issues, and attach logs, or screenshots to tickets',
+          'Update test data sets for local and cloud test environments',
+          'Participate in sprint planning, daily stand-ups, and retros to understand acceptance criteria and refine test cases early',
+          'Monitor flaky tests and rerun or quarantine them while collaborating with devs to stabilize root causes',
+          'Document new test scenarios, create simple wiki pages, and peer-review PRs for coding standards and readability'
+        ]
+      },
+      {
+        title: 'Software Quality Assurance Engineer',
+        period: 'June 2023 – July 2025',
+        description: 'Led test automation efforts and maintained CI/CD pipelines while executing API, performance, and penetration tests.',
+        achievements: [
+          'Developed and maintained automated testing frameworks',
+          'Implemented CI/CD testing integration',
+          'Performed security testing and vulnerability assessments',
+          'Collaborated with development teams on quality improvements'
+        ]
+      }
     ],
-    technologies: ['Cypress', 'Playwright', 'K6', 'OWASP ZAP', 'Docker', 'Postman', 'Jira', 'Qase'],
+    technologies: ['Cypress', 'Playwright', 'K6', 'OWASP ZAP', 'Docker', 'Postman', 'Jira', 'Qase', 'TestRail'],
     color: 'from-blue-500 to-cyan-500'
   },
   {
-    title: 'Lead Quality Assurance Engineer',
     company: 'Innovuze Solutions Inc.',
     location: 'Remote',
-    period: 'Dec 2022 – Jun 2023',
+    period: 'Jun 2022 – Jun 2023',
     type: 'Full-time',
-    description: 'Led the QA team and managed testing processes across projects. Mentored junior testers and maintained automation scripts.',
-    achievements: [
-      'Led QA efforts across multiple client projects',
-      'Established standardized testing procedures',
-      'Implemented code review processes',
-      'Developed onboarding program for new team members'
+    description: 'Progressed from Quality Assurance Engineer to Lead Quality Assurance Engineer, demonstrating growth in technical leadership and team management capabilities.',
+    roles: [
+      {
+        title: 'Lead Quality Assurance Engineer',
+        period: 'Dec 2022 – Jun 2023',
+        description: 'Led the QA team and managed testing processes across projects. Mentored junior testers and maintained automation scripts.',
+        achievements: [
+          'Led QA efforts across multiple client projects',
+          'Established standardized testing procedures',
+          'Implemented code review processes',
+          'Developed onboarding program for new team members'
+        ]
+      },
+      {
+        title: 'Quality Assurance Engineer',
+        period: 'Jun 2022 – Dec 2022',
+        description: 'Performed manual and automated testing on web platforms. Collaborated closely with developers to resolve bugs early in the SDLC.',
+        achievements: [
+          'Conducted systematic testing of web applications',
+          'Created comprehensive test documentation',
+          'Collaborated with development teams on testing practices',
+          'Participated in architectural reviews for testability'
+        ]
+      }
     ],
     technologies: ['Selenium WebDriver', 'Postman', 'MySQL', 'Git', 'Azure DevOps', 'Cypress'],
     color: 'from-purple-500 to-pink-500'
-  },
-  {
-    title: 'Quality Assurance Engineer',
-    company: 'Innovuze Solutions Inc.',
-    location: 'Remote',
-    period: 'Jun 2022 – Dec 2022',
-    type: 'Full-time',
-    description: 'Performed manual and automated testing on web platforms. Collaborated closely with developers to resolve bugs early in the SDLC.',
-    achievements: [
-      'Conducted systematic testing of web applications',
-      'Created comprehensive test documentation',
-      'Collaborated with development teams on testing practices',
-      'Participated in architectural reviews for testability'
-    ],
-    technologies: ['Selenium WebDriver', 'Postman', 'MySQL', 'Git', 'Azure DevOps', 'Cypress'],
-    color: 'from-green-500 to-emerald-500'
   },
 ];
 
@@ -77,7 +116,7 @@ export default function Experience() {
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary transform -translate-x-0.5"></div>
 
             <div className="space-y-6 md:space-y-12">
-              {experiences.map((exp, index) => (
+              {experiences.map((exp: Experience, index: number) => (
                 <motion.div
                   key={index}
                   className={`relative flex flex-col md:flex-row ${
@@ -114,9 +153,16 @@ export default function Experience() {
                           <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors leading-tight">
-                            {exp.title}
-                          </h3>
+                          {/* For multi-role companies */}
+                          {exp.roles && (
+                            <h3 className="text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors leading-tight mb-1">
+                              {exp.roles[0].title}
+                              <span className="text-sm text-muted-foreground font-normal ml-2">
+                                (Promoted from {exp.roles[exp.roles.length - 1].title})
+                              </span>
+                            </h3>
+                          )}
+                          
                           <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
                             <Building2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                             <span className="truncate">{exp.company}</span>
@@ -139,27 +185,36 @@ export default function Experience() {
                         {exp.description}
                       </p>
 
-                      {/* Achievements */}
-                      <div className="mb-3 sm:mb-4">
-                        <h4 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
-                          <Users className="w-4 h-4 text-primary flex-shrink-0" />
-                          Key Achievements
-                        </h4>
-                        <ul className="space-y-1">
-                          {exp.achievements.map((achievement, i) => (
-                            <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
-                              <CheckCircle2 className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
-                              <span className="leading-relaxed">{achievement}</span>
-                            </li>
+                      {/* For multi-role companies - show roles with achievements */}
+                      {exp.roles && (
+                        <div className="mb-3 sm:mb-4 space-y-4">
+                          {exp.roles.map((role: Role, roleIndex: number) => (
+                            <div key={roleIndex} className="border-l-2 border-primary/20 pl-4">
+                              <div className="flex items-center gap-2 mb-2">
+                                <h4 className="text-sm font-medium text-foreground">{role.title}</h4>
+                                <span className="text-xs text-muted-foreground">({role.period})</span>
+                              </div>
+                              <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
+                                {role.description}
+                              </p>
+                              <ul className="space-y-1">
+                                {role.achievements.map((achievement: string, i: number) => (
+                                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                    <CheckCircle2 className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                                    <span className="leading-relaxed">{achievement}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           ))}
-                        </ul>
-                      </div>
+                        </div>
+                      )}
 
                       {/* Technologies */}
                       <div>
                         <h4 className="text-sm font-medium text-foreground mb-2">Technologies</h4>
                         <div className="flex flex-wrap gap-1 sm:gap-2">
-                          {exp.technologies.map((tech) => (
+                          {exp.technologies.map((tech: string) => (
                             <span
                               key={tech}
                               className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md hover:bg-primary/10 hover:text-primary transition-colors whitespace-nowrap"

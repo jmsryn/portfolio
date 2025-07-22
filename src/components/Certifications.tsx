@@ -183,35 +183,6 @@ export default function Certifications() {
               </motion.div>
             ))}
           </div>
-
-          {/* Currently Learning Section */}
-          <motion.div
-            className="mt-16 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <div className="card-enhanced p-8 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <Clock className="w-5 h-5 text-primary" />
-                <h3 className="text-lg font-semibold text-foreground">Currently Learning</h3>
-              </div>
-              <p className="text-muted-foreground mb-6">
-                Continuously expanding knowledge in emerging technologies and security practices.
-              </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                <span className="px-3 py-1 text-sm bg-blue-500/10 text-blue-600 rounded-full border border-blue-500/20">
-                  AWS Cloud Practitioner
-                </span>
-                <span className="px-3 py-1 text-sm bg-purple-500/10 text-purple-600 rounded-full border border-purple-500/20">
-                  CISSP Preparation
-                </span>
-                <span className="px-3 py-1 text-sm bg-green-500/10 text-green-600 rounded-full border border-green-500/20">
-                  Docker & Kubernetes
-                </span>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
     </SectionWrapper>

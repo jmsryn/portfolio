@@ -101,7 +101,7 @@ export default function Contact() {
             </h2>
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
               Ready to discuss QA strategies, automation opportunities, or potential collaborations? 
-              I'd love to hear from you.
+              I&apos;d love to hear from you.
             </p>
           </motion.div>
 
@@ -116,10 +116,10 @@ export default function Contact() {
               <div className="card-enhanced p-6">
                 <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                   <Clock className="w-5 h-5 text-primary" />
-                  Let's Connect
+                  Let&apos;s Connect
                 </h3>
                 <p className="text-muted-foreground text-sm mb-6">
-                  I'm always interested in discussing new opportunities, 
+                  I&apos;m always interested in discussing new opportunities, 
                   sharing knowledge about QA practices, or collaborating on interesting projects.
                 </p>
 
@@ -310,4 +310,4 @@ export default function Contact() {
       </section>
     </SectionWrapper>
   );
-} 
+}

@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "James Ryan Gaid - QA Engineer & Test Automation Specialist",
   description: "Professional QA Engineer specializing in automated testing, security testing, and quality assurance. Expert in Cypress, Selenium, API testing, and CI/CD integration.",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   keywords: [
     "QA Engineer",
     "Quality Assurance",
