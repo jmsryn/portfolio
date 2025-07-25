@@ -12,33 +12,9 @@ interface Metric {
   improvement: string;
 }
 
-interface Section {
-  title: string;
-  content: string;
-  keyPoints?: string[];
-  metrics?: Metric[];
-}
 
-interface DeepDive {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  readTime: string;
-  publishDate: string;
-  author: string;
-  tags: string[];
-  featured: boolean;
-  image: string;
-  content: {
-    introduction: string;
-    sections: Section[];
-    tools: string[];
-    challenges: string[];
-    solutions: string[];
-    lessonsLearned?: string[];
-  };
-}
+
+
 
 const deepDives = [
   {

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Mail, Phone, MapPin, Clock, Send, CheckCircle, 
+  Mail, MapPin, Clock, Send, CheckCircle, 
   AlertCircle, Loader2, Calendar, Download 
 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
