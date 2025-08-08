@@ -49,16 +49,26 @@ async function getNowPlaying(accessToken: string) {
   if (!res.ok) {
     return null;
   }
-  const json = await res.json();
+  const json: {
+    is_playing?: boolean;
+    progress_ms?: number;
+    item?: {
+      name?: string;
+      duration_ms?: number;
+      external_urls?: { spotify?: string };
+      album?: { name?: string; images?: { url?: string }[] };
+      artists?: { name?: string }[];
+    };
+  } = await res.json();
   if (!json || !json.item) return null;
 
-  const item = json.item;
+  const item = json.item ?? {};
   return {
     isPlaying: json.is_playing as boolean,
-    title: item.name as string,
-    artist: (item.artists || []).map((a: any) => a.name).join(', '),
-    album: item.album?.name as string,
-    albumImageUrl: item.album?.images?.[0]?.url as string,
+    title: (item.name ?? '') as string,
+    artist: (item.artists ?? []).map((a) => a.name).join(', '),
+    album: (item.album?.name ?? '') as string,
+    albumImageUrl: (item.album?.images?.[0]?.url ?? '') as string,
     songUrl: item.external_urls?.spotify as string,
     progressMs: json.progress_ms as number | undefined,
     durationMs: item.duration_ms as number | undefined,
@@ -73,16 +83,33 @@ async function getLastPlayed(accessToken: string) {
   if (!res.ok) {
     throw new Error('Failed to fetch recently played');
   }
-  const json = await res.json();
+  const json: {
+    items?: {
+      played_at?: string;
+      track?: {
+        name?: string;
+        duration_ms?: number;
+        external_urls?: { spotify?: string };
+        album?: { name?: string; images?: { url?: string }[] };
+        artists?: { name?: string }[];
+      };
+    }[];
+  } = await res.json();
   const item = json.items?.[0];
   if (!item) return null;
-  const track = item.track;
+  const track = item.track as {
+    name?: string;
+    duration_ms?: number;
+    external_urls?: { spotify?: string };
+    album?: { name?: string; images?: { url?: string }[] };
+    artists?: { name?: string }[];
+  };
   return {
     isPlaying: false,
-    title: track?.name as string,
-    artist: (track?.artists || []).map((a: any) => a.name).join(', '),
-    album: track?.album?.name as string,
-    albumImageUrl: track?.album?.images?.[0]?.url as string,
+    title: (track?.name ?? '') as string,
+    artist: (track?.artists ?? []).map((a) => a.name).join(', '),
+    album: (track?.album?.name ?? '') as string,
+    albumImageUrl: (track?.album?.images?.[0]?.url ?? '') as string,
     songUrl: track?.external_urls?.spotify as string,
     playedAt: item.played_at as string,
     durationMs: track?.duration_ms as number | undefined,
@@ -98,8 +125,9 @@ export async function GET() {
     }
     const last = await getLastPlayed(token);
     return NextResponse.json(last ?? { isPlaying: false }, { headers: { 'Cache-Control': 'no-store' } });
-  } catch (err: any) {
-    return NextResponse.json({ error: err?.message ?? 'Spotify error' }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Spotify error';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

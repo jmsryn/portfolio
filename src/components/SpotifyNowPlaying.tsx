@@ -18,7 +18,7 @@ type NowPlaying = {
 
 export default function SpotifyNowPlaying({ className = '', compact = false }: { className?: string; compact?: boolean }) {
   const [data, setData] = useState<NowPlaying | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -28,8 +28,9 @@ export default function SpotifyNowPlaying({ className = '', compact = false }: {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json: NowPlaying = await res.json();
         if (isMounted) setData(json);
-      } catch (e: any) {
-        if (isMounted) setError(e?.message || 'Error');
+      } catch (e) {
+        const message = e instanceof Error ? e.message : 'Error';
+        if (isMounted) setError(message);
       }
     };
     fetchData();

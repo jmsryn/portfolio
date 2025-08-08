@@ -75,7 +75,7 @@ export default function Contact() {
         window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
         setSubmitStatus('success');
       }
-    } catch (err) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

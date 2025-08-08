@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, TargetAndTransition, VariantLabels, Transition } from 'framer-motion';
 import { Bug } from 'lucide-react';
 
 type BugOverlayProps = {
@@ -86,9 +86,9 @@ function BugFloat({
   leftPct: number;
   size: number;
   colorClass: string;
-  initial: any;
-  animate: any;
-  transition?: any;
+  initial?: boolean | VariantLabels | TargetAndTransition;
+  animate?: boolean | VariantLabels | TargetAndTransition;
+  transition?: Transition;
 }) {
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
   return (
