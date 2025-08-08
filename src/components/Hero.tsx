@@ -1,11 +1,58 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Download, Mail, ArrowDown, PlayCircle } from 'lucide-react';
+import { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Download, Mail, ArrowDown, PlayCircle, Bug } from 'lucide-react';
 import { BackgroundSwitcher } from '@/components/ui/background-switcher';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 import Terminal from './Terminal'; // Import the Terminal component
 
+function BugFloat({
+  positionClass,
+  colorClass,
+  iconClassName,
+  initial,
+  animate,
+  transition,
+}: {
+  positionClass: string;
+  colorClass: string;
+  iconClassName: string;
+  initial: any;
+  animate: any;
+  transition?: any;
+}) {
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+
+  return (
+    <motion.div
+      className={`group absolute ${positionClass} ${colorClass} pointer-events-auto cursor-help`}
+      initial={initial}
+      animate={animate}
+      transition={transition}
+      onMouseMove={(e) => {
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+        setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      }}
+      onMouseLeave={() => setPos(null)}
+    >
+      <Bug className={iconClassName} />
+      <div
+        className={`absolute px-2 py-1 rounded bg-background/90 border border-border text-[10px] text-foreground opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap shadow-sm transition-opacity`}
+        style={
+          pos
+            ? ({ left: pos.x + 8, top: pos.y - 20 } as React.CSSProperties)
+            : ({} as React.CSSProperties)
+        }
+      >
+        🐞 Bug found
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
   return (
     <section
       id="hero"
@@ -15,9 +62,11 @@ export default function Hero() {
       <BackgroundSwitcher />
 
       {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s' }} />
+      <div className="absolute top-0 left-0 w-full h-full" aria-hidden="true">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '12s' }} />
+        {/* Randomized bug overlay per load */}
+        <BugOverlay count={3} zIndexClass="-z-10" />
       </div>
 
       <motion.div

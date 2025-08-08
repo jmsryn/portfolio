@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SectionWrapper from './SectionWrapper';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 
 const education = {
   degree: 'B.S. Information Technology',
@@ -21,8 +22,9 @@ export default function Education() {
     <SectionWrapper>
     <section
       id="education"
-      className="py-20 px-4 max-w-3xl mx-auto"
+      className="py-20 px-4 max-w-3xl mx-auto relative"
     >
+      <BugOverlay count={1} />
       <div className="mb-12">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-pink-500"

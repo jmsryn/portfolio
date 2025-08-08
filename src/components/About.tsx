@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { CheckCircle, TrendingUp, Users } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 
 const skills = [
   {
@@ -27,7 +28,8 @@ export default function About() {
   return (
     <SectionWrapper>
       <section id="about" className="section-padding">
-        <div className="container-custom">
+        <div className="container-custom relative">
+          <BugOverlay count={2} />
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main content */}
             <div className="lg:col-span-2">

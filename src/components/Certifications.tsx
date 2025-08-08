@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 import { ExternalLink, Award, Calendar, CheckCircle, Clock } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
@@ -91,7 +92,8 @@ export default function Certifications() {
   return (
     <SectionWrapper>
       <section id="certifications" className="section-padding">
-        <div className="container-custom">
+        <div className="container-custom relative">
+          <BugOverlay count={1} />
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}

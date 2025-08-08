@@ -7,6 +7,7 @@ import {
   AlertCircle, Loader2, Calendar, Download 
 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 
 const contactMethods = [
   {
@@ -92,7 +93,8 @@ export default function Contact() {
   return (
     <SectionWrapper>
       <section id="contact" className="section-padding">
-        <div className="container-custom">
+        <div className="container-custom relative">
+          <BugOverlay count={1} />
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}

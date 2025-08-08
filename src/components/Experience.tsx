@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 import { 
   Building2, Calendar, MapPin, CheckCircle2, Briefcase 
 } from 'lucide-react';
@@ -113,7 +114,8 @@ export default function Experience() {
   return (
     <SectionWrapper>
       <section id="experience" className="section-padding">
-        <div className="container-custom">
+        <div className="container-custom relative">
+          <BugOverlay count={2} />
           <motion.h2
             className="text-balance text-center mb-16 relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
             initial={{ opacity: 0, y: 20 }}

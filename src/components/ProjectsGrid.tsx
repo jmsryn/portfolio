@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { BugOverlay } from '@/components/ui/bug-overlay';
 import { ExternalLink, Github } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
@@ -44,7 +45,8 @@ export default function ProjectsGrid() {
   const more = projects.filter(p => !p.featured);
   return (
     <SectionWrapper>
-      <section id="projects" className="py-20 px-4 max-w-5xl mx-auto">
+      <section id="projects" className="py-20 px-4 max-w-5xl mx-auto relative">
+        <BugOverlay count={1} />
         <div className="mb-12">
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
