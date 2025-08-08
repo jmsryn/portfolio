@@ -23,7 +23,7 @@ type BugSpec = {
 
 export function BugOverlay({
   count = 2,
-  zIndexClass = '-z-10',
+  zIndexClass = 'z-20',
   colors = ['text-primary/30', 'text-accent/30', 'text-foreground/20'],
 }: BugOverlayProps) {
   const reduceMotion = useReducedMotion();
@@ -52,7 +52,7 @@ export function BugOverlay({
   if (!mounted) return null;
 
   return (
-    <div className={`absolute inset-0 ${zIndexClass}`}>
+    <div className={`absolute inset-0 ${zIndexClass} pointer-events-none`}>
       {bugs.map((b, idx) => (
         <BugFloat
           key={idx}
@@ -104,7 +104,10 @@ function BugFloat({
       }}
       onMouseLeave={() => setPos(null)}
     >
-      <Bug style={{ width: size, height: size }} />
+      {/* Ensure the icon itself can capture hover events */}
+      <div className="relative pointer-events-auto">
+        <Bug style={{ width: size, height: size }} />
+      </div>
       <div
         className="absolute px-2 py-1 rounded bg-background/90 border border-border text-[10px] text-foreground opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap shadow-sm transition-opacity"
         style={

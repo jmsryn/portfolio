@@ -6,6 +6,7 @@ import { Download, Mail, ArrowDown, PlayCircle, Bug } from 'lucide-react';
 import { BackgroundSwitcher } from '@/components/ui/background-switcher';
 import { BugOverlay } from '@/components/ui/bug-overlay';
 import Terminal from './Terminal'; // Import the Terminal component
+// SpotifyNowPlaying intentionally removed from Hero; shown in Footer only
 
 function BugFloat({
   positionClass,
@@ -61,12 +62,14 @@ export default function Hero() {
       {/* Background switcher with multiple options */}
       <BackgroundSwitcher />
 
+      {/* Spotify Now Playing removed from Hero to reduce crowding; appears in Footer */}
+
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '8s' }} />
         <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '12s' }} />
         {/* Randomized bug overlay per load */}
-        <BugOverlay count={3} zIndexClass="-z-10" />
+        <BugOverlay count={3} zIndexClass="z-20" />
       </div>
 
       <motion.div
@@ -126,6 +129,7 @@ export default function Hero() {
             loop={true} 
           />
         </motion.div>
+
 
         {/* CTA buttons */}
         <motion.div

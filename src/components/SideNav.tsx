@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, User, Briefcase, FolderOpen, GraduationCap, Award, Mail } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import SpotifyNowPlaying from './SpotifyNowPlaying';
 
 const navItems = [
   { name: 'Home', href: '#hero', icon: <Home className="w-4 h-4" /> },
@@ -149,6 +150,10 @@ export default function SideNav() {
                 </motion.button>
               </li>
             ))}
+            {/* Spotify under Contact */}
+            <li className="pt-2">
+              <SpotifyNowPlaying compact />
+            </li>
           </ul>
           
           {/* Theme Toggle in Desktop Nav */}
@@ -262,6 +267,10 @@ export default function SideNav() {
                       </motion.li>
                     ))}
                   </ul>
+                  {/* Spotify under Contact */}
+                  <div className="mt-4">
+                    <SpotifyNowPlaying compact />
+                  </div>
                 </div>
 
                 {/* Footer */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import SpotifyNowPlaying from './SpotifyNowPlaying';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
@@ -45,6 +46,10 @@ export default function Footer() {
             >
               <Linkedin className="w-5 h-5 text-primary" />
             </motion.a>
+          </div>
+
+          <div className="mb-4 flex justify-center">
+            <SpotifyNowPlaying />
           </div>
 
           <div className="text-sm text-muted-foreground flex items-center gap-1 justify-center">
