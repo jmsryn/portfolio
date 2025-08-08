@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,8 +40,8 @@ export default function BackToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.3 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.97 }}
           aria-label="Back to top"
         >
           {/* Progress circle */}
@@ -67,9 +68,9 @@ export default function BackToTop() {
               fill="none"
               className="text-primary"
               strokeLinecap="round"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: scrollProgress / 100 }}
-              transition={{ duration: 0.2 }}
+              initial={reduceMotion ? undefined : { pathLength: 0 }}
+              animate={reduceMotion ? undefined : { pathLength: scrollProgress / 100 }}
+              transition={reduceMotion ? undefined : { duration: 0.2 }}
               style={{
                 strokeDasharray: 2 * Math.PI * 20,
                 strokeDashoffset: 2 * Math.PI * 20 * (1 - scrollProgress / 100),

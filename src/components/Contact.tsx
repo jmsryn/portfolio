@@ -35,21 +35,49 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch {
+      // Prefer Formspree when configured
+      if (formspreeId) {
+        const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        // Fallback: open mail client
+        const to = 'hello@jrgaid.site';
+        const subject = encodeURIComponent(formData.subject || 'Portfolio contact');
+        const body = encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        );
+        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+        setSubmitStatus('success');
+      }
+    } catch (err) {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
-      // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
     }
   };
@@ -139,7 +167,7 @@ export default function Contact() {
                 <h4 className="font-medium text-foreground mb-4">Quick Actions</h4>
                 <div className="space-y-3">
                   <a 
-                    href="/files/James_Ryan_Gaid_Resume.pdf" 
+                    href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf" 
                     download
                     className="btn-secondary w-full"
                   >

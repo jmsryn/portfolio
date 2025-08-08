@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Award, Calendar, CheckCircle, Clock } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
@@ -85,6 +86,8 @@ const getStatusColor = (status: string) => {
 };
 
 export default function Certifications() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? certifications : certifications.slice(0, 3);
   return (
     <SectionWrapper>
       <section id="certifications" className="section-padding">
@@ -104,7 +107,7 @@ export default function Certifications() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
+            {visible.map((cert, index) => (
               <motion.div
                 key={cert.title}
                 className="group"
@@ -183,6 +186,18 @@ export default function Certifications() {
               </motion.div>
             ))}
           </div>
+
+          {certifications.length > 3 && (
+            <div className="text-center mt-8">
+              <button
+                type="button"
+                onClick={() => setShowAll(v => !v)}
+                className="btn-ghost"
+              >
+                {showAll ? 'Show fewer certifications' : 'Show all certifications'}
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </SectionWrapper>

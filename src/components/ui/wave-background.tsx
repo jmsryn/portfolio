@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 
 export function WaveBackground({
   waveCount = 3,
@@ -16,7 +17,8 @@ export function WaveBackground({
   animationDuration?: number;
   blur?: number;
 }) {
-  
+  const reduceMotion = useReducedMotion();
+  const shouldAnimate = !reduceMotion;
   // Generate waves
   const waves = Array.from({ length: waveCount }, (_, i) => {
     const index = i + 1;
@@ -37,16 +39,14 @@ export function WaveBackground({
           borderTopRightRadius: `${100 + i * 50}% ${50 + i * 20}%`,
           filter: `blur(${blur}px)`,
         }}
-        initial={{ y: '100%' }}
-        animate={{
-          y: ['100%', '80%', '100%'],
-        }}
-        transition={{
+        initial={shouldAnimate ? { y: '100%' } : { y: '85%' }}
+        animate={shouldAnimate ? { y: ['100%', '80%', '100%'] } : { y: '85%' }}
+        transition={shouldAnimate ? {
           repeat: Infinity,
-          duration: animationDuration - i * 2,
+          duration: Math.max(8, animationDuration - i * 2),
           ease: 'easeInOut',
           delay,
-        }}
+        } : undefined}
       />
     );
   });

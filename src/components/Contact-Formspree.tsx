@@ -164,7 +164,7 @@ export default function Contact() {
                 <h4 className="font-medium text-foreground mb-4">Quick Actions</h4>
                 <div className="space-y-3">
                   <a 
-                    href="/files/James_Ryan_Gaid_Resume.pdf" 
+                    href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf" 
                     download
                     className="btn-secondary w-full"
                   >

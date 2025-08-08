@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GradientMesh } from './gradient-mesh';
-import { WaveBackground } from './wave-background';
 import { Grid, Waves } from 'lucide-react';
+
+const GradientMesh = React.lazy(() => import('./gradient-mesh').then(m => ({ default: m.GradientMesh })));
+const WaveBackground = React.lazy(() => import('./wave-background').then(m => ({ default: m.WaveBackground })));
 
 type BackgroundType = 'gradient' | 'waves';
 
@@ -16,22 +17,26 @@ export function BackgroundSwitcher() {
 
   const backgrounds = {
     gradient: (
-      <GradientMesh
-        cellSize={70}
-        noiseIntensity={0.5}
-        speed={0.0005}
-        colorIntensity={0.7}
-        blurAmount={60}
-      />
+      <Suspense fallback={<div className="absolute inset-0 -z-10" />}> 
+        <GradientMesh
+          cellSize={70}
+          noiseIntensity={0.5}
+          speed={0.0005}
+          colorIntensity={0.6}
+          blurAmount={50}
+        />
+      </Suspense>
     ),
     waves: (
-      <WaveBackground
-        waveCount={3}
-        baseColor="primary"
-        opacity={0.1}
-        animationDuration={20}
-        blur={60}
-      />
+      <Suspense fallback={<div className="absolute inset-0 -z-10" />}>
+        <WaveBackground
+          waveCount={3}
+          baseColor="primary"
+          opacity={0.08}
+          animationDuration={18}
+          blur={50}
+        />
+      </Suspense>
     )
   };
 

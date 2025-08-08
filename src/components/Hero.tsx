@@ -86,7 +86,7 @@ export default function Hero() {
           transition={{ delay: 0.8, duration: 0.5 }}
         >
           <motion.a
-            href="/files/James_Ryan_Gaid_Resume.pdf"
+            href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf"
             download
             className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
                       text-primary-foreground bg-primary hover:bg-primary/90

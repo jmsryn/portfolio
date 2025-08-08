@@ -20,35 +20,58 @@ export default function SideNav() {
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Handle scroll progress and active section
+  // Scroll progress (throttled via rAF)
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      // Calculate scroll progress
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      setScrollProgress(progress);
-
-      // Determine active section
-      const sections = navItems.map(item => item.href.slice(1));
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        setScrollProgress(progress);
+        ticking = false;
       });
-
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
-
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Active section via IntersectionObserver (avoids per-scroll DOM reads)
+  useEffect(() => {
+    const sectionIds = navItems.map(item => item.href.slice(1));
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (elements.length === 0) return;
+
+    const visibilityRatioById = new Map<string, number>();
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = (entry.target as HTMLElement).id;
+          visibilityRatioById.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+        // Pick most visible section
+        const mostVisible = Array.from(visibilityRatioById.entries()).sort((a, b) => b[1] - a[1])[0];
+        if (mostVisible && mostVisible[1] > 0) {
+          setActiveSection(mostVisible[0]);
+        }
+      },
+      {
+        root: null,
+        // Focus a band around viewport center
+        rootMargin: '-30% 0px -50% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    elements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, []);
 
   const handleNavClick = (href: string) => {
@@ -87,17 +110,7 @@ export default function SideNav() {
 
   return (
     <>
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary/20 z-50"
-        initial={{ scaleX: 0 }}
-        style={{ originX: 0 }}
-      >
-        <motion.div
-          className="h-full bg-gradient-to-r from-primary to-accent"
-          style={{ scaleX: scrollProgress / 100, originX: 0 }}
-        />
-      </motion.div>
+      {/* Top progress bar removed (global ScrollProgress component renders it) */}
 
       {/* Desktop Navigation */}
       <motion.nav
@@ -257,14 +270,12 @@ export default function SideNav() {
                     <p className="text-xs text-muted-foreground">
                       Scroll Progress
                     </p>
-                    <div className="mt-2 w-full bg-muted rounded-full h-2">
-                      <motion.div
-                        className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${scrollProgress}%` }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </div>
+                     <div className="mt-2 w-full bg-muted rounded-full h-2 overflow-hidden">
+                       <div
+                         className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
+                         style={{ width: `${Math.round(scrollProgress)}%`, transition: 'width 120ms linear' }}
+                       />
+                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
                       {Math.round(scrollProgress)}% Complete
                     </p>

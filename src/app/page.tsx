@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <>
       <main className="relative w-full overflow-hidden">
-        {/* Background gradient elements */}
-        <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-accent/5 blur-3xl z-[-1]" />
+        {/* Background gradient elements - lighten for performance */}
+        <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-accent/10 blur-2xl z-[-1]" />
 
         {/* Content container with proper centering */}
         <div className="mx-auto max-w-screen-2xl">

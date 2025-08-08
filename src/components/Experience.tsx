@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Building2, Calendar, MapPin, CheckCircle2, Briefcase 
@@ -97,6 +98,18 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const [expandedRolesByExp, setExpandedRolesByExp] = useState<Record<number, boolean>>({});
+  const [expandedAchievementsByRole, setExpandedAchievementsByRole] = useState<Record<string, boolean>>({});
+
+  const toggleOlderRoles = (expIndex: number) => {
+    setExpandedRolesByExp((prev) => ({ ...prev, [expIndex]: !prev[expIndex] }));
+  };
+
+  const toggleAchievements = (expIndex: number, roleIndex: number) => {
+    const key = `${expIndex}-${roleIndex}`;
+    setExpandedAchievementsByRole((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
   return (
     <SectionWrapper>
       <section id="experience" className="section-padding">
@@ -185,28 +198,56 @@ export default function Experience() {
                         {exp.description}
                       </p>
 
-                      {/* For multi-role companies - show roles with achievements */}
+                      {/* For multi-role companies - show roles with achievements (collapsed older roles) */}
                       {exp.roles && (
                         <div className="mb-3 sm:mb-4 space-y-4">
-                          {exp.roles.map((role: Role, roleIndex: number) => (
-                            <div key={roleIndex} className="border-l-2 border-primary/20 pl-4">
-                              <div className="flex items-center gap-2 mb-2">
-                                <h4 className="text-sm font-medium text-foreground">{role.title}</h4>
-                                <span className="text-xs text-muted-foreground">({role.period})</span>
+                          {(expandedRolesByExp[index] ? exp.roles : exp.roles.slice(0, 1)).map((role: Role, roleIndex: number) => {
+                            const globalRoleIndex = expandedRolesByExp[index] ? roleIndex : roleIndex; // roleIndex is correct for shown slice
+                            const key = `${index}-${globalRoleIndex}`;
+                            const isAchExpanded = Boolean(expandedAchievementsByRole[key]);
+                            const visibleAchievements = isAchExpanded ? role.achievements : role.achievements.slice(0, 3);
+                            const hasMoreAchievements = role.achievements.length > 3;
+                            return (
+                              <div key={globalRoleIndex} className="border-l-2 border-primary/20 pl-4">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <h4 className="text-sm font-medium text-foreground">{role.title}</h4>
+                                  <span className="text-xs text-muted-foreground">({role.period})</span>
+                                </div>
+                                <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
+                                  {role.description}
+                                </p>
+                                <ul className="space-y-1">
+                                  {visibleAchievements.map((achievement: string, i: number) => (
+                                    <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                      <CheckCircle2 className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                                      <span className="leading-relaxed">{achievement}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                                {hasMoreAchievements && (
+                                  <button
+                                    type="button"
+                                    className="mt-2 text-xs text-primary hover:text-primary/80"
+                                    onClick={() => toggleAchievements(index, globalRoleIndex)}
+                                  >
+                                    {isAchExpanded ? 'Show fewer' : 'Show more'}
+                                  </button>
+                                )}
                               </div>
-                              <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
-                                {role.description}
-                              </p>
-                              <ul className="space-y-1">
-                                {role.achievements.map((achievement: string, i: number) => (
-                                  <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                                    <CheckCircle2 className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
-                                    <span className="leading-relaxed">{achievement}</span>
-                                  </li>
-                                ))}
-                              </ul>
+                            );
+                          })}
+
+                          {exp.roles.length > 1 && (
+                            <div className="pt-2">
+                              <button
+                                type="button"
+                                className="text-xs text-primary hover:text-primary/80"
+                                onClick={() => toggleOlderRoles(index)}
+                              >
+                                {expandedRolesByExp[index] ? 'Hide older roles' : 'Show older roles'}
+                              </button>
                             </div>
-                          ))}
+                          )}
                         </div>
                       )}
 
