@@ -10,18 +10,24 @@ type NoMotionComponent = React.ForwardRefExoticComponent<
   MotionProps<HTMLElement> & React.RefAttributes<HTMLElement>
 >;
 
+const componentCache: Record<string, NoMotionComponent> = {};
+
 export const motion: Record<string, NoMotionComponent> = new Proxy(
   {},
   {
     get: (_target, tag: string) => {
+      // Cache per tag to keep component identity stable across renders
+      if (componentCache[tag]) return componentCache[tag];
       const Tag = tag as React.ElementType;
-      return React.forwardRef<HTMLElement, MotionProps<HTMLElement>>(function NoMotion(
+      const Comp = React.forwardRef<HTMLElement, MotionProps<HTMLElement>>(function NoMotion(
         { children, ...rest },
         ref
       ) {
         const props = rest as Record<string, unknown>;
         return React.createElement(Tag, { ref, ...(props as object) }, children as React.ReactNode);
       });
+      componentCache[tag] = Comp as NoMotionComponent;
+      return componentCache[tag];
     },
   }
 ) as Record<string, NoMotionComponent>;
