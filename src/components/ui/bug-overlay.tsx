@@ -51,8 +51,28 @@ export function BugOverlay({
 
   if (!mounted) return null;
 
-  // Disable overlay motion entirely
-  return null;
+  if (!mounted) return null;
+
+  return (
+    <div className={`absolute inset-0 ${zIndexClass} pointer-events-none`}>
+      {bugs.map((b, idx) => (
+        <BugFloat
+          key={idx}
+          topPct={b.topPct}
+          leftPct={b.leftPct}
+          size={b.size}
+          colorClass={b.colorClass}
+          initial={{ opacity: 0, y: -2, rotate: -b.rotateRange / 2 }}
+          animate={reduceMotion ? { opacity: 0.35 } : {
+            opacity: 0.35,
+            y: [-b.yRange, b.yRange / 2, -b.yRange],
+            rotate: [-b.rotateRange, b.rotateRange, -b.rotateRange],
+          }}
+          transition={reduceMotion ? undefined : { duration: b.duration, repeat: Infinity, ease: 'easeInOut', delay: b.delay }}
+        />
+      ))}
+    </div>
+  );
 }
 
 function BugFloat({
