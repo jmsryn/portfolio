@@ -10,9 +10,9 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto">
         <motion.div
           className="flex flex-col items-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={false}
+          whileInView={undefined}
+          transition={undefined}
           viewport={{ once: true }}
         >
           <div className="flex justify-center gap-6 mb-6">
@@ -21,8 +21,8 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors"
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={undefined}
+              whileTap={undefined}
             >
               <Mail className="w-5 h-5 text-primary" />
             </motion.a>
@@ -31,8 +31,8 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors"
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={undefined}
+              whileTap={undefined}
             >
               <Github className="w-5 h-5 text-primary" />
             </motion.a>
@@ -41,8 +41,8 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors"
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={undefined}
+              whileTap={undefined}
             >
               <Linkedin className="w-5 h-5 text-primary" />
             </motion.a>

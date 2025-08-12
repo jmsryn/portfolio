@@ -118,9 +118,9 @@ export default function Experience() {
           <BugOverlay count={2} />
           <motion.h2
             className="text-balance text-center mb-16 relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={false}
+            whileInView={undefined}
+            transition={undefined}
           >
             Professional Experience
           </motion.h2>
@@ -137,17 +137,17 @@ export default function Experience() {
                   className={`relative flex flex-col md:flex-row ${
                     index % 2 === 0 ? 'md:flex-row-reverse' : ''
                   } items-start gap-4 md:gap-8`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  initial={false}
+                  whileInView={undefined}
+                  transition={undefined}
                 >
                   {/* Timeline node - hidden on mobile */}
                   <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 z-10">
                     <motion.div
                       className={`w-4 h-4 rounded-full bg-gradient-to-r ${exp.color} border-4 border-background shadow-lg`}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                      initial={false}
+                      whileInView={undefined}
+                      transition={undefined}
                     />
                   </div>
 
@@ -155,9 +155,9 @@ export default function Experience() {
                   <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
                     <motion.div
                       className="card-enhanced p-4 sm:p-6 group relative"
-                      initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.2 + 0.1 }}
+                      initial={false}
+                      whileInView={undefined}
+                      transition={undefined}
                     >
                       {/* Mobile timeline indicator */}
                       <div className="md:hidden absolute -left-2 top-6 w-1 h-8 bg-gradient-to-b from-primary to-accent rounded-full"></div>
@@ -279,9 +279,9 @@ export default function Experience() {
             {/* Timeline end - desktop only */}
             <motion.div
               className="hidden md:block absolute left-1/2 transform -translate-x-1/2 bottom-0"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.8 }}
+              initial={false}
+              whileInView={undefined}
+              transition={undefined}
             >
               <div className="w-6 h-6 rounded-full bg-gradient-to-r from-primary to-accent border-4 border-background shadow-lg flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-white"></div>

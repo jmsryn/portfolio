@@ -96,9 +96,9 @@ export default function Certifications() {
           <BugOverlay count={1} />
           <motion.div
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={false}
+            whileInView={undefined}
+            transition={undefined}
           >
             <h2 className="text-balance relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent">
               Certifications & Training
@@ -113,9 +113,9 @@ export default function Certifications() {
               <motion.div
                 key={cert.title}
                 className="group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={false}
+                whileInView={undefined}
+                transition={undefined}
               >
                 <div className="card-enhanced p-6 h-full flex flex-col">
                   {/* Header */}

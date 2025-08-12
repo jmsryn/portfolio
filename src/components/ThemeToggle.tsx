@@ -51,7 +51,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-10 h-10 rounded-lg bg-muted animate-pulse" />
+      <div className="w-10 h-10 rounded-lg bg-muted" />
     );
   }
 
@@ -60,17 +60,17 @@ export default function ThemeToggle() {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="w-10 h-10 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:bg-card/80 hover:border-primary/30 transition-all duration-300 flex items-center justify-center"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={undefined}
+        whileTap={undefined}
         aria-label="Toggle theme"
       >
         <AnimatePresence mode="wait">
           <motion.div
             key={theme}
-            initial={{ scale: 0.5, opacity: 0, rotate: -90 }}
-            animate={{ scale: 1, opacity: 1, rotate: 0 }}
-            exit={{ scale: 0.5, opacity: 0, rotate: 90 }}
-            transition={{ duration: 0.2 }}
+            initial={false}
+            animate={undefined}
+            exit={undefined}
+            transition={undefined}
             className="text-foreground"
           >
             {currentTheme.icon}
@@ -90,10 +90,10 @@ export default function ThemeToggle() {
             {/* Theme options */}
             <motion.div
               className="absolute bottom-full right-0 mb-2 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-xl z-20 min-w-[140px]"
-              initial={{ opacity: 0, scale: 0.9, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 10 }}
-              transition={{ duration: 0.2 }}
+              initial={false}
+              animate={undefined}
+              exit={undefined}
+              transition={undefined}
             >
               <div className="p-2">
                 {themes.map((themeOption, index) => (
@@ -105,23 +105,17 @@ export default function ThemeToggle() {
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     }`}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.2, delay: index * 0.05 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    initial={false}
+                    animate={undefined}
+                    transition={undefined}
+                    whileHover={undefined}
+                    whileTap={undefined}
                   >
                     <span className="transition-transform duration-200 group-hover:scale-110">
                       {themeOption.icon}
                     </span>
                     <span>{themeOption.label}</span>
-                    {theme === themeOption.value && (
-                      <motion.div
-                        className="ml-auto w-2 h-2 rounded-full bg-primary-foreground"
-                        layoutId="activeTheme"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
-                    )}
+                    {theme === themeOption.value && <div className="ml-auto w-2 h-2 rounded-full bg-primary-foreground" />}
                   </motion.button>
                 ))}
               </div>

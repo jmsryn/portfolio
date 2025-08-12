@@ -50,9 +50,9 @@ export default function ProjectsGrid() {
         <div className="mb-12">
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={false}
+            whileInView={undefined}
+            transition={undefined}
           >
             Featured Projects
           </motion.h2>
@@ -63,9 +63,9 @@ export default function ProjectsGrid() {
           {featured.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={false}
+              whileInView={undefined}
+              transition={undefined}
               className="bg-card/50 backdrop-blur-sm rounded-lg border border-border p-0 overflow-hidden hover:bg-primary/5 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] group w-full max-w-md"
             >
               {project.image && (
@@ -130,9 +130,9 @@ export default function ProjectsGrid() {
               {more.map((project, i) => (
                 <motion.div
                   key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  initial={false}
+                  whileInView={undefined}
+                  transition={undefined}
                   className="bg-card/40 rounded-lg border border-border p-4 hover:bg-primary/5 hover:border-primary/30 transition-all"
                 >
                   <div className="flex items-start justify-between gap-2">

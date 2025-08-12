@@ -32,6 +32,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    // Replace framer-motion with a lightweight no-op implementation to disable animations globally
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'framer-motion': require('path').resolve(__dirname, 'src/lib/no-motion.tsx'),
+    };
+    return config;
+  },
 };
 
 export default nextConfig;

@@ -16,28 +16,8 @@ export function BackgroundSwitcher() {
   const toggleOpen = () => setIsOpen(!isOpen);
 
   const backgrounds = {
-    gradient: (
-      <Suspense fallback={<div className="absolute inset-0 -z-10" />}> 
-        <GradientMesh
-          cellSize={70}
-          noiseIntensity={0.5}
-          speed={0.0005}
-          colorIntensity={0.6}
-          blurAmount={50}
-        />
-      </Suspense>
-    ),
-    waves: (
-      <Suspense fallback={<div className="absolute inset-0 -z-10" />}>
-        <WaveBackground
-          waveCount={3}
-          baseColor="primary"
-          opacity={0.08}
-          animationDuration={18}
-          blur={50}
-        />
-      </Suspense>
-    )
+    gradient: <div className="absolute inset-0 -z-10" />,
+    waves: <div className="absolute inset-0 -z-10" />,
   };
 
   const icons = {
@@ -71,8 +51,8 @@ export function BackgroundSwitcher() {
         <motion.button
           onClick={toggleOpen}
           className="p-2 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-md"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={undefined}
+          whileTap={undefined}
         >
           {icons[activeBackground]}
         </motion.button>
@@ -99,8 +79,8 @@ export function BackgroundSwitcher() {
                         ? 'bg-primary/10 text-primary'
                         : 'hover:bg-muted text-muted-foreground hover:text-foreground'
                     }`}
-                    whileHover={{ x: 3 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={undefined}
+                    whileTap={undefined}
                   >
                     {icons[type]}
                     <span>{labels[type]}</span>

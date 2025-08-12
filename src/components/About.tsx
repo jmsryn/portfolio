@@ -35,18 +35,18 @@ export default function About() {
             <div className="lg:col-span-2">
               <motion.h2
                 className="text-balance relative w-fit after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                initial={false}
+                whileInView={undefined}
+                transition={undefined}
               >
                 About Me
               </motion.h2>
 
               <motion.div
                 className="space-y-6 text-muted-foreground leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={false}
+                whileInView={undefined}
+                transition={undefined}
               >
                 <p>
                   I&apos;m a passionate QA Engineer with expertise in automated testing, security testing, and full-stack development. 
@@ -65,19 +65,19 @@ export default function About() {
               {/* Skills Section */}
               <motion.div
                 className="mt-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                initial={false}
+                whileInView={undefined}
+                transition={undefined}
               >
                 <h3 className="text-xl font-semibold mb-6 text-foreground">Technical Skills</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   {skills.map((skillGroup, index) => (
-                    <motion.div
+                      <motion.div
                       key={skillGroup.category}
                       className="card-enhanced p-6"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.1 * index }}
+                        initial={false}
+                        whileInView={undefined}
+                        transition={undefined}
                     >
                       <h4 className="font-medium text-primary mb-3">{skillGroup.category}</h4>
                       <div className="flex flex-wrap gap-2">
@@ -98,12 +98,7 @@ export default function About() {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <motion.div
-                className="space-y-6"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
+              <div className="space-y-6">
                 <div className="card-enhanced p-6 sticky top-8">
                   <h3 className="font-semibold text-foreground mb-4">Quick Facts</h3>
                   <div className="space-y-4">
@@ -137,7 +132,7 @@ export default function About() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

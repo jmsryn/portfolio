@@ -97,9 +97,9 @@ export default function Contact() {
           <BugOverlay count={1} />
           <motion.div
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={false}
+            whileInView={undefined}
+            transition={undefined}
           >
             <h2 className="text-balance relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent">
               Get In Touch
@@ -114,9 +114,9 @@ export default function Contact() {
             {/* Contact Information */}
             <motion.div
               className="lg:col-span-1 space-y-6"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={false}
+              whileInView={undefined}
+              transition={undefined}
             >
               <div className="card-enhanced p-6">
                 <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
@@ -133,9 +133,9 @@ export default function Contact() {
                     <motion.div
                       key={index}
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                      initial={false}
+                      whileInView={undefined}
+                      transition={undefined}
                     >
                       <div className="text-primary mt-1">{method.icon}</div>
                       <div className="flex-1 min-w-0">
@@ -162,9 +162,9 @@ export default function Contact() {
               {/* Quick Actions */}
               <motion.div
                 className="card-enhanced p-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                initial={false}
+                whileInView={undefined}
+                transition={undefined}
               >
                 <h4 className="font-medium text-foreground mb-4">Quick Actions</h4>
                 <div className="space-y-3">
@@ -190,9 +190,9 @@ export default function Contact() {
             {/* Contact Form */}
             <motion.div
               className="lg:col-span-2"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              initial={false}
+              whileInView={undefined}
+              transition={undefined}
             >
               <div className="card-enhanced p-8">
                 <h3 className="font-semibold text-foreground mb-6">Send a Message</h3>
@@ -271,7 +271,7 @@ export default function Contact() {
                       className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="w-4 h-4" />
                       ) : (
                         <Send className="w-4 h-4" />
                       )}
@@ -282,8 +282,8 @@ export default function Contact() {
                     {submitStatus === 'success' && (
                       <motion.div
                         className="flex items-center gap-2 text-green-600 text-sm"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        initial={false}
+                        animate={undefined}
                       >
                         <CheckCircle className="w-4 h-4" />
                         Message sent successfully!
@@ -293,8 +293,8 @@ export default function Contact() {
                     {submitStatus === 'error' && (
                       <motion.div
                         className="flex items-center gap-2 text-red-600 text-sm"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        initial={false}
+                        animate={undefined}
                       >
                         <AlertCircle className="w-4 h-4" />
                         Failed to send message. Please try again.

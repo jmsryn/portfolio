@@ -266,7 +266,7 @@ export default function Contact() {
                       className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="w-4 h-4" />
                       ) : (
                         <Send className="w-4 h-4" />
                       )}

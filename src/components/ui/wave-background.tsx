@@ -33,14 +33,14 @@ export function WaveBackground({
         className={`absolute inset-x-0 bottom-0 ${baseColor === 'primary' ? 'bg-primary' : 'bg-accent'}`}
         style={{
           height: `${30 + i * 15}%`,
-          opacity: waveOpacity,
+          opacity: shouldAnimate ? waveOpacity : 0,
           zIndex: -10 - i,
           borderTopLeftRadius: `${100 + i * 50}% ${50 + i * 20}%`,
           borderTopRightRadius: `${100 + i * 50}% ${50 + i * 20}%`,
           filter: `blur(${blur}px)`,
         }}
-        initial={shouldAnimate ? { y: '100%' } : { y: '85%' }}
-        animate={shouldAnimate ? { y: ['100%', '80%', '100%'] } : { y: '85%' }}
+        initial={shouldAnimate ? { y: '100%' } : false}
+        animate={shouldAnimate ? { y: ['100%', '80%', '100%'] } : undefined}
         transition={shouldAnimate ? {
           repeat: Infinity,
           duration: Math.max(8, animationDuration - i * 2),

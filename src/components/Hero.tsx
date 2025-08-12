@@ -19,25 +19,20 @@ export default function Hero() {
 
       {/* Spotify Now Playing removed from Hero to reduce crowding; appears in Footer */}
 
-      {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-full h-full" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '12s' }} />
-        {/* Randomized bug overlay per load */}
-        <BugOverlay count={3} zIndexClass="z-20" />
-      </div>
+      {/* Background elements removed for performance */}
+      <div className="absolute top-0 left-0 w-full h-full" aria-hidden="true" />
 
       <motion.div
         className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        initial={false}
+        animate={undefined}
+        transition={undefined}
       >
         <motion.h1
           className="font-mono text-primary text-sm sm:text-base mb-3 flex items-center justify-center gap-2 flex-wrap"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={false}
+          animate={undefined}
+          transition={undefined}
         >
           ➜ ~ <span className="font-semibold text-foreground">jamesgaid@sec</span>
           <span className="text-green-500">●</span>
@@ -47,9 +42,9 @@ export default function Hero() {
         {/* Name with gradient text */}
         <motion.h2
           className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-extrabold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          initial={false}
+          animate={undefined}
+          transition={undefined}
         >
           {"{James Ryan Gaid}"}
         </motion.h2>
@@ -57,9 +52,9 @@ export default function Hero() {
         {/* Roles with typewriter effect */}
         <motion.p
           className="font-mono text-xs sm:text-sm md:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
+          initial={false}
+          animate={undefined}
+          transition={undefined}
         >
           QA Engineer • Automation Specialist •<br className="sm:hidden" /> Security Enthusiast
           <span className="inline-block w-[5px] h-[1em] bg-foreground animate-blink align-middle ml-1"></span>
@@ -67,9 +62,9 @@ export default function Hero() {
 
         {/* Terminal component */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
+          initial={false}
+          animate={undefined}
+          transition={undefined}
           className="mt-6 sm:mt-8 mb-6 sm:mb-8 w-full max-w-lg mx-auto"
         >
           <Terminal 
@@ -89,9 +84,9 @@ export default function Hero() {
         {/* CTA buttons */}
         <motion.div
           className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-6 sm:mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
+          initial={false}
+          animate={undefined}
+          transition={undefined}
         >
           <motion.a
             href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf"
@@ -99,8 +94,8 @@ export default function Hero() {
             className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
                       text-primary-foreground bg-primary hover:bg-primary/90
                       border border-primary/50 shadow-md hover:shadow-lg w-full sm:w-auto min-h-[44px]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={undefined}
+            whileTap={undefined}
           >
             <Download className="w-4 h-4 text-primary-foreground" />
             ./Download_CV.pdf
@@ -111,8 +106,8 @@ export default function Hero() {
             className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
                       text-primary bg-primary/10 hover:bg-primary/20
                       border border-primary/20 shadow-md hover:shadow-lg w-full sm:w-auto min-h-[44px]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={undefined}
+            whileTap={undefined}
           >
             <Mail className="w-4 h-4" />
             ./Contact_Me
@@ -122,8 +117,8 @@ export default function Hero() {
             href="#projects"
             className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
                       text-muted-foreground border border-border hover:bg-primary/5 hover:border-primary/30 hover:text-primary w-full sm:w-auto min-h-[44px]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={undefined}
+            whileTap={undefined}
           >
             <PlayCircle className="w-4 h-4" />
             ./View_Work
@@ -133,11 +128,11 @@ export default function Hero() {
         {/* Availability status */}
         <motion.div
           className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-green-500/10 text-green-600 border border-green-500/20 rounded-full text-xs sm:text-sm"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
+          initial={false}
+          animate={undefined}
+          transition={undefined}
         >
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          <div className="w-2 h-2 bg-green-500 rounded-full" />
           <span className="text-center">Available for new opportunities</span>
         </motion.div>
       </motion.div>
@@ -145,16 +140,16 @@ export default function Hero() {
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 0.5 }}
+        initial={false}
+        animate={undefined}
+        transition={undefined}
       >
         <div className="flex flex-col items-center gap-2">
           <span className="text-xs text-muted-foreground">Discover More</span>
           <motion.div
             className="p-2 rounded-full border border-muted-foreground/30 hover:border-primary hover:text-primary transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+            animate={undefined}
+            transition={undefined}
           >
             <ArrowDown className="w-4 h-4" />
           </motion.div>

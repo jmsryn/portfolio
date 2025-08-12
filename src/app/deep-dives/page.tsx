@@ -222,9 +222,9 @@ export default function DeepDivesPage() {
           </div>
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={false}
+            animate={undefined}
+            transition={undefined}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Technical Deep Dives
@@ -247,9 +247,9 @@ export default function DeepDivesPage() {
             {deepDives.filter(article => article.featured).map((article, index) => (
               <motion.article
                 key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={false}
+                whileInView={undefined}
+                transition={undefined}
                 className="group bg-card/50 backdrop-blur-sm rounded-xl overflow-hidden border border-border shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
               >
                 {/* Article image */}
@@ -309,11 +309,11 @@ export default function DeepDivesPage() {
           
           <div className="space-y-6">
             {deepDives.map((article, index) => (
-              <motion.article
+                <motion.article
                 key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                  initial={false}
+                  whileInView={undefined}
+                  transition={undefined}
                 className="group bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border hover:bg-primary/5 hover:border-primary/30 transition-all duration-300"
               >
                 <div className="flex flex-col md:flex-row gap-6">
@@ -380,9 +380,9 @@ export default function DeepDivesPage() {
 
           {/* Coming Soon */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={false}
+            whileInView={undefined}
+            transition={undefined}
             className="mt-16 text-center"
           >
             <div className="bg-card/30 backdrop-blur-sm rounded-xl p-8 border border-border">
