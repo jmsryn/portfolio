@@ -4,33 +4,35 @@
 
 import React from 'react';
 
-type MotionProps<T> = React.HTMLAttributes<T> & { [key: string]: any };
+type MotionProps<T extends HTMLElement> = React.HTMLAttributes<T> & Record<string, unknown>;
 
-export const motion: any = new Proxy(
+type NoMotionComponent = React.ForwardRefExoticComponent<
+  MotionProps<HTMLElement> & React.RefAttributes<HTMLElement>
+>;
+
+export const motion: Record<string, NoMotionComponent> = new Proxy(
   {},
   {
     get: (_target, tag: string) => {
-      const Tag: any = tag;
-      // Return a component that ignores motion-specific props
-      return React.forwardRef<HTMLElement, MotionProps<any>>(function NoMotion(
+      const Tag = tag as React.ElementType;
+      return React.forwardRef<HTMLElement, MotionProps<HTMLElement>>(function NoMotion(
         { children, ...rest },
         ref
       ) {
-        // Remove common motion props
-        const { initial, animate, exit, whileHover, whileTap, transition, layoutId, layout, ...props } = rest as any;
-        return <Tag ref={ref} {...props}>{children}</Tag>;
+        const props = rest as Record<string, unknown>;
+        return React.createElement(Tag, { ref, ...(props as object) }, children as React.ReactNode);
       });
     },
   }
-);
+) as Record<string, NoMotionComponent>;
 
 export const AnimatePresence = ({ children }: { children: React.ReactNode }) => <>{children}</>;
 
-export function useScroll() {
-  return { scrollYProgress: 0 } as any;
+export function useScroll(): { scrollYProgress: number } {
+  return { scrollYProgress: 0 };
 }
 
-export function useReducedMotion() {
+export function useReducedMotion(): boolean {
   return true; // indicate reduced motion
 }
 

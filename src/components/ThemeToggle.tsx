@@ -96,7 +96,7 @@ export default function ThemeToggle() {
               transition={undefined}
             >
               <div className="p-2">
-                {themes.map((themeOption, index) => (
+                {themes.map((themeOption) => (
                   <motion.button
                     key={themeOption.value}
                     onClick={() => handleThemeChange(themeOption.value)}

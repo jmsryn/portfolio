@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+// ScrollProgress disabled
 
 export default function ScrollProgress() {
   return null;

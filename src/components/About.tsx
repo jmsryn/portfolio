@@ -71,13 +71,13 @@ export default function About() {
               >
                 <h3 className="text-xl font-semibold mb-6 text-foreground">Technical Skills</h3>
                 <div className="grid md:grid-cols-2 gap-6">
-                  {skills.map((skillGroup, index) => (
+                  {skills.map((skillGroup) => (
                       <motion.div
                       key={skillGroup.category}
                       className="card-enhanced p-6"
-                        initial={false}
-                        whileInView={undefined}
-                        transition={undefined}
+                      initial={false}
+                      whileInView={undefined}
+                      transition={undefined}
                     >
                        <h4 className="font-medium text-primary mb-3 underline-slide">{skillGroup.category}</h4>
                       <div className="flex flex-wrap gap-2">

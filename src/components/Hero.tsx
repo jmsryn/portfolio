@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Download, Mail, ArrowDown, PlayCircle } from 'lucide-react';
 import { BackgroundSwitcher } from '@/components/ui/background-switcher';
-import { BugOverlay } from '@/components/ui/bug-overlay';
 import Terminal from './Terminal'; // Import the Terminal component
 // SpotifyNowPlaying intentionally removed from Hero; shown in Footer only
 

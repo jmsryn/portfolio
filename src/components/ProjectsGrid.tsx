@@ -127,7 +127,7 @@ export default function ProjectsGrid() {
           <div className="max-w-4xl mx-auto mt-12">
             <h3 className="text-center text-sm text-muted-foreground mb-4">More projects</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              {more.map((project, i) => (
+              {more.map((project) => (
                 <motion.div
                   key={project.title}
                   initial={false}

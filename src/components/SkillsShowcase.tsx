@@ -43,7 +43,7 @@ export default function SkillsShowcase() {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, index) => (
+          {skillCategories.map((category) => (
             <motion.div
               key={category.title}
               className="p-6 bg-card/50 backdrop-blur-sm rounded-lg border border-border hover:bg-primary/5 hover:border-primary/30 transition-all duration-300"

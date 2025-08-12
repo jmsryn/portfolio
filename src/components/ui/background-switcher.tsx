@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Grid, Waves } from 'lucide-react';
 
-const GradientMesh = React.lazy(() => import('./gradient-mesh').then(m => ({ default: m.GradientMesh })));
-const WaveBackground = React.lazy(() => import('./wave-background').then(m => ({ default: m.WaveBackground })));
+// Backgrounds disabled for performance
 
 type BackgroundType = 'gradient' | 'waves';
 
