@@ -91,7 +91,7 @@ export default function Hero() {
           <motion.a
             href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf"
             download
-            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300 hover-lift
                       text-primary-foreground bg-primary hover:bg-primary/90
                       border border-primary/50 shadow-md hover:shadow-lg w-full sm:w-auto min-h-[44px]"
             whileHover={undefined}
@@ -103,7 +103,7 @@ export default function Hero() {
 
           <motion.a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300 hover-lift
                       text-primary bg-primary/10 hover:bg-primary/20
                       border border-primary/20 shadow-md hover:shadow-lg w-full sm:w-auto min-h-[44px]"
             whileHover={undefined}
@@ -115,7 +115,7 @@ export default function Hero() {
 
           <motion.a
             href="#projects"
-            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-md text-sm font-mono transition-all duration-300 hover-lift
                       text-muted-foreground border border-border hover:bg-primary/5 hover:border-primary/30 hover:text-primary w-full sm:w-auto min-h-[44px]"
             whileHover={undefined}
             whileTap={undefined}

@@ -79,7 +79,7 @@ export default function About() {
                         whileInView={undefined}
                         transition={undefined}
                     >
-                      <h4 className="font-medium text-primary mb-3">{skillGroup.category}</h4>
+                       <h4 className="font-medium text-primary mb-3 underline-slide">{skillGroup.category}</h4>
                       <div className="flex flex-wrap gap-2">
                         {skillGroup.items.map((skill) => (
                           <span

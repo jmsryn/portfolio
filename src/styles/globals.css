@@ -282,6 +282,35 @@ html {
 
 /* Custom utility classes */
 @layer utilities {
+  /* Desktop-only micro interactions */
+  @media (hover: hover) {
+    .hover-lift {
+      transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px -6px rgb(0 0 0 / 0.15);
+    }
+
+    .hover-scale {
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.01);
+      box-shadow: 0 12px 20px -8px rgb(0 0 0 / 0.18);
+    }
+
+    .underline-slide {
+      background-image: linear-gradient(currentColor, currentColor);
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 150ms ease;
+    }
+    .underline-slide:hover {
+      background-size: 100% 1px;
+    }
+  }
   .section-padding {
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);

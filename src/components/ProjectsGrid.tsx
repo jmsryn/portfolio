@@ -66,7 +66,7 @@ export default function ProjectsGrid() {
               initial={false}
               whileInView={undefined}
               transition={undefined}
-              className="bg-card/50 backdrop-blur-sm rounded-lg border border-border p-0 overflow-hidden hover:bg-primary/5 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] group w-full max-w-md"
+              className="bg-card/50 backdrop-blur-sm rounded-lg border border-border p-0 overflow-hidden hover:bg-primary/5 hover:border-primary/30 transition-all duration-300 md:hover:shadow-lg md:hover:scale-[1.01] group w-full max-w-md hover-scale"
             >
               {project.image && (
                 <div className="relative h-40 w-full">
@@ -133,7 +133,7 @@ export default function ProjectsGrid() {
                   initial={false}
                   whileInView={undefined}
                   transition={undefined}
-                  className="bg-card/40 rounded-lg border border-border p-4 hover:bg-primary/5 hover:border-primary/30 transition-all"
+                  className="bg-card/40 rounded-lg border border-border p-4 hover:bg-primary/5 hover:border-primary/30 transition-all md:hover:shadow md:hover:scale-[1.005] hover-scale"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>

@@ -20,7 +20,7 @@ export default function Footer() {
               href="mailto:jamesgaid.dev@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors hover-lift"
               whileHover={undefined}
               whileTap={undefined}
             >
@@ -30,7 +30,7 @@ export default function Footer() {
               href="https://github.com/jmsryn"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors hover-lift"
               whileHover={undefined}
               whileTap={undefined}
             >
@@ -40,7 +40,7 @@ export default function Footer() {
               href="https://linkedin.com/in/jmsryn"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-full bg-background hover:bg-primary/10 transition-colors hover-lift"
               whileHover={undefined}
               whileTap={undefined}
             >
