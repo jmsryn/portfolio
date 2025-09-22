@@ -4,6 +4,7 @@ import SideNav from "@/components/SideNav";
 import OpenToWork from "@/components/OpenToWork";
 import ScrollProgress from "@/components/ScrollProgress";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
+import VisitTracker from "@/components/VisitTracker";
 import "../styles/globals.css";
 
 const inter = Inter({
@@ -110,14 +111,16 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <ThemeProviderWrapper>
-          <SideNav />
-          <ScrollProgress />
-          <OpenToWork />
-          <div className="relative min-h-screen">
-            <div className="lg:pr-0 xl:pr-0">
-              {children}
+          <VisitTracker>
+            <SideNav />
+            <ScrollProgress />
+            <OpenToWork />
+            <div className="relative min-h-screen">
+              <div className="lg:pr-0 xl:pr-0">
+                {children}
+              </div>
             </div>
-          </div>
+          </VisitTracker>
         </ThemeProviderWrapper>
       </body>
     </html>

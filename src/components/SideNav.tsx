@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { Menu, X, Home, User, Briefcase, FolderOpen, GraduationCap, Award, Mail } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import SpotifyNowPlaying from './SpotifyNowPlaying';
@@ -20,6 +21,7 @@ export default function SideNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const router = useRouter();
 
   // Scroll progress (throttled via rAF)
   useEffect(() => {
@@ -75,11 +77,18 @@ export default function SideNav() {
     return () => io.disconnect();
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (item: typeof navItems[0]) => {
     setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (item.href.startsWith('/')) {
+      // Navigate to page
+      router.push(item.href);
+    } else {
+      // Handle anchor links
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -125,9 +134,9 @@ export default function SideNav() {
             {navItems.map((item) => (
               <li key={item.name}>
                 <motion.button
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={() => handleNavClick(item)}
                   className={`group relative flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                    activeSection === item.href.slice(1)
+                    activeSection === item.href.slice(1) && item.href.startsWith('#')
                       ? 'bg-primary text-primary-foreground shadow-lg'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   }`}
@@ -140,7 +149,7 @@ export default function SideNav() {
                   <span className="whitespace-nowrap">{item.name}</span>
                   
                   {/* Active indicator */}
-                  {activeSection === item.href.slice(1) && (
+                  {activeSection === item.href.slice(1) && item.href.startsWith('#') && (
                     <motion.div
                       className="absolute left-0 w-1 h-full bg-primary-foreground rounded-r-full"
                       layoutId="activeIndicator"
@@ -243,9 +252,9 @@ export default function SideNav() {
                         transition={{ duration: 0.3, delay: index * 0.05 }}
                       >
                         <button
-                          onClick={() => handleNavClick(item.href)}
+                          onClick={() => handleNavClick(item)}
                           className={`group relative flex items-center gap-4 w-full px-4 py-4 rounded-xl text-left transition-all duration-300 ${
-                            activeSection === item.href.slice(1)
+                            activeSection === item.href.slice(1) && item.href.startsWith('#')
                               ? 'bg-primary text-primary-foreground shadow-lg'
                               : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                           }`}
@@ -256,7 +265,7 @@ export default function SideNav() {
                           <span className="font-medium">{item.name}</span>
                           
                           {/* Active indicator */}
-                          {activeSection === item.href.slice(1) && (
+                          {activeSection === item.href.slice(1) && item.href.startsWith('#') && (
                             <motion.div
                               className="absolute left-0 w-1 h-full bg-primary-foreground rounded-r-full"
                               layoutId="mobileActiveIndicator"
