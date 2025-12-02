@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BugOverlay } from '@/components/ui/bug-overlay';
 import { 
-  Building2, Calendar, MapPin, CheckCircle2, Briefcase 
+  Calendar, MapPin, CheckCircle2, ChevronDown, ChevronUp
 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
@@ -30,13 +29,13 @@ const experiences = [
   {
     company: 'Theoria Medical',
     location: 'Remote',
-    period: 'June 2023 – Present',
+    period: 'June 2023 – December 2025',
     type: 'Full-time',
     description: 'Progressed from Software Quality Assurance Engineer to Jr. Software Development Engineer in Test, expanding expertise in test automation and development practices.',
     roles: [
       {
         title: 'Jr. Software Development Engineer in Test',
-        period: 'June 2025 – Present',
+        period: 'June 2025 – December 2025',
         description: 'Write and maintain automated test scripts in Playwright for UI, API, and integration layers under senior guidance. Execute existing regression and smoke suites in CI and report results.',
         achievements: [
           'Write and maintain automated test scripts in Playwright for UI, API, and integration layers under senior guidance',
@@ -114,179 +113,196 @@ export default function Experience() {
   return (
     <SectionWrapper>
       <section id="experience" className="section-padding">
-        <div className="container-custom relative">
-          <BugOverlay count={2} />
-          <motion.h2
-            className="text-balance text-center mb-16 relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
-            initial={false}
-            whileInView={undefined}
-            transition={undefined}
-          >
-            Professional Experience
-          </motion.h2>
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              className="mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <h2 className="text-5xl md:text-6xl font-light mb-6 text-foreground">
+                Experience
+              </h2>
+              <div className="h-px w-20 bg-gradient-to-r from-primary to-transparent mb-8" />
+            </motion.div>
 
-          {/* Timeline */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Timeline line - hidden on mobile, shown on desktop */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary transform -translate-x-0.5"></div>
-
-            <div className="space-y-6 md:space-y-12">
+            <div className="space-y-12">
               {experiences.map((exp: Experience, index: number) => (
                 <motion.div
                   key={index}
-                  className={`relative flex flex-col md:flex-row ${
-                    index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                  } items-start gap-4 md:gap-8`}
-                  initial={false}
-                  whileInView={undefined}
-                  transition={undefined}
+                  className="relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  {/* Timeline node - hidden on mobile */}
-                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 z-10">
-                    <motion.div
-                      className={`w-4 h-4 rounded-full bg-gradient-to-r ${exp.color} border-4 border-background shadow-lg`}
-                      initial={false}
-                      whileInView={undefined}
-                      transition={undefined}
-                    />
-                  </div>
+                  {index < experiences.length - 1 && (
+                    <div className="absolute left-6 top-16 bottom-0 w-px bg-border" />
+                  )}
 
-                  {/* Content card */}
-                  <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
+                  <div className="flex gap-6">
+                    <div className="flex-shrink-0 relative">
+                      <motion.div
+                        className="w-14 h-14 rounded-xl border-2 border-primary bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center shadow-lg"
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <div className="w-3 h-3 rounded-full bg-primary" />
+                      </motion.div>
+                      {index < experiences.length - 1 && (
+                        <div className="absolute left-1/2 top-14 w-0.5 h-full bg-gradient-to-b from-primary/50 to-transparent -translate-x-1/2" />
+                      )}
+                    </div>
+
                     <motion.div
-                      className="card-enhanced p-4 sm:p-6 group relative"
-                      initial={false}
-                      whileInView={undefined}
-                      transition={undefined}
+                      className="flex-1 pb-16"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
                     >
-                      {/* Mobile timeline indicator */}
-                      <div className="md:hidden absolute -left-2 top-6 w-1 h-8 bg-gradient-to-b from-primary to-accent rounded-full"></div>
-                      
-                      {/* Header */}
-                      <div className={`flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4 ${index % 2 === 0 ? 'md:flex-row-reverse md:text-right' : ''}`}>
-                        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-r ${exp.color} flex items-center justify-center text-white shadow-lg flex-shrink-0`}>
-                          <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          {/* For multi-role companies */}
-                          {exp.roles && (
-                            <h3 className="text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors leading-tight mb-1">
-                              {exp.roles[0].title}
-                              <span className="text-sm text-muted-foreground font-normal ml-2">
-                                (Promoted from {exp.roles[exp.roles.length - 1].title})
-                              </span>
-                            </h3>
-                          )}
-                          
-                          <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
-                            <Building2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                            <span className="truncate">{exp.company}</span>
+                      <div className="mb-6">
+                        <h3 className="text-2xl md:text-3xl font-light text-foreground mb-3">
+                          {exp.company}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border/50">
+                            <Calendar className="w-4 h-4" />
+                            <span className="font-medium">{exp.period}</span>
                           </div>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="w-3 h-3 flex-shrink-0" />
-                              <span>{exp.period}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="w-3 h-3 flex-shrink-0" />
-                              <span>{exp.location}</span>
-                            </div>
+                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/30 border border-border/50">
+                            <MapPin className="w-4 h-4" />
+                            <span className="font-medium">{exp.location}</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Description */}
-                      <p className="text-muted-foreground text-sm mb-3 sm:mb-4 leading-relaxed">
-                        {exp.description}
-                      </p>
-
-                      {/* For multi-role companies - show roles with achievements (collapsed older roles) */}
                       {exp.roles && (
-                        <div className="mb-3 sm:mb-4 space-y-4">
+                        <div className="space-y-6">
                           {(expandedRolesByExp[index] ? exp.roles : exp.roles.slice(0, 1)).map((role: Role, roleIndex: number) => {
-                            const globalRoleIndex = expandedRolesByExp[index] ? roleIndex : roleIndex; // roleIndex is correct for shown slice
+                            const globalRoleIndex = expandedRolesByExp[index] ? roleIndex : roleIndex;
                             const key = `${index}-${globalRoleIndex}`;
                             const isAchExpanded = Boolean(expandedAchievementsByRole[key]);
-                            const visibleAchievements = isAchExpanded ? role.achievements : role.achievements.slice(0, 3);
-                            const hasMoreAchievements = role.achievements.length > 3;
+                            const visibleAchievements = isAchExpanded ? role.achievements : role.achievements.slice(0, 4);
+                            const hasMoreAchievements = role.achievements.length > 4;
+                            
                             return (
-                              <div key={globalRoleIndex} className="border-l-2 border-primary/20 pl-4">
-                                <div className="flex items-center gap-2 mb-2">
-                                  <h4 className="text-sm font-medium text-foreground">{role.title}</h4>
-                                  <span className="text-xs text-muted-foreground">({role.period})</span>
+                              <motion.div
+                                key={globalRoleIndex}
+                                className="space-y-4 mb-4 p-5 rounded-xl bg-card/40 backdrop-blur-sm border border-border/50"
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4 }}
+                              >
+                                <div>
+                                  <div className="flex items-center justify-between mb-3">
+                                    <h4 className="text-xl font-medium text-foreground">
+                                      {role.title}
+                                    </h4>
+                                    <span className="text-xs px-2 py-1 rounded-lg bg-primary/10 text-primary border border-primary/20">
+                                      {role.period}
+                                    </span>
+                                  </div>
+                                  <p className="text-muted-foreground leading-relaxed font-light">
+                                    {role.description}
+                                  </p>
                                 </div>
-                                <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
-                                  {role.description}
-                                </p>
-                                <ul className="space-y-1">
-                                  {visibleAchievements.map((achievement: string, i: number) => (
-                                    <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                                      <CheckCircle2 className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
-                                      <span className="leading-relaxed">{achievement}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                                {hasMoreAchievements && (
-                                  <button
-                                    type="button"
-                                    className="mt-2 text-xs text-primary hover:text-primary/80"
-                                    onClick={() => toggleAchievements(index, globalRoleIndex)}
-                                  >
-                                    {isAchExpanded ? 'Show fewer' : 'Show more'}
-                                  </button>
+
+                                {visibleAchievements.length > 0 && (
+                                  <div>
+                                    <h5 className="text-sm font-medium text-foreground mb-4 uppercase tracking-wider flex items-center gap-2">
+                                      <div className="w-1 h-4 bg-primary rounded-full" />
+                                      Key Achievements
+                                    </h5>
+                                    <ul className="space-y-3">
+                                      {visibleAchievements.map((achievement: string, i: number) => (
+                                        <motion.li
+                                          key={i}
+                                          className="flex items-start gap-3 text-muted-foreground group"
+                                          initial={{ opacity: 0, x: -10 }}
+                                          whileInView={{ opacity: 1, x: 0 }}
+                                          viewport={{ once: true }}
+                                          transition={{ duration: 0.3, delay: i * 0.05 }}
+                                        >
+                                          <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                                          <span className="leading-relaxed">{achievement}</span>
+                                        </motion.li>
+                                      ))}
+                                    </ul>
+                                    {hasMoreAchievements && (
+                                      <button
+                                        type="button"
+                                        onClick={() => toggleAchievements(index, globalRoleIndex)}
+                                        className="mt-3 text-sm text-primary hover:text-primary/80 flex items-center gap-1"
+                                      >
+                                        {isAchExpanded ? (
+                                          <>
+                                            <ChevronUp className="w-4 h-4" />
+                                            Show fewer
+                                          </>
+                                        ) : (
+                                          <>
+                                            <ChevronDown className="w-4 h-4" />
+                                            Show more ({role.achievements.length - 4} more)
+                                          </>
+                                        )}
+                                      </button>
+                                    )}
+                                  </div>
                                 )}
-                              </div>
+
+                                <div>
+                                  <h5 className="text-sm font-medium text-foreground mb-4 uppercase tracking-wider flex items-center gap-2">
+                                    <div className="w-1 h-4 bg-primary rounded-full" />
+                                    Technologies
+                                  </h5>
+                                  <div className="flex flex-wrap gap-2">
+                                    {exp.technologies.map((tech: string) => (
+                                      <motion.span
+                                        key={tech}
+                                        className="px-3 py-1.5 text-sm bg-muted/50 text-foreground border border-border/50 rounded-lg hover:border-primary/30 hover:bg-primary/5 transition-all duration-200"
+                                        whileHover={{ scale: 1.05 }}
+                                      >
+                                        {tech}
+                                      </motion.span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </motion.div>
                             );
                           })}
 
                           {exp.roles.length > 1 && (
-                            <div className="pt-2">
-                              <button
-                                type="button"
-                                className="text-xs text-primary hover:text-primary/80"
-                                onClick={() => toggleOlderRoles(index)}
-                              >
-                                {expandedRolesByExp[index] ? 'Hide older roles' : 'Show older roles'}
-                              </button>
-                            </div>
+                            <button
+                              type="button"
+                              onClick={() => toggleOlderRoles(index)}
+                              className="text-sm text-primary hover:text-primary/80 flex items-center gap-1"
+                            >
+                              {expandedRolesByExp[index] ? (
+                                <>
+                                  <ChevronUp className="w-4 h-4" />
+                                  Hide older roles
+                                </>
+                              ) : (
+                                <>
+                                  <ChevronDown className="w-4 h-4" />
+                                  Show older roles ({exp.roles.length - 1} more)
+                                </>
+                              )}
+                            </button>
                           )}
                         </div>
                       )}
-
-                      {/* Technologies */}
-                      <div>
-                        <h4 className="text-sm font-medium text-foreground mb-2">Technologies</h4>
-                        <div className="flex flex-wrap gap-1 sm:gap-2">
-                          {exp.technologies.map((tech: string) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md hover:bg-primary/10 hover:text-primary transition-colors whitespace-nowrap"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
                     </motion.div>
                   </div>
-
-                  {/* Empty space for alternating layout */}
-                  <div className="hidden md:block w-5/12"></div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Timeline end - desktop only */}
-            <motion.div
-              className="hidden md:block absolute left-1/2 transform -translate-x-1/2 bottom-0"
-              initial={false}
-              whileInView={undefined}
-              transition={undefined}
-            >
-              <div className="w-6 h-6 rounded-full bg-gradient-to-r from-primary to-accent border-4 border-background shadow-lg flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-white"></div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>

@@ -13,7 +13,7 @@ const themes: { value: Theme; icon: React.ReactNode; label: string }[] = [
 ];
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('system');
+  const [theme, setTheme] = useState<Theme>('light');
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -83,17 +83,17 @@ export default function ThemeToggle() {
           <>
             {/* Backdrop */}
             <div 
-              className="fixed inset-0 z-10" 
+              className="fixed inset-0 z-[90]" 
               onClick={() => setIsOpen(false)}
             />
             
             {/* Theme options */}
             <motion.div
-              className="absolute bottom-full right-0 mb-2 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-xl z-20 min-w-[140px]"
-              initial={false}
-              animate={undefined}
-              exit={undefined}
-              transition={undefined}
+              className="absolute bottom-full right-0 mb-2 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-xl z-[100] min-w-[140px]"
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
               <div className="p-2">
                 {themes.map((themeOption) => (

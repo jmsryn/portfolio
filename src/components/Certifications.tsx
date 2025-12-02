@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BugOverlay } from '@/components/ui/bug-overlay';
 import { ExternalLink, Award, Calendar, CheckCircle, Clock } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
@@ -92,18 +91,19 @@ export default function Certifications() {
   return (
     <SectionWrapper>
       <section id="certifications" className="section-padding">
-        <div className="container-custom relative">
-          <BugOverlay count={1} />
+        <div className="container-custom">
           <motion.div
-            className="text-center mb-16"
-            initial={false}
-            whileInView={undefined}
-            transition={undefined}
+            className="mb-20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2 className="text-balance relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent">
-              Certifications & Training
+            <h2 className="text-5xl md:text-6xl font-light mb-6 text-foreground">
+              Certifications
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            <div className="h-px w-20 bg-gradient-to-r from-primary to-transparent mb-8" />
+            <p className="text-muted-foreground text-lg max-w-2xl font-light">
               Continuous learning and professional development in cybersecurity, testing, and technology.
             </p>
           </motion.div>
@@ -113,62 +113,73 @@ export default function Certifications() {
               <motion.div
                 key={cert.title}
                 className="group"
-                initial={false}
-                whileInView={undefined}
-                transition={undefined}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
               >
-                <div className="card-enhanced p-6 h-full flex flex-col">
+                <motion.div
+                  className="card-enhanced p-8 h-full flex flex-col group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  whileHover={{ y: -6 }}
+                >
                   {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${cert.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <Award className="w-6 h-6" />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className={`px-2 py-1 text-xs rounded-full border ${getStatusColor(cert.status)} flex items-center gap-1`}>
+                  <div className="mb-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <motion.div
+                        className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/30 flex items-center justify-center"
+                        whileHover={{ rotate: 5, scale: 1.1 }}
+                      >
+                        <Award className="w-6 h-6 text-primary" />
+                      </motion.div>
+                      <span className={`px-3 py-1.5 text-xs rounded-lg border ${getStatusColor(cert.status)} flex items-center gap-1.5`}>
                         {getStatusIcon(cert.status)}
                         {cert.status}
                       </span>
                     </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    
+                    <h3 className="text-lg font-light text-foreground mb-3 group-hover:text-primary transition-colors">
                       {cert.title}
                     </h3>
                     
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                      <span className="font-medium">{cert.issuer}</span>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
+                      <span>{cert.issuer}</span>
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
                         <span>{cert.date}</span>
                       </div>
                     </div>
+                    
+                    <span className="inline-block px-3 py-1.5 text-xs bg-muted/50 text-foreground border border-border/50 rounded-lg">
+                      {cert.type}
+                    </span>
+                  </div>
 
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  {/* Content */}
+                  <div className="flex-1 mb-6">
+                    <p className="text-muted-foreground mb-4 leading-relaxed font-light">
                       {cert.description}
                     </p>
 
                     {/* Skills */}
-                    <div className="mb-4">
-                      <h4 className="text-xs font-medium text-foreground mb-2">Skills Covered</h4>
-                      <div className="flex flex-wrap gap-1">
+                    <div>
+                      <h4 className="text-xs font-medium text-foreground mb-3 uppercase tracking-wider">
+                        Skills Covered
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
                         {cert.skills.map((skill) => (
-                          <span
+                          <motion.span
                             key={skill}
-                            className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md"
+                            className="px-2.5 py-1 text-xs bg-muted/50 text-foreground border border-border/50 rounded-lg hover:border-primary/30 transition-all duration-200"
+                            whileHover={{ scale: 1.05 }}
                           >
                             {skill}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Type badge */}
-                    <div className="mb-4">
-                      <span className="inline-flex items-center px-2 py-1 text-xs bg-primary/10 text-primary rounded-md">
-                        {cert.type}
-                      </span>
                     </div>
                   </div>
 
@@ -178,13 +189,13 @@ export default function Certifications() {
                       href={cert.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors group-hover:gap-3"
+                      className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
                     >
                       <span>View Certificate</span>
-                      <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -194,7 +205,7 @@ export default function Certifications() {
               <button
                 type="button"
                 onClick={() => setShowAll(v => !v)}
-                className="btn-ghost"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-muted-foreground border border-border hover:bg-primary/5 hover:border-primary/30 hover:text-primary min-h-[44px]"
               >
                 {showAll ? 'Show fewer certifications' : 'Show all certifications'}
               </button>

@@ -1,9 +1,11 @@
 'use client';
 
+import { ReactNode } from 'react';
+
 export default function SectionWrapper({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return <section>{children}</section>;
 }

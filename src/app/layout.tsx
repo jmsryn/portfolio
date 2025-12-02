@@ -108,17 +108,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased w-full overflow-x-hidden`}
       >
         <ThemeProviderWrapper>
           <VisitTracker>
             <SideNav />
             <ScrollProgress />
             <OpenToWork />
-            <div className="relative min-h-screen">
-              <div className="lg:pr-0 xl:pr-0">
-                {children}
-              </div>
+            <div className="relative min-h-screen w-full overflow-x-hidden">
+              {children}
             </div>
           </VisitTracker>
         </ThemeProviderWrapper>

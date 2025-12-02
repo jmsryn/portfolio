@@ -3,11 +3,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Mail, MapPin, Clock, Send, CheckCircle, 
+  Mail, MapPin, Send, CheckCircle, 
   AlertCircle, Loader2, Calendar, Download 
 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
-import { BugOverlay } from '@/components/ui/bug-overlay';
 
 const contactMethods = [
   {
@@ -93,18 +92,19 @@ export default function Contact() {
   return (
     <SectionWrapper>
       <section id="contact" className="section-padding">
-        <div className="container-custom relative">
-          <BugOverlay count={1} />
+        <div className="container-custom">
           <motion.div
-            className="text-center mb-16"
-            initial={false}
-            whileInView={undefined}
-            transition={undefined}
+            className="mb-20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2 className="text-balance relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent">
-              Get In Touch
+            <h2 className="text-5xl md:text-6xl font-light mb-6 text-foreground">
+              Contact
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            <div className="h-px w-20 bg-gradient-to-r from-primary to-transparent mb-8" />
+            <p className="text-muted-foreground text-lg max-w-2xl font-light">
               Ready to discuss QA strategies, automation opportunities, or potential collaborations? 
               I&apos;d love to hear from you.
             </p>
@@ -118,12 +118,11 @@ export default function Contact() {
               whileInView={undefined}
               transition={undefined}
             >
-              <div className="card-enhanced p-6">
-                <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-primary" />
+              <div className="card-enhanced p-8">
+                <h3 className="text-xl font-light text-foreground mb-6">
                   Let&apos;s Connect
                 </h3>
-                <p className="text-muted-foreground text-sm mb-6">
+                <p className="text-muted-foreground mb-8 leading-relaxed font-light">
                   I&apos;m always interested in discussing new opportunities, 
                   sharing knowledge about QA practices, or collaborating on interesting projects.
                 </p>
@@ -161,24 +160,25 @@ export default function Contact() {
 
               {/* Quick Actions */}
               <motion.div
-                className="card-enhanced p-6"
-                initial={false}
-                whileInView={undefined}
-                transition={undefined}
+                className="card-enhanced p-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
               >
-                <h4 className="font-medium text-foreground mb-4">Quick Actions</h4>
+                <h4 className="text-lg font-light text-foreground mb-6">Quick Actions</h4>
                 <div className="space-y-3">
                   <a 
                     href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf" 
                     download
-                    className="btn-secondary w-full"
+                    className="flex items-center justify-center gap-2 px-6 py-3 border border-border hover:border-primary hover:text-primary transition-colors w-full"
                   >
                     <Download className="w-4 h-4" />
                     Download Resume
                   </a>
                   <a 
-                    href="mailto:james.gaid@email.com?subject=Let&apos;s Schedule a Call"
-                    className="btn-ghost w-full"
+                    href="mailto:hello@jrgaid.site?subject=Let's Schedule a Call"
+                    className="flex items-center justify-center gap-2 px-6 py-3 border border-border hover:border-primary hover:text-primary transition-colors w-full"
                   >
                     <Calendar className="w-4 h-4" />
                     Schedule a Call
@@ -195,7 +195,7 @@ export default function Contact() {
               transition={undefined}
             >
               <div className="card-enhanced p-8">
-                <h3 className="font-semibold text-foreground mb-6">Send a Message</h3>
+                <h3 className="text-xl font-light text-foreground mb-8">Send a Message</h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -210,7 +210,7 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-md border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-sm border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
                         placeholder="Your full name"
                       />
                     </div>
@@ -225,7 +225,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-md border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-sm border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
                         placeholder="your.email@example.com"
                       />
                     </div>
@@ -258,7 +258,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 rounded-md border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-sm border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all resize-none"
                       placeholder="Tell me about your project, questions, or how I can help..."
                     />
                   </div>
@@ -268,7 +268,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-sm text-sm font-medium transition-all duration-200 text-primary-foreground bg-primary hover:bg-primary/90 border border-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
                     >
                       {isSubmitting ? (
                         <Loader2 className="w-4 h-4" />
