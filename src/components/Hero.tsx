@@ -110,7 +110,7 @@ export default function Hero() {
           transition={{ delay: 0.9, duration: 0.6 }}
         >
           <motion.a
-            href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf"
+            href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf"
             download
             className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-primary-foreground bg-primary hover:bg-primary/90 border border-primary shadow-lg hover:shadow-xl min-h-[44px]"
             whileHover={{ scale: 1.02, y: -2 }}

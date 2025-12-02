@@ -169,7 +169,7 @@ export default function Contact() {
                 <h4 className="text-lg font-light text-foreground mb-6">Quick Actions</h4>
                 <div className="space-y-3">
                   <a 
-                    href="/files/James%20Ryan%20Gaid%20-%20Resume4.pdf" 
+                    href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf" 
                     download
                     className="flex items-center justify-center gap-2 px-6 py-3 border border-border hover:border-primary hover:text-primary transition-colors w-full"
                   >
