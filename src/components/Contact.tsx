@@ -2,27 +2,21 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Mail, MapPin, Send, CheckCircle, 
-  AlertCircle, Loader2, Calendar, Download 
-} from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle, AlertCircle, Loader2, Download, Calendar } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
 const contactMethods = [
   {
-    icon: <Mail className="w-5 h-5" />,
+    icon: <Mail className="w-4 h-4" />,
     label: 'Email',
     value: 'hello@jrgaid.site',
-
     href: 'mailto:hello@jrgaid.site',
-    description: 'Best for detailed inquiries'
   },
   {
-    icon: <MapPin className="w-5 h-5" />,
+    icon: <MapPin className="w-4 h-4" />,
     label: 'Location',
     value: 'Remote',
     href: null,
-    description: 'Open to remote opportunities'
   }
 ];
 
@@ -40,9 +34,8 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      // Prefer Formspree when configured
       if (formspreeId) {
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
           method: 'POST',
@@ -50,27 +43,16 @@ export default function Contact() {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-          }),
+          body: JSON.stringify(formData),
         });
 
-        if (!response.ok) {
-          throw new Error('Form submission failed');
-        }
-
+        if (!response.ok) throw new Error('Form submission failed');
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        // Fallback: open mail client
         const to = 'hello@jrgaid.site';
         const subject = encodeURIComponent(formData.subject || 'Portfolio contact');
-        const body = encodeURIComponent(
-          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-        );
+        const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
         window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
         setSubmitStatus('success');
       }
@@ -83,233 +65,179 @@ export default function Contact() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
     <SectionWrapper>
       <section id="contact" className="section-padding">
         <div className="container-custom">
-          <motion.div
-            className="mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <h2 className="text-5xl md:text-6xl font-light mb-6 text-foreground">
-              Contact
-            </h2>
-            <div className="h-px w-20 bg-gradient-to-r from-primary to-transparent mb-8" />
-            <p className="text-muted-foreground text-lg max-w-2xl font-light">
-              Ready to discuss QA strategies, automation opportunities, or potential collaborations? 
-              I&apos;d love to hear from you.
-            </p>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Contact Information */}
+          <div className="max-w-3xl mx-auto">
             <motion.div
-              className="lg:col-span-1 space-y-6"
-              initial={false}
-              whileInView={undefined}
-              transition={undefined}
+              className="mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="card-enhanced p-8">
-                <h3 className="text-xl font-light text-foreground mb-6">
-                  Let&apos;s Connect
-                </h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed font-light">
-                  I&apos;m always interested in discussing new opportunities, 
-                  sharing knowledge about QA practices, or collaborating on interesting projects.
-                </p>
+              <h2 className="text-4xl md:text-5xl font-light mb-4 text-foreground">
+                Contact
+              </h2>
+              <div className="h-px w-12 bg-primary mb-6" />
+              <p className="text-muted-foreground">
+                Ready to discuss opportunities? I&apos;d love to hear from you.
+              </p>
+            </motion.div>
 
-                <div className="space-y-4">
-                  {contactMethods.map((method, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
-                      initial={false}
-                      whileInView={undefined}
-                      transition={undefined}
-                    >
-                      <div className="text-primary mt-1">{method.icon}</div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-foreground">{method.label}</div>
-                        {method.href ? (
-                          <a 
-                            href={method.href}
-                            className="text-primary hover:underline text-sm break-all"
-                          >
-                            {method.value}
-                          </a>
-                        ) : (
-                          <div className="text-sm text-muted-foreground">{method.value}</div>
-                        )}
-                        <div className="text-xs text-muted-foreground mt-1">
-                          {method.description}
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Actions */}
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Contact Info */}
               <motion.div
-                className="card-enhanced p-8"
+                className="lg:col-span-1 space-y-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <h4 className="text-lg font-light text-foreground mb-6">Quick Actions</h4>
-                <div className="space-y-3">
-                  <a 
-                    href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf" 
-                    download
-                    className="flex items-center justify-center gap-2 px-6 py-3 border border-border hover:border-primary hover:text-primary transition-colors w-full"
-                  >
-                    <Download className="w-4 h-4" />
-                    Download Resume
-                  </a>
-                  <a 
-                    href="mailto:hello@jrgaid.site?subject=Let's Schedule a Call"
-                    className="flex items-center justify-center gap-2 px-6 py-3 border border-border hover:border-primary hover:text-primary transition-colors w-full"
-                  >
-                    <Calendar className="w-4 h-4" />
-                    Schedule a Call
-                  </a>
+                <div className="card-enhanced p-5">
+                  <h3 className="text-sm font-medium text-foreground mb-4">Get in Touch</h3>
+                  <div className="space-y-3">
+                    {contactMethods.map((method, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <span className="text-primary">{method.icon}</span>
+                        <div>
+                          <p className="text-xs text-muted-foreground">{method.label}</p>
+                          {method.href ? (
+                            <a href={method.href} className="text-sm text-foreground hover:text-primary transition-colors">
+                              {method.value}
+                            </a>
+                          ) : (
+                            <p className="text-sm text-foreground">{method.value}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="card-enhanced p-5">
+                  <h3 className="text-sm font-medium text-foreground mb-4">Quick Actions</h3>
+                  <div className="space-y-2">
+                    <a
+                      href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf"
+                      download
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download Resume
+                    </a>
+                    <a
+                      href="https://calendar.app.google/wajhYMZYTbUMvHYk6"
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Calendar className="w-4 h-4" />
+                      Schedule a Call
+                    </a>
+                  </div>
                 </div>
               </motion.div>
-            </motion.div>
 
-            {/* Contact Form */}
-            <motion.div
-              className="lg:col-span-2"
-              initial={false}
-              whileInView={undefined}
-              transition={undefined}
-            >
-              <div className="card-enhanced p-8">
-                <h3 className="text-xl font-light text-foreground mb-8">Send a Message</h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+              {/* Contact Form */}
+              <motion.div
+                className="lg:col-span-2"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <div className="card-enhanced p-6">
+                  <h3 className="text-sm font-medium text-foreground mb-6">Send a Message</h3>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="name" className="block text-xs text-muted-foreground mb-1.5">Name</label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                          placeholder="Your name"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-xs text-muted-foreground mb-1.5">Email</label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                          placeholder="your@email.com"
+                        />
+                      </div>
+                    </div>
+
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                        Name *
-                      </label>
+                      <label htmlFor="subject" className="block text-xs text-muted-foreground mb-1.5">Subject</label>
                       <input
                         type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-sm border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
-                        placeholder="Your full name"
+                        className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                        placeholder="What's this about?"
                       />
                     </div>
+
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
+                      <label htmlFor="message" className="block text-xs text-muted-foreground mb-1.5">Message</label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-sm border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
-                        placeholder="your.email@example.com"
+                        rows={4}
+                        className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors resize-none"
+                        placeholder="Your message..."
                       />
                     </div>
-                  </div>
 
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-md border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                      placeholder="What would you like to discuss?"
-                    />
-                  </div>
+                    <div className="flex items-center gap-4">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
+                      >
+                        {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                        {isSubmitting ? 'Sending...' : 'Send'}
+                      </button>
 
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-sm border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all resize-none"
-                      placeholder="Tell me about your project, questions, or how I can help..."
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-sm text-sm font-medium transition-all duration-200 text-primary-foreground bg-primary hover:bg-primary/90 border border-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
-                    >
-                      {isSubmitting ? (
-                        <Loader2 className="w-4 h-4" />
-                      ) : (
-                        <Send className="w-4 h-4" />
+                      {submitStatus === 'success' && (
+                        <span className="flex items-center gap-1.5 text-sm text-green-600">
+                          <CheckCircle className="w-4 h-4" />
+                          Sent!
+                        </span>
                       )}
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
-                    </button>
 
-                    {/* Status Messages */}
-                    {submitStatus === 'success' && (
-                      <motion.div
-                        className="flex items-center gap-2 text-green-600 text-sm"
-                        initial={false}
-                        animate={undefined}
-                      >
-                        <CheckCircle className="w-4 h-4" />
-                        Message sent successfully!
-                      </motion.div>
-                    )}
-
-                    {submitStatus === 'error' && (
-                      <motion.div
-                        className="flex items-center gap-2 text-red-600 text-sm"
-                        initial={false}
-                        animate={undefined}
-                      >
-                        <AlertCircle className="w-4 h-4" />
-                        Failed to send message. Please try again.
-                      </motion.div>
-                    )}
-                  </div>
-                </form>
-
-                <div className="mt-6 pt-6 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
-                    * Required fields. I typically respond within 24 hours during business days.
-                  </p>
+                      {submitStatus === 'error' && (
+                        <span className="flex items-center gap-1.5 text-sm text-red-600">
+                          <AlertCircle className="w-4 h-4" />
+                          Failed
+                        </span>
+                      )}
+                    </div>
+                  </form>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

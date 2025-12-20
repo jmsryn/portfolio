@@ -5,6 +5,7 @@ import OpenToWork from "@/components/OpenToWork";
 import ScrollProgress from "@/components/ScrollProgress";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import VisitTracker from "@/components/VisitTracker";
+import PageLoader from "@/components/PageLoader";
 import "../styles/globals.css";
 
 const inter = Inter({
@@ -112,12 +113,14 @@ export default function RootLayout({
       >
         <ThemeProviderWrapper>
           <VisitTracker>
-            <SideNav />
-            <ScrollProgress />
-            <OpenToWork />
-            <div className="relative min-h-screen w-full overflow-x-hidden">
-              {children}
-            </div>
+            <PageLoader>
+              <SideNav />
+              <ScrollProgress />
+              <OpenToWork />
+              <div className="relative min-h-screen w-full overflow-x-hidden">
+                {children}
+              </div>
+            </PageLoader>
           </VisitTracker>
         </ThemeProviderWrapper>
       </body>
