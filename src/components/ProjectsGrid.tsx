@@ -1,7 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Eye, X } from 'lucide-react';
+import { useState } from 'react';
 import SectionWrapper from './SectionWrapper';
 
 type Project = {
@@ -47,6 +48,8 @@ const qaProjects: Project[] = [
 ];
 
 export default function ProjectsGrid() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   return (
     <SectionWrapper>
       <section id="projects" className="section-padding">
@@ -107,6 +110,13 @@ export default function ProjectsGrid() {
                     </div>
 
                     <div className="flex gap-3">
+                      <button
+                        onClick={() => setSelectedProject(project)}
+                        className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                      >
+                        <Eye className="w-4 h-4" />
+                        View Live
+                      </button>
                       <a
                         href={project.demo}
                         target="_blank"
@@ -114,7 +124,7 @@ export default function ProjectsGrid() {
                         className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
-                        Demo
+                        Open in New Tab
                       </a>
                     </div>
                   </motion.div>
@@ -179,6 +189,51 @@ export default function ProjectsGrid() {
             </div>
           </div>
         </div>
+
+        {/* Iframe Showcase Modal */}
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-7xl h-[90vh] bg-background rounded-lg shadow-2xl overflow-hidden border border-primary/20"
+              >
+                {/* Header */}
+                <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-4 bg-background/95 backdrop-blur-sm border-b border-primary/20">
+                  <h3 className="text-lg font-medium text-foreground">
+                    {selectedProject.title}
+                  </h3>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="p-2 hover:bg-muted rounded-lg transition-colors"
+                    aria-label="Close preview"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Iframe */}
+                <iframe
+                  src={selectedProject.demo}
+                  className="w-full h-full pt-16"
+                  title={selectedProject.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
     </SectionWrapper>
   );
