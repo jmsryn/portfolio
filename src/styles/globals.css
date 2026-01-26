@@ -173,6 +173,11 @@
 
 @layer components {
 
+  /* Custom Container */
+  .container-custom {
+    @apply w-full mx-auto px-4 md:px-8 max-w-7xl;
+  }
+
   /* Brutalist Card */
   .brutalist-card {
     @apply bg-card border-2 border-border p-4 md:p-6 relative transition-all duration-300;

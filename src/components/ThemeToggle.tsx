@@ -13,7 +13,7 @@ const themes: { value: Theme; icon: React.ReactNode; label: string }[] = [
 ];
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,7 +29,7 @@ export default function ThemeToggle() {
     if (!mounted) return;
 
     const root = window.document.documentElement;
-    
+
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       root.classList.remove('light', 'dark');
@@ -82,11 +82,11 @@ export default function ThemeToggle() {
         {isOpen && (
           <>
             {/* Backdrop */}
-            <div 
-              className="fixed inset-0 z-[90]" 
+            <div
+              className="fixed inset-0 z-[90]"
               onClick={() => setIsOpen(false)}
             />
-            
+
             {/* Theme options */}
             <motion.div
               className="absolute bottom-full right-0 mb-2 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-xl z-[100] min-w-[140px]"
@@ -100,11 +100,10 @@ export default function ThemeToggle() {
                   <motion.button
                     key={themeOption.value}
                     onClick={() => handleThemeChange(themeOption.value)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                      theme === themeOption.value
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${theme === themeOption.value
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                    }`}
+                      }`}
                     initial={false}
                     animate={undefined}
                     transition={undefined}

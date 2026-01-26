@@ -30,7 +30,7 @@ export default function Education() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground uppercase">
+              <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground uppercase break-all md:break-normal">
                 Education
               </h2>
               <div className="h-2 w-24 bg-primary" />

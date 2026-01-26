@@ -52,7 +52,7 @@ export default function Certifications() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground uppercase">
+              <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground uppercase break-all md:break-normal">
                 Certifications
               </h2>
               <div className="h-2 w-24 bg-primary" />
@@ -118,7 +118,7 @@ export default function Certifications() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-2xl md:text-4xl font-black mb-4 text-foreground uppercase">
+              <h2 className="text-2xl md:text-4xl font-black mb-4 text-foreground uppercase break-words">
                 Courses & Self Development
               </h2>
               <div className="h-2 w-24 bg-secondary" />

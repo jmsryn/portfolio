@@ -63,7 +63,7 @@ export default function SideNav() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (isOpen && !target.closest('.floating-nav') && !target.closest('.nav-toggle')) {
+      if (isOpen && !target.closest('.floating-nav') && !target.closest('.nav-toggle') && !target.closest('.mobile-nav-sheet')) {
         setIsOpen(false);
       }
     };
@@ -149,7 +149,7 @@ export default function SideNav() {
 
             {/* Bottom Sheet */}
             <motion.div
-              className="fixed bottom-0 left-0 right-0 z-[70] lg:hidden bg-card border-t border-border rounded-t-2xl"
+              className="fixed bottom-0 left-0 right-0 z-[70] lg:hidden bg-card border-t border-border rounded-t-2xl mobile-nav-sheet"
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
