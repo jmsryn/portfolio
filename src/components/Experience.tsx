@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, ChevronUp, Briefcase } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
 interface Role {
@@ -81,6 +81,7 @@ const experiences: Experience[] = [
 
 export default function Experience() {
   const [expandedRoles, setExpandedRoles] = useState<Record<number, boolean>>({});
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const toggleRoles = (index: number) => {
     setExpandedRoles((prev) => ({ ...prev, [index]: !prev[index] }));
@@ -90,9 +91,9 @@ export default function Experience() {
     <SectionWrapper>
       <section id="experience" className="section-padding">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <motion.div
-              className="mb-12"
+              className="mb-16"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -104,90 +105,191 @@ export default function Experience() {
               <div className="h-px w-12 bg-primary" />
             </motion.div>
 
-            <div className="space-y-8">
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  className="relative"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="card-enhanced p-6">
-                    {/* Company Header */}
-                    <div className="mb-6">
-                      <h3 className="text-xl font-medium text-foreground mb-2">
-                        {exp.company}
-                      </h3>
-                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="w-4 h-4" />
-                          <span>{exp.period}</span>
+            {/* Interactive Timeline */}
+            <div className="relative">
+              {/* Timeline Line - Hidden on mobile, visible on md+ */}
+              <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent" />
+
+              <div className="space-y-12">
+                {experiences.map((exp, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    {/* Timeline Marker - Hidden on mobile */}
+                    <div className="hidden md:block absolute left-8 top-8 -translate-x-1/2">
+                      <motion.div
+                        className="relative"
+                        whileHover={{ scale: 1.2 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      >
+                        {/* Pulsing Ring */}
+                        {hoveredIndex === index && (
+                          <motion.div
+                            className="absolute inset-0 rounded-full bg-primary"
+                            initial={{ scale: 1, opacity: 0.5 }}
+                            animate={{ scale: 2, opacity: 0 }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          />
+                        )}
+
+                        {/* Outer Ring */}
+                        <div className="w-4 h-4 rounded-full bg-background border-2 border-primary flex items-center justify-center">
+                          {/* Inner Dot */}
+                          <motion.div
+                            className="w-2 h-2 rounded-full bg-primary"
+                            animate={hoveredIndex === index ? { scale: [1, 1.5, 1] } : {}}
+                            transition={{ duration: 0.6, repeat: hoveredIndex === index ? Infinity : 0 }}
+                          />
                         </div>
-                        <div className="flex items-center gap-1.5">
-                          <MapPin className="w-4 h-4" />
-                          <span>{exp.location}</span>
-                        </div>
-                      </div>
+                      </motion.div>
                     </div>
 
-                    {/* Roles */}
-                    <div className="space-y-4">
-                      {(expandedRoles[index] ? exp.roles : exp.roles.slice(0, 1)).map((role, roleIndex) => (
-                        <div key={roleIndex} className="border-l-2 border-primary/30 pl-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <h4 className="font-medium text-foreground">{role.title}</h4>
-                            <span className="text-xs text-muted-foreground">{role.period}</span>
+                    {/* Content Card */}
+                    <div className="md:ml-20">
+                      <motion.div
+                        className="card-enhanced p-6 md:p-8 relative overflow-hidden group"
+                        whileHover={{ y: -4 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Hover Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        {/* Company Header */}
+                        <div className="relative mb-6">
+                          <div className="flex items-start justify-between gap-4 mb-3">
+                            <div className="flex items-center gap-3">
+                              {/* Company Icon */}
+                              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 border border-primary/20">
+                                <Briefcase className="w-6 h-6 text-primary" />
+                              </div>
+                              <div>
+                                <h3 className="text-xl md:text-2xl font-medium text-foreground">
+                                  {exp.company}
+                                </h3>
+                                <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mt-1">
+                                  <div className="flex items-center gap-1.5">
+                                    <Calendar className="w-4 h-4" />
+                                    <span>{exp.period}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1.5">
+                                    <MapPin className="w-4 h-4" />
+                                    <span>{exp.location}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <p className="text-sm text-muted-foreground mb-3">{role.description}</p>
-                          <ul className="space-y-1.5">
-                            {role.achievements.slice(0, 3).map((achievement, i) => (
-                              <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                                <span className="text-primary mt-1.5">•</span>
-                                <span>{achievement}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
 
-                      {exp.roles.length > 1 && (
-                        <button
-                          onClick={() => toggleRoles(index)}
-                          className="text-sm text-primary hover:text-primary/80 flex items-center gap-1"
-                        >
-                          {expandedRoles[index] ? (
-                            <>
-                              <ChevronUp className="w-4 h-4" />
-                              Show less
-                            </>
-                          ) : (
-                            <>
-                              <ChevronDown className="w-4 h-4" />
-                              Show more roles
-                            </>
-                          )}
-                        </button>
-                      )}
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="mt-6 pt-4 border-t border-border">
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2.5 py-1 text-xs bg-muted text-foreground rounded-md"
+                          {/* Progress Bar */}
+                          <motion.div
+                            className="h-1 bg-muted rounded-full overflow-hidden"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "100%" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: index * 0.2 + 0.3 }}
                           >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                            <motion.div
+                              className="h-full bg-gradient-to-r from-primary to-primary/50"
+                              initial={{ x: "-100%" }}
+                              whileInView={{ x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
+                            />
+                          </motion.div>
+                        </div>
+
+                        {/* Roles */}
+                        <div className="relative space-y-6">
+                          {(expandedRoles[index] ? exp.roles : exp.roles.slice(0, 1)).map((role, roleIndex) => (
+                            <motion.div
+                              key={roleIndex}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4, delay: roleIndex * 0.1 }}
+                              className="border-l-2 border-primary/30 pl-5 hover:border-primary/60 transition-colors"
+                            >
+                              <div className="flex items-start justify-between gap-4 mb-2 flex-wrap">
+                                <h4 className="font-medium text-foreground text-base md:text-lg">
+                                  {role.title}
+                                </h4>
+                                <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                                  {role.period}
+                                </span>
+                              </div>
+                              <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+                                {role.description}
+                              </p>
+                              <ul className="space-y-2">
+                                {role.achievements.slice(0, 3).map((achievement, i) => (
+                                  <motion.li
+                                    key={i}
+                                    className="text-sm text-muted-foreground flex items-start gap-2"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                                  >
+                                    <span className="text-primary mt-1 text-lg leading-none">•</span>
+                                    <span className="flex-1">{achievement}</span>
+                                  </motion.li>
+                                ))}
+                              </ul>
+                            </motion.div>
+                          ))}
+
+                          {exp.roles.length > 1 && (
+                            <button
+                              onClick={() => toggleRoles(index)}
+                              className="text-sm text-primary hover:text-primary/80 flex items-center gap-2 transition-colors group/btn"
+                            >
+                              {expandedRoles[index] ? (
+                                <>
+                                  <ChevronUp className="w-4 h-4 group-hover/btn:translate-y-[-2px] transition-transform" />
+                                  Show less
+                                </>
+                              ) : (
+                                <>
+                                  <ChevronDown className="w-4 h-4 group-hover/btn:translate-y-[2px] transition-transform" />
+                                  Show {exp.roles.length - 1} more role{exp.roles.length - 1 > 1 ? 's' : ''}
+                                </>
+                              )}
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Technologies */}
+                        <div className="relative mt-6 pt-6 border-t border-border">
+                          <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
+                            Technologies Used
+                          </h5>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech, techIndex) => (
+                              <motion.span
+                                key={tech}
+                                className="px-3 py-1.5 text-xs bg-muted text-foreground rounded-md hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.3, delay: techIndex * 0.05 }}
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
