@@ -53,112 +53,127 @@ export default function About() {
     <SectionWrapper>
       <section id="about" className="section-padding">
         <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             {/* Header */}
             <motion.div
-              className="mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="mb-12 md:mb-16 border-b-4 border-foreground pb-4"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-4xl md:text-5xl font-light mb-4 text-foreground">
-                About
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-foreground uppercase tracking-tight">
+                About Me
               </h2>
-              <div className="h-px w-12 bg-primary" />
             </motion.div>
 
-            {/* Experience highlight */}
-            <motion.div
-              className="mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <span className="text-3xl font-light text-primary">{yearsExp}+</span>
-              <span className="text-sm text-muted-foreground">Years of Experience</span>
-            </motion.div>
+            <div className="grid md:grid-cols-12 gap-12">
+              {/* Left Column: Stats & Description */}
+              <div className="md:col-span-7">
+                {/* Experience Badge */}
+                <motion.div
+                  className="mb-8 inline-flex items-center gap-4 p-4 border-2 border-primary bg-primary/5"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  <span className="text-5xl font-black text-primary font-display">{yearsExp}+</span>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold uppercase tracking-wider text-foreground">Years of</span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-foreground">Experience</span>
+                  </div>
+                </motion.div>
 
-            {/* Description */}
-            <motion.div
-              className="mb-10 max-w-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-            >
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4 font-light">
-                I&apos;m a Quality Assurance Engineer with {yearsExp}+ years of experience in test automation, security testing, and quality engineering.
-              </p>
-              <p className="text-base text-muted-foreground/80 leading-relaxed font-light">
-                My expertise spans web application testing, API testing, security assessments, and building maintainable test frameworks integrated into CI/CD pipelines.
-              </p>
-            </motion.div>
+                {/* Description */}
+                <motion.div
+                  className="mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                >
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 font-mono border-l-2 border-muted pl-4">
+                    I&apos;m a Quality Assurance Engineer with a focus on <span className="text-foreground font-bold bg-primary/20 px-1">automation</span>, security, and performance.
+                  </p>
+                  <p className="text-base text-muted-foreground leading-relaxed font-sans">
+                    My expertise spans web application testing, API testing, security assessments, and building maintainable test frameworks integrated into CI/CD pipelines. I build systems that break other systems to make them stronger.
+                  </p>
+                </motion.div>
 
-            {/* Tech Stack Icons */}
-            <motion.div
-              className="mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-wider">Tech Stack</h3>
-              <div className="flex flex-wrap gap-3">
-                {techStack.map((tech, index) => (
-                  <motion.div
-                    key={tech.name}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.25 + index * 0.05 }}
-                  >
-                    <span className="text-lg">{tech.icon}</span>
-                    <span className="text-sm text-foreground">{tech.name}</span>
-                  </motion.div>
-                ))}
+                {/* Tech Stack - Raw List */}
+                <motion.div
+                  className="mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <h3 className="text-sm font-bold mb-6 text-primary uppercase tracking-widest flex items-center gap-2">
+                    <span className="w-2 h-2 bg-primary"></span>
+                    Core Technologies
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {techStack.map((tech, index) => (
+                      <motion.div
+                        key={tech.name}
+                        className="flex items-center gap-2 px-3 py-2 border border-border bg-card hover:border-primary hover:bg-primary/10 transition-colors cursor-default"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.25 + index * 0.05 }}
+                      >
+                        <span className="text-base filter grayscale hover:grayscale-0 transition-all">{tech.icon}</span>
+                        <span className="text-sm font-mono font-bold text-foreground uppercase">{tech.name}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
 
-            {/* Skills Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <h3 className="text-lg font-medium mb-6 text-foreground">Technical Skills</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {skills.map((skillGroup) => {
-                  const Icon = skillGroup.icon;
-                  return (
-                    <div
-                      key={skillGroup.category}
-                      className="card-enhanced p-6"
-                    >
-                      <div className="flex items-center gap-3 mb-4">
-                        <Icon className="w-5 h-5 text-primary" />
-                        <h4 className="text-base font-medium text-foreground">
-                          {skillGroup.category}
-                        </h4>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {skillGroup.items.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-3 py-1.5 text-sm bg-muted text-foreground rounded-md"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
+              {/* Right Column: Skills Grid */}
+              <div className="md:col-span-5">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  <h3 className="text-xl font-black mb-8 text-foreground uppercase bg-foreground text-background inline-block px-2 py-1 transform -rotate-1">
+                    Capability Matrix
+                  </h3>
+                  <div className="space-y-6">
+                    {skills.map((skillGroup) => {
+                      const Icon = skillGroup.icon;
+                      return (
+                        <div
+                          key={skillGroup.category}
+                          className="brutalist-card p-5 border-l-8 border-l-primary"
+                        >
+                          <div className="flex items-center gap-3 mb-4 border-b border-border pb-2">
+                            <Icon className="w-5 h-5 text-primary" />
+                            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider">
+                              {skillGroup.category}
+                            </h4>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {skillGroup.items.map((skill) => (
+                              <span
+                                key={skill}
+                                className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors cursor-default"
+                              >
+                                {skill}
+                                <span className="mx-1 text-border">/</span>
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

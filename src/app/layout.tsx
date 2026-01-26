@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Syne, Manrope, JetBrains_Mono } from "next/font/google";
 import SideNav from "@/components/SideNav";
 import OpenToWork from "@/components/OpenToWork";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -8,10 +8,16 @@ import VisitTracker from "@/components/VisitTracker";
 import PageLoader from "@/components/PageLoader";
 import "../styles/globals.css";
 
-const inter = Inter({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-syne",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -109,7 +115,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased w-full overflow-x-hidden`}
+        className={`${syne.variable} ${manrope.variable} ${jetbrainsMono.variable} antialiased w-full overflow-x-hidden font-sans bg-background text-foreground`}
       >
         <ThemeProviderWrapper>
           <VisitTracker>

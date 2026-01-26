@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { 
+import {
   TestTube, Shield, Code, Server
 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
@@ -32,40 +32,43 @@ const skillCategories = [
 export default function SkillsShowcase() {
   return (
     <SectionWrapper>
-      <section className="py-20 px-4 max-w-5xl mx-auto">
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-12 relative w-fit mx-auto after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2 after:h-[3px] after:w-12 after:rounded-full after:bg-gradient-to-r after:from-primary after:to-accent"
-          initial={false}
-          whileInView={undefined}
-          transition={undefined}
+      <section className="py-20 px-4 max-w-6xl mx-auto">
+        <motion.div
+          className="mb-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          Technical Skills
-        </motion.h2>
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-foreground inline-block px-4 border-2 border-foreground bg-primary/10">
+            Technical Arsenal
+          </h2>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category) => (
+          {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
-              className="p-6 bg-card/50 backdrop-blur-sm rounded-lg border border-border hover:bg-primary/5 hover:border-primary/30 transition-all duration-300"
-              initial={false}
-              whileInView={undefined}
-              transition={undefined}
+              className="brutalist-card bg-card p-6 flex flex-col items-center text-center hover:bg-muted/10 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
             >
-              <div className="flex flex-col items-center text-center">
-                <div className="text-primary mb-4">
-                  {category.icon}
-                </div>
-                <h3 className="font-semibold text-foreground mb-3">{category.title}</h3>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {category.skills.map((skill) => (
-                    <span 
-                      key={skill}
-                      className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+              <div className="text-primary mb-6 p-4 border-2 border-primary rounded-full">
+                {category.icon}
+              </div>
+              <h3 className="font-bold text-xl text-foreground mb-6 uppercase tracking-wide border-b-2 border-border pb-2 w-full">
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-xs px-2 py-1 border border-muted-foreground/30 text-muted-foreground font-mono uppercase hover:border-primary hover:text-primary transition-colors cursor-default"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}

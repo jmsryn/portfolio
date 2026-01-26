@@ -30,23 +30,17 @@ export default function SideNav() {
 
     if (elements.length === 0) return;
 
-    const visibilityRatioById = new Map<string, number>();
-
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const id = (entry.target as HTMLElement).id;
-          visibilityRatioById.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
         });
-        const mostVisible = Array.from(visibilityRatioById.entries()).sort((a, b) => b[1] - a[1])[0];
-        if (mostVisible && mostVisible[1] > 0) {
-          setActiveSection(mostVisible[0]);
-        }
       },
       {
         root: null,
-        rootMargin: '-30% 0px -50% 0px',
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: '-50% 0px -50% 0px',
       }
     );
 
@@ -90,36 +84,50 @@ export default function SideNav() {
 
   return (
     <>
-      {/* Desktop Navigation - Clean minimal dock */}
+      {/* Desktop Navigation - Vertical Floating Sidebar */}
       <motion.nav
-        className="fixed left-1/2 -translate-x-1/2 bottom-8 z-40 hidden lg:block floating-nav"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
+        className="fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4 floating-nav"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <div className="flex items-center gap-1 bg-card/95 backdrop-blur-sm border border-border rounded-full px-2 py-2 shadow-lg">
+        <div className="flex flex-col gap-2 p-2 bg-background/50 backdrop-blur-md border border-border/50 rounded-none shadow-xl relative">
+          {/* Decorative line */}
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary/20" />
+
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.href.slice(1);
 
             return (
-              <button
-                key={item.name}
-                onClick={() => handleNavClick(item)}
-                className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 ${isActive
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                  }`}
-                aria-label={item.name}
-              >
-                <Icon className="w-4 h-4" />
-              </button>
+              <div key={item.name} className="group relative flex items-center">
+                <button
+                  onClick={() => handleNavClick(item)}
+                  className={`relative flex items-center justify-center w-12 h-12 transition-all duration-300 border border-transparent ${isActive
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] translate-x-1 -translate-y-1'
+                    : 'text-muted-foreground hover:text-primary hover:border-primary hover:bg-muted/10'
+                    }`}
+                  aria-label={item.name}
+                >
+                  <Icon className="w-5 h-5" />
+                </button>
+
+                {/* Hover Label */}
+                <span className="absolute left-14 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-card border border-border px-3 py-1 text-xs font-mono uppercase tracking-wider text-foreground whitespace-nowrap pointer-events-none">
+                  {item.name}
+                </span>
+
+                {/* Active Indicator Line for non-active items */}
+                {isActive && (
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-2 h-0.5 bg-primary" />
+                )}
+              </div>
             );
           })}
 
-          <div className="w-px h-6 bg-border mx-1" />
+          <div className="h-px w-full bg-border my-2" />
 
-          <div className="px-1">
+          <div className="flex justify-center">
             <ThemeToggle />
           </div>
         </div>

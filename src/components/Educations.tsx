@@ -24,16 +24,16 @@ export default function Education() {
           <div className="max-w-2xl mx-auto">
             {/* Header */}
             <motion.div
-              className="mb-12"
+              className="mb-12 md:mb-16"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-4xl md:text-5xl font-light mb-4 text-foreground">
+              <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground uppercase">
                 Education
               </h2>
-              <div className="h-px w-12 bg-primary" />
+              <div className="h-2 w-24 bg-primary" />
             </motion.div>
 
             {/* Education Card */}

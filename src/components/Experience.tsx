@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, ChevronDown, ChevronUp, Briefcase } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
 interface Role {
@@ -91,26 +91,26 @@ export default function Experience() {
     <SectionWrapper>
       <section id="experience" className="section-padding">
         <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
+            {/* Header */}
             <motion.div
-              className="mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="mb-12 md:mb-16 border-b-4 border-foreground pb-4"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-4xl md:text-5xl font-light mb-4 text-foreground">
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-black text-foreground uppercase tracking-tight break-all md:break-normal">
                 Experience
               </h2>
-              <div className="h-px w-12 bg-primary" />
             </motion.div>
 
-            {/* Interactive Timeline */}
+            {/* Interactive Timeline - Brutalist Style */}
             <div className="relative">
-              {/* Timeline Line - Hidden on mobile, visible on md+ */}
-              <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent" />
+              {/* Timeline Line - Thick and Bold */}
+              <div className="hidden md:block absolute left-8 top-0 bottom-0 w-2 bg-muted-foreground/20" />
 
-              <div className="space-y-12">
+              <div className="space-y-16">
                 {experiences.map((exp, index) => (
                   <motion.div
                     key={index}
@@ -122,123 +122,73 @@ export default function Experience() {
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    {/* Timeline Marker - Hidden on mobile */}
-                    <div className="hidden md:block absolute left-8 top-8 -translate-x-1/2">
-                      <motion.div
-                        className="relative"
-                        whileHover={{ scale: 1.2 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      >
-                        {/* Pulsing Ring */}
-                        {hoveredIndex === index && (
-                          <motion.div
-                            className="absolute inset-0 rounded-full bg-primary"
-                            initial={{ scale: 1, opacity: 0.5 }}
-                            animate={{ scale: 2, opacity: 0 }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                          />
-                        )}
-
-                        {/* Outer Ring */}
-                        <div className="w-4 h-4 rounded-full bg-background border-2 border-primary flex items-center justify-center">
-                          {/* Inner Dot */}
-                          <motion.div
-                            className="w-2 h-2 rounded-full bg-primary"
-                            animate={hoveredIndex === index ? { scale: [1, 1.5, 1] } : {}}
-                            transition={{ duration: 0.6, repeat: hoveredIndex === index ? Infinity : 0 }}
-                          />
-                        </div>
-                      </motion.div>
+                    {/* Timeline Marker - Square and Hard */}
+                    <div className="hidden md:block absolute left-4 top-8 -translate-x-1/2 z-10">
+                      <div className={`w-8 h-8 border-4 border-background transition-all duration-300 ${hoveredIndex === index ? 'bg-primary rotate-45 scale-125' : 'bg-muted-foreground rotate-0'}`} />
                     </div>
 
                     {/* Content Card */}
-                    <div className="md:ml-20">
+                    <div className="md:ml-24">
                       <motion.div
-                        className="card-enhanced p-6 md:p-8 relative overflow-hidden group"
-                        whileHover={{ y: -4 }}
-                        transition={{ duration: 0.3 }}
+                        className={`brutalist-card p-6 md:p-8 relative ${hoveredIndex === index ? 'border-primary' : ''}`}
+                        initial={false}
+                        animate={hoveredIndex === index ? { x: 10 } : { x: 0 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
-                        {/* Hover Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
                         {/* Company Header */}
-                        <div className="relative mb-6">
-                          <div className="flex items-start justify-between gap-4 mb-3">
-                            <div className="flex items-center gap-3">
-                              {/* Company Icon */}
-                              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 border border-primary/20">
-                                <Briefcase className="w-6 h-6 text-primary" />
-                              </div>
-                              <div>
-                                <h3 className="text-xl md:text-2xl font-medium text-foreground">
-                                  {exp.company}
-                                </h3>
-                                <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mt-1">
-                                  <div className="flex items-center gap-1.5">
-                                    <Calendar className="w-4 h-4" />
-                                    <span>{exp.period}</span>
-                                  </div>
-                                  <div className="flex items-center gap-1.5">
-                                    <MapPin className="w-4 h-4" />
-                                    <span>{exp.location}</span>
-                                  </div>
-                                </div>
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8 border-b-2 border-dashed border-border pb-6">
+                          <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 bg-foreground text-background flex items-center justify-center font-bold text-2xl uppercase tracking-tighter">
+                              {exp.company.substring(0, 2)}
+                            </div>
+                            <div>
+                              <h3 className="text-2xl md:text-3xl font-bold text-foreground uppercase">
+                                {exp.company}
+                              </h3>
+                              <div className="flex items-center gap-2 text-primary font-mono text-sm mt-1">
+                                <MapPin className="w-4 h-4" />
+                                <span>{exp.location}</span>
                               </div>
                             </div>
                           </div>
 
-                          {/* Progress Bar */}
-                          <motion.div
-                            className="h-1 bg-muted rounded-full overflow-hidden"
-                            initial={{ width: 0 }}
-                            whileInView={{ width: "100%" }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: index * 0.2 + 0.3 }}
-                          >
-                            <motion.div
-                              className="h-full bg-gradient-to-r from-primary to-primary/50"
-                              initial={{ x: "-100%" }}
-                              whileInView={{ x: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
-                            />
-                          </motion.div>
+                          <div className="bg-muted p-2 font-mono text-sm text-foreground border border-border">
+                            {exp.period}
+                          </div>
                         </div>
 
                         {/* Roles */}
-                        <div className="relative space-y-6">
+                        <div className="space-y-8">
                           {(expandedRoles[index] ? exp.roles : exp.roles.slice(0, 1)).map((role, roleIndex) => (
                             <motion.div
                               key={roleIndex}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.4, delay: roleIndex * 0.1 }}
-                              className="border-l-2 border-primary/30 pl-5 hover:border-primary/60 transition-colors"
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              transition={{ duration: 0.3 }}
+                              className="relative pl-6 border-l-4 border-primary/50"
                             >
-                              <div className="flex items-start justify-between gap-4 mb-2 flex-wrap">
-                                <h4 className="font-medium text-foreground text-base md:text-lg">
+                              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
+                                <h4 className="font-bold text-xl text-foreground">
                                   {role.title}
                                 </h4>
-                                <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                                <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
                                   {role.period}
                                 </span>
                               </div>
-                              <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+
+                              <p className="text-base text-muted-foreground mb-4 font-mono leading-relaxed">
                                 {role.description}
                               </p>
+
                               <ul className="space-y-2">
                                 {role.achievements.slice(0, 3).map((achievement, i) => (
-                                  <motion.li
+                                  <li
                                     key={i}
-                                    className="text-sm text-muted-foreground flex items-start gap-2"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                                    className="text-sm text-foreground flex items-start gap-3"
                                   >
-                                    <span className="text-primary mt-1 text-lg leading-none">•</span>
-                                    <span className="flex-1">{achievement}</span>
-                                  </motion.li>
+                                    <span className="text-primary font-bold text-lg leading-none">»</span>
+                                    <span>{achievement}</span>
+                                  </li>
                                 ))}
                               </ul>
                             </motion.div>
@@ -247,17 +197,17 @@ export default function Experience() {
                           {exp.roles.length > 1 && (
                             <button
                               onClick={() => toggleRoles(index)}
-                              className="text-sm text-primary hover:text-primary/80 flex items-center gap-2 transition-colors group/btn"
+                              className="text-sm font-bold text-primary uppercase tracking-widest hover:underline decoration-2 underline-offset-4 flex items-center gap-2"
                             >
                               {expandedRoles[index] ? (
                                 <>
-                                  <ChevronUp className="w-4 h-4 group-hover/btn:translate-y-[-2px] transition-transform" />
-                                  Show less
+                                  <ChevronUp className="w-4 h-4" />
+                                  Collapse
                                 </>
                               ) : (
                                 <>
-                                  <ChevronDown className="w-4 h-4 group-hover/btn:translate-y-[2px] transition-transform" />
-                                  Show {exp.roles.length - 1} more role{exp.roles.length - 1 > 1 ? 's' : ''}
+                                  <ChevronDown className="w-4 h-4" />
+                                  View History ({exp.roles.length - 1} more)
                                 </>
                               )}
                             </button>
@@ -265,23 +215,18 @@ export default function Experience() {
                         </div>
 
                         {/* Technologies */}
-                        <div className="relative mt-6 pt-6 border-t border-border">
-                          <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
-                            Technologies Used
+                        <div className="mt-8 pt-6 border-t-2 border-dashed border-border">
+                          <h5 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">
+                            Protocol / Tech Stack
                           </h5>
                           <div className="flex flex-wrap gap-2">
-                            {exp.technologies.map((tech, techIndex) => (
-                              <motion.span
+                            {exp.technologies.map((tech) => (
+                              <span
                                 key={tech}
-                                className="px-3 py-1.5 text-xs bg-muted text-foreground rounded-md hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: techIndex * 0.05 }}
-                                whileHover={{ scale: 1.05 }}
+                                className="px-3 py-1 text-xs border border-foreground/20 text-foreground font-mono uppercase hover:bg-foreground hover:text-background transition-colors cursor-default"
                               >
                                 {tech}
-                              </motion.span>
+                              </span>
                             ))}
                           </div>
                         </div>

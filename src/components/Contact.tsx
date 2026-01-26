@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, CheckCircle, AlertCircle, Loader2, Download, Calendar } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle, AlertCircle, Loader2, Download } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
 const contactMethods = [
@@ -70,92 +70,97 @@ export default function Contact() {
 
   return (
     <SectionWrapper>
-      <section id="contact" className="section-padding">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <motion.div
-              className="mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-light mb-4 text-foreground">
-                Contact
-              </h2>
-              <div className="h-px w-12 bg-primary mb-6" />
-              <p className="text-muted-foreground">
-                Ready to discuss opportunities? I&apos;d love to hear from you.
-              </p>
-            </motion.div>
+      <section id="contact" className="section-padding overflow-hidden relative">
+        {/* Background Decorative Text */}
+        <div className="absolute -right-20 top-40 text-[20rem] font-black text-muted/20 pointer-events-none select-none overflow-hidden opacity-10 rotate-90 hidden xl:block">
+          CONTACT
+        </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Contact Info */}
+        <div className="container-custom relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
+              {/* Left Column: Info */}
               <motion.div
-                className="lg:col-span-1 space-y-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5 }}
               >
-                <div className="card-enhanced p-5">
-                  <h3 className="text-sm font-medium text-foreground mb-4">Get in Touch</h3>
-                  <div className="space-y-3">
-                    {contactMethods.map((method, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <span className="text-primary">{method.icon}</span>
-                        <div>
-                          <p className="text-xs text-muted-foreground">{method.label}</p>
-                          {method.href ? (
-                            <a href={method.href} className="text-sm text-foreground hover:text-primary transition-colors">
-                              {method.value}
-                            </a>
-                          ) : (
-                            <p className="text-sm text-foreground">{method.value}</p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="mb-12">
+                  <h2 className="text-4xl md:text-6xl lg:text-8xl font-black text-foreground uppercase tracking-tighter leading-[0.8] mb-6 md:mb-8">
+                    Let&apos;s<br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Talk</span>
+                  </h2>
+                  <p className="text-xl text-muted-foreground font-mono leading-relaxed border-l-4 border-primary pl-6">
+                    Ready to engineer the future? Drop a signal. I&apos;m available for new opportunities and interesting collaborations.
+                  </p>
                 </div>
 
-                <div className="card-enhanced p-5">
-                  <h3 className="text-sm font-medium text-foreground mb-4">Quick Actions</h3>
-                  <div className="space-y-2">
+                <div className="space-y-8">
+                  {/* Quick Actions */}
+                  <div className="brutalist-card p-8 border-l-8 border-l-secondary bg-card">
+                    <h3 className="text-lg font-bold text-foreground uppercase tracking-widest mb-6 border-b border-border pb-2">
+                      Channels
+                    </h3>
+                    <div className="space-y-4">
+                      {contactMethods.map((method, index) => (
+                        <div key={index} className="flex items-start gap-4">
+                          <div className="p-2 bg-secondary/10 text-secondary rounded-none">
+                            {method.icon}
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold uppercase text-muted-foreground">{method.label}</p>
+                            {method.href ? (
+                              <a href={method.href} className="text-lg font-mono text-foreground hover:text-primary transition-colors underline decoration-dotted underline-offset-4">
+                                {method.value}
+                              </a>
+                            ) : (
+                              <p className="text-lg font-mono text-foreground">{method.value}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex flex-col sm:flex-row gap-4">
                     <a
                       href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf"
                       download
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="btn-outline-brutalist flex-1 py-4 text-xs"
                     >
-                      <Download className="w-4 h-4" />
-                      Download Resume
-                    </a>
-                    <a
-                      href="https://calendar.app.google/wajhYMZYTbUMvHYk6"
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <Calendar className="w-4 h-4" />
-                      Schedule a Call
+                      <Download className="w-4 h-4 mr-2" />
+                      Download V.Card
                     </a>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Contact Form */}
+              {/* Right Column: Form */}
               <motion.div
-                className="lg:col-span-2"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative"
               >
-                <div className="card-enhanced p-6">
-                  <h3 className="text-sm font-medium text-foreground mb-6">Send a Message</h3>
+                <div className="bg-card border-4 border-foreground p-1 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_0px_var(--primary)]">
+                  <div className="bg-background border border-border p-6 md:p-8">
+                    <div className="mb-8 flex items-center justify-between">
+                      <h3 className="text-xl font-black uppercase text-foreground">
+                        Transmission Link
+                      </h3>
+                      <div className="flex gap-1">
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      </div>
+                    </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="name" className="block text-xs text-muted-foreground mb-1.5">Name</label>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="space-y-2">
+                        <label htmlFor="name" className="text-xs font-mono font-bold uppercase text-muted-foreground">Subject Name</label>
                         <input
                           type="text"
                           id="name"
@@ -163,12 +168,13 @@ export default function Contact() {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
-                          placeholder="Your name"
+                          className="w-full bg-muted/20 border-2 border-border p-3 text-foreground font-mono focus:border-primary focus:outline-none transition-colors rounded-none placeholder:text-muted-foreground/50"
+                          placeholder="IDENTIFY YOURSELF"
                         />
                       </div>
-                      <div>
-                        <label htmlFor="email" className="block text-xs text-muted-foreground mb-1.5">Email</label>
+
+                      <div className="space-y-2">
+                        <label htmlFor="email" className="text-xs font-mono font-bold uppercase text-muted-foreground">Return Address</label>
                         <input
                           type="email"
                           id="email"
@@ -176,65 +182,82 @@ export default function Contact() {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
-                          placeholder="your@email.com"
+                          className="w-full bg-muted/20 border-2 border-border p-3 text-foreground font-mono focus:border-primary focus:outline-none transition-colors rounded-none placeholder:text-muted-foreground/50"
+                          placeholder="ENTER EMAIL COORDINATES"
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label htmlFor="subject" className="block text-xs text-muted-foreground mb-1.5">Subject</label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
-                        placeholder="What's this about?"
-                      />
-                    </div>
+                      <div className="space-y-2">
+                        <label htmlFor="subject" className="text-xs font-mono font-bold uppercase text-muted-foreground">Topic</label>
+                        <input
+                          type="text"
+                          id="subject"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          required
+                          className="w-full bg-muted/20 border-2 border-border p-3 text-foreground font-mono focus:border-primary focus:outline-none transition-colors rounded-none placeholder:text-muted-foreground/50"
+                          placeholder="PURPOSE OF CONTACT"
+                        />
+                      </div>
 
-                    <div>
-                      <label htmlFor="message" className="block text-xs text-muted-foreground mb-1.5">Message</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={4}
-                        className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-colors resize-none"
-                        placeholder="Your message..."
-                      />
-                    </div>
+                      <div className="space-y-2">
+                        <label htmlFor="message" className="text-xs font-mono font-bold uppercase text-muted-foreground">Data Packet</label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                          rows={4}
+                          className="w-full bg-muted/20 border-2 border-border p-3 text-foreground font-mono focus:border-primary focus:outline-none transition-colors rounded-none resize-none placeholder:text-muted-foreground/50"
+                          placeholder="INITIALIZE MESSAGE STREAM..."
+                        />
+                      </div>
 
-                    <div className="flex items-center gap-4">
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
+                        className="w-full btn-neon py-4 text-sm mt-4 group relative overflow-hidden"
                       >
-                        {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                        {isSubmitting ? 'Sending...' : 'Send'}
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                              Transmitting...
+                            </>
+                          ) : (
+                            <>
+                              <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                              Send Transmission
+                            </>
+                          )}
+                        </span>
                       </button>
 
                       {submitStatus === 'success' && (
-                        <span className="flex items-center gap-1.5 text-sm text-green-600">
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          className="bg-green-500/10 border border-green-500 p-3 text-green-500 font-mono text-xs flex items-center gap-2"
+                        >
                           <CheckCircle className="w-4 h-4" />
-                          Sent!
-                        </span>
+                          TRANSMISSION SUCCESSFUL
+                        </motion.div>
                       )}
 
                       {submitStatus === 'error' && (
-                        <span className="flex items-center gap-1.5 text-sm text-red-600">
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          className="bg-red-500/10 border border-red-500 p-3 text-red-500 font-mono text-xs flex items-center gap-2"
+                        >
                           <AlertCircle className="w-4 h-4" />
-                          Failed
-                        </span>
+                          TRANSMISSION FAILED
+                        </motion.div>
                       )}
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </motion.div>
             </div>
