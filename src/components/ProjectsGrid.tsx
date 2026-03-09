@@ -8,6 +8,7 @@ import SectionWrapper from './SectionWrapper';
 type Project = {
   title: string;
   description: string;
+  impact: string;
   tags: string[];
   github: string;
   demo: string;
@@ -17,6 +18,7 @@ const webProjects: Project[] = [
   {
     title: 'AutoTestGen - AI Test Case Generator',
     description: 'AI-powered test automation framework for generating and maintaining test cases for web applications. Integrates with CI/CD pipelines.',
+    impact: 'Reduced test creation time by 60% through AI-generated scenarios',
     tags: ['Cypress', 'Playwright', 'JavaScript', 'GitHub Actions', 'AI'],
     github: 'https://github.com/jmsryn',
     demo: 'https://testai.jrgaid.site',
@@ -24,6 +26,7 @@ const webProjects: Project[] = [
   {
     title: 'Smart Money Tracker - AI Finance Assistant',
     description: 'Personal finance management application with AI-powered insights and recommendations. Track expenses and analyze spending patterns.',
+    impact: 'Built full-stack finance app with AI-driven spending analytics',
     tags: ['AI', 'Finance', 'Web App', 'Analytics'],
     github: 'https://github.com/jmsryn',
     demo: 'https://smartmoney.jrgaid.site',
@@ -31,6 +34,7 @@ const webProjects: Project[] = [
   {
     title: 'Sillage - AI Curator',
     description: 'AI-powered fragrance collection management platform with weather-smart recommendations and layering combinations.',
+    impact: 'Weather-aware AI fragrance recommendation engine',
     tags: ['AI', 'React', 'Web App', 'Recommendations'],
     github: 'https://github.com/jmsryn',
     demo: 'https://mysillage.me',
@@ -41,6 +45,7 @@ const qaProjects: Project[] = [
   {
     title: 'Sillage - Playwright E2E Automation',
     description: 'Comprehensive end-to-end testing suite for the MySillage platform ensuring reliability and performance.',
+    impact: 'Full E2E coverage across critical user flows',
     tags: ['Playwright', 'TypeScript', 'E2E Testing', 'CI/CD'],
     github: 'https://github.com/jmsryn/mysillage-playwright',
     demo: 'https://github.com/jmsryn/mysillage-playwright',
@@ -80,8 +85,64 @@ export default function ProjectsGrid() {
                   Web Applications
                 </span>
               </motion.h3>
+
+              {/* Featured project (first one spans full width) */}
+              {webProjects.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="brutalist-card p-6 md:p-8 mb-8 border-primary"
+                >
+                  <div className="flex items-start gap-2 mb-2">
+                    <span className="px-2 py-0.5 text-xs font-mono uppercase tracking-wider bg-primary text-primary-foreground font-bold">Featured</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3 uppercase">
+                    {webProjects[0].title}
+                  </h3>
+                  <p className="text-sm text-primary font-mono mb-4 border-l-2 border-primary pl-3">
+                    ↳ {webProjects[0].impact}
+                  </p>
+                  <p className="text-base text-muted-foreground leading-relaxed mb-6 font-mono max-w-3xl">
+                    {webProjects[0].description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {webProjects[0].tags.map(tag => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 text-xs border border-border text-foreground font-mono uppercase tracking-wider"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button
+                      onClick={() => setSelectedProject(webProjects[0])}
+                      className="btn-neon text-xs py-3 px-6"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      Live Demo
+                    </button>
+                    <a
+                      href={webProjects[0].demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline-brutalist text-xs py-3 px-6"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      New Tab
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Remaining projects in grid */}
               <div className="grid md:grid-cols-2 gap-8">
-                {webProjects.map((project, i) => (
+                {webProjects.slice(1).map((project, i) => (
                   <motion.div
                     key={project.title}
                     initial={{ opacity: 0, y: 50 }}
@@ -90,9 +151,13 @@ export default function ProjectsGrid() {
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     className="brutalist-card flex flex-col h-full"
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-4 uppercase">
+                    <h3 className="text-2xl font-bold text-foreground mb-2 uppercase">
                       {project.title}
                     </h3>
+
+                    <p className="text-xs text-primary font-mono mb-4 border-l-2 border-primary pl-3">
+                      ↳ {project.impact}
+                    </p>
 
                     <p className="text-base text-muted-foreground leading-relaxed mb-6 flex-grow font-mono">
                       {project.description}
@@ -124,7 +189,7 @@ export default function ProjectsGrid() {
                         className="flex-1 btn-outline-brutalist text-xs py-3 px-4"
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Tab
+                        New Tab
                       </a>
                     </div>
                   </motion.div>
@@ -154,9 +219,13 @@ export default function ProjectsGrid() {
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     className="brutalist-card flex flex-col h-full border-secondary shadow-[4px_4px_0px_0px_var(--secondary)] hover:shadow-[8px_8px_0px_0px_var(--secondary)] hover:border-secondary"
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-4 uppercase">
+                    <h3 className="text-2xl font-bold text-foreground mb-2 uppercase">
                       {project.title}
                     </h3>
+
+                    <p className="text-xs text-secondary font-mono mb-4 border-l-2 border-secondary pl-3">
+                      ↳ {project.impact}
+                    </p>
 
                     <p className="text-base text-muted-foreground leading-relaxed mb-6 flex-grow font-mono">
                       {project.description}
@@ -191,7 +260,7 @@ export default function ProjectsGrid() {
           </div>
         </div>
 
-        {/* Iframe Showcase Modal - Brutalist Style */}
+        {/* Iframe Showcase Modal */}
         <AnimatePresence>
           {selectedProject && (
             <motion.div
@@ -238,6 +307,6 @@ export default function ProjectsGrid() {
           )}
         </AnimatePresence>
       </section>
-    </SectionWrapper >
+    </SectionWrapper>
   );
 }

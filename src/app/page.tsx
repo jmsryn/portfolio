@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import WhatIDo from '@/components/WhatIDo';
 import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Education from '@/components/Educations';
@@ -25,6 +26,7 @@ export default function Home() {
           <Hero />
 
           <div className="container-custom">
+            <WhatIDo />
             <About />
             <Experience />
             <ProjectsGrid />

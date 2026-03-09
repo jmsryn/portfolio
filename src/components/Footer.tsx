@@ -1,20 +1,64 @@
 'use client';
 
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import SpotifyNowPlaying from './SpotifyNowPlaying';
+
+const navLinks = [
+  { name: 'Home', href: '#hero' },
+  { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Education', href: '#education' },
+  { name: 'Credentials', href: '#certifications' },
+  { name: 'Contact', href: '#contact' },
+];
 
 export default function Footer() {
   return (
     <footer className="border-t-4 border-foreground py-16 px-4 bg-background relative overflow-hidden">
-      {/* Background decoration */}
+      {/* Gradient top line */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent" />
 
       <div className="max-w-6xl mx-auto flex flex-col items-center">
+        {/* CTA Section */}
+        <div className="w-full mb-12 text-center">
+          <h3 className="text-2xl md:text-4xl font-black text-foreground uppercase mb-4">
+            Let&apos;s Work Together
+          </h3>
+          <p className="text-muted-foreground font-mono text-sm mb-6 max-w-md mx-auto">
+            Open for new opportunities in QA Engineering, Test Automation, and Security Testing.
+          </p>
+          <a
+            href="#contact"
+            className="btn-neon inline-flex items-center gap-2 group"
+          >
+            Get In Touch
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+
+        {/* Quick Navigation */}
+        <div className="w-full mb-12 border-t border-b border-border py-6">
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Watermark */}
         <h2 className="text-[12vw] leading-none font-black text-foreground/5 pointer-events-none select-none">
           JMSRYN
         </h2>
 
         <div className="flex flex-col items-center gap-8 -mt-8 md:-mt-16 z-10">
+          {/* Social Links */}
           <div className="flex gap-6">
             {[
               { icon: Mail, href: "mailto:hello@jrgaid.site", label: "Email" },

@@ -240,3 +240,28 @@
     }
   }
 }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fallback for card-enhanced used in Education */
+.card-enhanced {
+  @apply bg-card border-2 border-border p-4 md:p-6 relative transition-all duration-300;
+  box-shadow: 4px 4px 0px 0px var(--primary);
+}
+
+.card-enhanced:hover {
+  @apply border-primary;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--primary);
+}

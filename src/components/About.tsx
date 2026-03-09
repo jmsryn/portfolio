@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Code, Shield, Zap, CheckCircle2 } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
-// Tech stack with icons (using emoji for simplicity, could be replaced with actual icons)
 const techStack = [
   { name: 'JavaScript', icon: '🟨' },
   { name: 'TypeScript', icon: '🔷' },
@@ -15,36 +14,58 @@ const techStack = [
   { name: 'Git', icon: '🔀' },
 ];
 
-const skills = [
-  {
-    category: 'Testing Frameworks',
-    items: ['Selenium', 'Cypress', 'Playwright', 'Jest', 'TestRail', 'JIRA'],
-    icon: CheckCircle2,
-  },
-  {
-    category: 'Programming Languages',
-    items: ['JavaScript', 'Python', 'C#', 'TypeScript', 'GraphQL'],
-    icon: Code,
-  },
-  {
-    category: 'Security Testing',
-    items: ['OWASP Top 10', 'Penetration Testing', 'Burp Suite'],
-    icon: Shield,
-  },
-  {
-    category: 'DevOps & CI/CD',
-    items: ['Docker', 'Git', 'GitHub Actions', 'AzureDevOps', 'Linux', 'API Testing'],
-    icon: Zap,
-  }
+interface SkillBar {
+  name: string;
+  level: number;
+  category: string;
+  icon: typeof CheckCircle2;
+}
+
+const skillBars: SkillBar[] = [
+  { name: 'Test Automation', level: 90, category: 'Testing Frameworks', icon: CheckCircle2 },
+  { name: 'API Testing', level: 85, category: 'Testing Frameworks', icon: CheckCircle2 },
+  { name: 'JavaScript/TypeScript', level: 88, category: 'Programming', icon: Code },
+  { name: 'Security Testing', level: 75, category: 'Security', icon: Shield },
+  { name: 'CI/CD Pipelines', level: 80, category: 'DevOps', icon: Zap },
+  { name: 'Performance Testing', level: 70, category: 'DevOps', icon: Zap },
 ];
 
 // Calculate years of experience dynamically
 const calculateExperience = () => {
-  const startDate = new Date('2022-06-01'); // Started June 2022
+  const startDate = new Date('2022-06-01');
   const now = new Date();
   const years = (now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365);
   return Math.floor(years);
 };
+
+function TerminalSkillBar({ skill, index }: { skill: SkillBar; index: number }) {
+
+  return (
+    <motion.div
+      className="font-mono text-xs"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+    >
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-muted-foreground uppercase tracking-wider truncate mr-2">
+          {skill.name}
+        </span>
+        <span className="text-foreground font-bold flex-shrink-0">{skill.level}%</span>
+      </div>
+      <div className="w-full h-2 bg-muted/30 border border-border">
+        <motion.div
+          className="h-full bg-primary"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${skill.level}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 + index * 0.1, ease: 'easeOut' }}
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 export default function About() {
   const yearsExp = calculateExperience();
@@ -68,7 +89,7 @@ export default function About() {
             </motion.div>
 
             <div className="grid md:grid-cols-12 gap-12">
-              {/* Left Column: Stats & Description */}
+              {/* Left Column */}
               <div className="md:col-span-7">
                 {/* Experience Badge */}
                 <motion.div
@@ -87,7 +108,7 @@ export default function About() {
 
                 {/* Description */}
                 <motion.div
-                  className="mb-12"
+                  className="mb-10"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -101,16 +122,31 @@ export default function About() {
                   </p>
                 </motion.div>
 
-                {/* Tech Stack - Raw List */}
+                {/* Currently Strip */}
                 <motion.div
-                  className="mb-12"
+                  className="mb-10 p-4 border border-dashed border-border bg-muted/10 font-mono text-xs"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
+                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-muted-foreground">
+                    <span><span className="text-primary">🔬</span> Learning: <span className="text-foreground">PJPT Certification</span></span>
+                    <span><span className="text-primary">💼</span> Working: <span className="text-foreground">Amihan Solutions</span></span>
+                    <span><span className="text-primary">📍</span> Based: <span className="text-foreground">Philippines (Remote)</span></span>
+                  </div>
+                </motion.div>
+
+                {/* Tech Stack */}
+                <motion.div
+                  className="mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.25 }}
+                >
                   <h3 className="text-sm font-bold mb-6 text-primary uppercase tracking-widest flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary"></span>
+                    <span className="w-2 h-2 bg-primary" />
                     Core Technologies
                   </h3>
                   <div className="flex flex-wrap gap-3">
@@ -121,7 +157,7 @@ export default function About() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: 0.25 + index * 0.05 }}
+                        transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
                       >
                         <span className="text-base filter grayscale hover:grayscale-0 transition-all">{tech.icon}</span>
                         <span className="text-sm font-mono font-bold text-foreground uppercase">{tech.name}</span>
@@ -131,7 +167,7 @@ export default function About() {
                 </motion.div>
               </div>
 
-              {/* Right Column: Skills Grid */}
+              {/* Right Column: Terminal Skill Bars */}
               <div className="md:col-span-5">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
@@ -140,36 +176,20 @@ export default function About() {
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
                   <h3 className="text-xl font-black mb-8 text-foreground uppercase bg-foreground text-background inline-block px-2 py-1 transform -rotate-1">
-                    Capability Matrix
+                    Skill Matrix
                   </h3>
-                  <div className="space-y-6">
-                    {skills.map((skillGroup) => {
-                      const Icon = skillGroup.icon;
-                      return (
-                        <div
-                          key={skillGroup.category}
-                          className="brutalist-card p-5 border-l-8 border-l-primary"
-                        >
-                          <div className="flex items-center gap-3 mb-4 border-b border-border pb-2">
-                            <Icon className="w-5 h-5 text-primary" />
-                            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                              {skillGroup.category}
-                            </h4>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {skillGroup.items.map((skill) => (
-                              <span
-                                key={skill}
-                                className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors cursor-default"
-                              >
-                                {skill}
-                                <span className="mx-1 text-border">/</span>
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    })}
+
+                  {/* Terminal-style skill bars */}
+                  <div className="brutalist-card p-5 md:p-6">
+                    <div className="flex items-center gap-2 mb-6 border-b border-border pb-3">
+                      <div className="w-2 h-2 bg-green-500 animate-pulse" />
+                      <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">system scan active</span>
+                    </div>
+                    <div className="space-y-3">
+                      {skillBars.map((skill, index) => (
+                        <TerminalSkillBar key={skill.name} skill={skill} index={index} />
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               </div>

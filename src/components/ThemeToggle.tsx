@@ -89,10 +89,10 @@ export default function ThemeToggle() {
 
             {/* Theme options */}
             <motion.div
-              className="absolute bottom-full right-0 mb-2 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-xl z-[100] min-w-[140px]"
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              className="absolute left-full bottom-0 ml-2 bg-card/95 backdrop-blur-md border border-border shadow-xl z-[100] min-w-[140px]"
+              initial={{ opacity: 0, x: -10, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
               <div className="p-2">
@@ -101,8 +101,8 @@ export default function ThemeToggle() {
                     key={themeOption.value}
                     onClick={() => handleThemeChange(themeOption.value)}
                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${theme === themeOption.value
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                       }`}
                     initial={false}
                     animate={undefined}

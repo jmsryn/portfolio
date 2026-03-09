@@ -38,9 +38,9 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center text-center relative w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-background overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center relative w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-background overflow-hidden"
     >
-      {/* Background decoration - optional grid or noise could go here */}
+      {/* Background dot grid */}
       <div className="absolute inset-0 pointer-events-none opacity-20"
         style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, var(--primary) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
       />
@@ -51,7 +51,7 @@ export default function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Availability Status as a raw badge */}
+        {/* Status badge */}
         <motion.div
           className="inline-flex items-center gap-3 px-4 py-2 mb-12 border-2 border-border bg-card text-sm font-mono tracking-widest text-primary uppercase"
           initial={{ opacity: 0, y: -20 }}
@@ -62,49 +62,38 @@ export default function Hero() {
           <span>System Online: Available</span>
         </motion.div>
 
-        {/* Name - Massive & Broken */}
+        {/* Name */}
         <motion.h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-8 text-foreground tracking-tighter leading-[0.9] uppercase mix-blend-difference"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-8 text-foreground tracking-tighter leading-[0.9] uppercase text-center mix-blend-difference"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "circOut" }}
+          transition={{ delay: 0.3, duration: 0.8, ease: 'circOut' }}
         >
           James Ryan
           <br />
-          <span className="text-stroke text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/0" style={{ WebkitTextStroke: '2px var(--foreground)' }}>
+          <span style={{ WebkitTextStroke: '2px var(--foreground)', color: 'transparent' }}>
             Gaid
           </span>
         </motion.h1>
 
-        {/* Typing effect title - Monospace & Glitchy */}
+        {/* Typing role — clean inline style */}
         <motion.div
-          className="h-10 sm:h-12 mb-8 flex items-center justify-center font-mono text-xl sm:text-2xl text-primary"
+          className="h-10 sm:h-12 mb-10 flex items-center justify-center font-mono text-xl sm:text-2xl text-primary"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
           <span>&gt; </span>
           <span className="mx-2">{displayText}</span>
-          <span className="animate-blink bg-primary w-3 h-6 block" />
+          <span className="animate-pulse bg-primary w-2.5 h-6 inline-block" />
         </motion.div>
-
-        {/* Description */}
-        <motion.p
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed font-sans border-l-4 border-primary pl-6 text-left"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          <span className="block text-foreground font-bold mb-2 uppercase tracking-wide text-sm">Target Status:</span>
-          Specializing in test automation, security testing, and quality engineering. Currently architecting AI-powered testing tools and pursuing Practical Junior Penetration Tester certification by TCM Security.
-        </motion.p>
 
         {/* CTA buttons */}
         <motion.div
           className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
           <a
             href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf"
@@ -124,12 +113,12 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Social links - Raw Icons */}
+        {/* Social links */}
         <motion.div
           className="flex items-center justify-center gap-6 mt-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.6 }}
         >
           {[
             { href: "https://github.com/jmsryn", label: "GitHub" },
@@ -153,7 +142,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator with hard edges */}
+      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 right-8 hidden lg:block"
         initial={{ opacity: 0 }}

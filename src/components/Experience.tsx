@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronUp, TrendingUp } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 
 interface Role {
@@ -18,6 +18,8 @@ interface Experience {
   period: string;
   roles: Role[];
   technologies: string[];
+  color: string;
+  keyMetric: string;
 }
 
 const experiences: Experience[] = [
@@ -25,6 +27,8 @@ const experiences: Experience[] = [
     company: 'Amihan Solutions',
     location: 'Remote',
     period: 'Feb 2026 – Present',
+    color: '#00ccff',
+    keyMetric: 'Oracle APEX Test Suite',
     roles: [
       {
         title: 'QA & Test Engineer',
@@ -47,6 +51,8 @@ const experiences: Experience[] = [
     company: 'Theoria Medical',
     location: 'Remote',
     period: 'June 2023 – December 2025',
+    color: '#ccff00',
+    keyMetric: '200+ Automated Test Cases',
     roles: [
       {
         title: 'Jr. Software Development Engineer in Test',
@@ -76,6 +82,8 @@ const experiences: Experience[] = [
     company: 'Innovuze Solutions Inc.',
     location: 'Remote',
     period: 'Jun 2022 – Jun 2023',
+    color: '#ff0099',
+    keyMetric: 'Led QA Team of 5',
     roles: [
       {
         title: 'Lead Quality Assurance Engineer',
@@ -117,7 +125,7 @@ export default function Experience() {
             {/* Header */}
             <motion.div
               className="mb-12 md:mb-16 border-b-4 border-foreground pb-4"
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
@@ -127,9 +135,8 @@ export default function Experience() {
               </h2>
             </motion.div>
 
-            {/* Interactive Timeline - Brutalist Style */}
+            {/* Timeline */}
             <div className="relative">
-              {/* Timeline Line - Thick and Bold */}
               <div className="hidden md:block absolute left-8 top-0 bottom-0 w-2 bg-muted-foreground/20" />
 
               <div className="space-y-16">
@@ -137,45 +144,62 @@ export default function Experience() {
                   <motion.div
                     key={index}
                     className="relative"
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    {/* Timeline Marker - Square and Hard */}
-                    <div className="hidden md:block absolute left-4 top-8 -translate-x-1/2 z-10">
-                      <div className={`w-8 h-8 border-4 border-background transition-all duration-300 ${hoveredIndex === index ? 'bg-primary rotate-45 scale-125' : 'bg-muted-foreground rotate-0'}`} />
+                    {/* Timeline Marker with company color */}
+                    <div className="hidden md:block absolute left-5 top-8 z-10">
+                      <div
+                        className={`w-8 h-8 border-4 border-background transition-all duration-300 ${hoveredIndex === index ? 'rotate-45 scale-125' : 'rotate-0'}`}
+                        style={{ backgroundColor: exp.color }}
+                      />
                     </div>
 
                     {/* Content Card */}
                     <div className="md:ml-24">
                       <motion.div
-                        className={`brutalist-card p-6 md:p-8 relative ${hoveredIndex === index ? 'border-primary' : ''}`}
+                        className="brutalist-card p-6 md:p-8 relative"
+                        style={{ borderLeftWidth: '6px', borderLeftColor: exp.color }}
                         initial={false}
                         animate={hoveredIndex === index ? { x: 10 } : { x: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
                         {/* Company Header */}
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8 border-b-2 border-dashed border-border pb-6">
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6 border-b-2 border-dashed border-border pb-6">
                           <div className="flex items-center gap-4">
-                            <div className="w-16 h-16 bg-foreground text-background flex items-center justify-center font-bold text-2xl uppercase tracking-tighter">
+                            <div
+                              className="w-14 h-14 flex items-center justify-center font-bold text-xl uppercase tracking-tighter border-2"
+                              style={{ backgroundColor: exp.color + '20', borderColor: exp.color, color: exp.color }}
+                            >
                               {exp.company.substring(0, 2)}
                             </div>
                             <div>
                               <h3 className="text-2xl md:text-3xl font-bold text-foreground uppercase">
                                 {exp.company}
                               </h3>
-                              <div className="flex items-center gap-2 text-primary font-mono text-sm mt-1">
+                              <div className="flex items-center gap-2 font-mono text-sm mt-1" style={{ color: exp.color }}>
                                 <MapPin className="w-4 h-4" />
                                 <span>{exp.location}</span>
                               </div>
                             </div>
                           </div>
 
-                          <div className="bg-muted p-2 font-mono text-sm text-foreground border border-border">
-                            {exp.period}
+                          <div className="flex flex-col items-end gap-2">
+                            <div className="bg-muted p-2 font-mono text-sm text-foreground border border-border">
+                              {exp.period}
+                            </div>
+                            {/* Key Metric Badge */}
+                            <div
+                              className="flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider border"
+                              style={{ borderColor: exp.color, color: exp.color, backgroundColor: exp.color + '10' }}
+                            >
+                              <TrendingUp className="w-3 h-3" />
+                              {exp.keyMetric}
+                            </div>
                           </div>
                         </div>
 
@@ -187,7 +211,8 @@ export default function Experience() {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: 'auto' }}
                               transition={{ duration: 0.3 }}
-                              className="relative pl-6 border-l-4 border-primary/50"
+                              className="relative pl-6 border-l-4"
+                              style={{ borderLeftColor: exp.color + '80' }}
                             >
                               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
                                 <h4 className="font-bold text-xl text-foreground">
@@ -208,7 +233,7 @@ export default function Experience() {
                                     key={i}
                                     className="text-sm text-foreground flex items-start gap-3"
                                   >
-                                    <span className="text-primary font-bold text-lg leading-none">»</span>
+                                    <span className="font-bold text-lg leading-none" style={{ color: exp.color }}>»</span>
                                     <span>{achievement}</span>
                                   </li>
                                 ))}
@@ -219,7 +244,8 @@ export default function Experience() {
                           {exp.roles.length > 1 && (
                             <button
                               onClick={() => toggleRoles(index)}
-                              className="text-sm font-bold text-primary uppercase tracking-widest hover:underline decoration-2 underline-offset-4 flex items-center gap-2"
+                              className="text-sm font-bold uppercase tracking-widest hover:underline decoration-2 underline-offset-4 flex items-center gap-2"
+                              style={{ color: exp.color }}
                             >
                               {expandedRoles[index] ? (
                                 <>
