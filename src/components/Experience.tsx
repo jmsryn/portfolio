@@ -22,6 +22,28 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
+    company: 'Amihan Solutions',
+    location: 'Remote',
+    period: 'Feb 2026 – Present',
+    roles: [
+      {
+        title: 'QA & Test Engineer',
+        period: 'Feb 2026 – Present',
+        description: 'Collaborating with development and product teams to prepare and execute comprehensive test plans for Oracle APEX-based applications.',
+        achievements: [
+          'Design, run, and report on manual and automated test cases across multiple testing levels',
+          'Develop and maintain automated end-to-end tests using Playwright for Oracle APEX-based applications',
+          'Test APIs using APIDog or Playwright to ensure integration quality and reliability',
+          'Set up and maintain test environments, data, and CI/CD integration for automated test execution',
+          'Support User Acceptance Testing (UAT) and assist in customer training when needed',
+          'Document and report test results, issues, and improvement suggestions',
+          'Collaborate in an Agile (Scrum/Kanban) environment to continuously enhance software quality and testing efficiency'
+        ]
+      }
+    ],
+    technologies: ['Playwright', 'Oracle APEX', 'APIDog', 'Postman', 'CI/CD', 'Agile/Scrum']
+  },
+  {
     company: 'Theoria Medical',
     location: 'Remote',
     period: 'June 2023 – December 2025',
