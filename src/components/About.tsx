@@ -71,7 +71,7 @@ export default function About() {
   const yearsExp = calculateExperience();
 
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="left">
       <section id="about" className="section-padding">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto">

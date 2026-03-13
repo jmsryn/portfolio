@@ -118,7 +118,7 @@ export default function Experience() {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="right">
       <section id="experience" className="section-padding">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto">

@@ -56,7 +56,7 @@ export default function ProjectsGrid() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="up">
       <section id="projects" className="section-padding bg-background/50">
         <div className="container-custom">
           <div className="max-w-6xl mx-auto">
@@ -147,9 +147,10 @@ export default function ProjectsGrid() {
                     key={project.title}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -4, transition: { type: "spring", stiffness: 300 } }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="brutalist-card flex flex-col h-full"
+                    className="brutalist-card flex flex-col h-full hover:shadow-[8px_8px_0px_0px_var(--primary)] text-left"
                   >
                     <h3 className="text-2xl font-bold text-foreground mb-2 uppercase">
                       {project.title}

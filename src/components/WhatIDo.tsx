@@ -33,7 +33,7 @@ const services = [
 
 export default function WhatIDo() {
     return (
-        <SectionWrapper>
+        <SectionWrapper direction="up">
             <section className="section-padding">
                 <div className="container-custom">
                     <div className="max-w-5xl mx-auto">
@@ -51,17 +51,33 @@ export default function WhatIDo() {
                         </motion.div>
 
                         {/* Service Cards */}
-                        <div className="grid sm:grid-cols-2 gap-6">
-                            {services.map((service, i) => {
+                        <motion.div
+                            className="grid sm:grid-cols-2 gap-6"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: '-50px' }}
+                            variants={{
+                                visible: {
+                                    transition: {
+                                        staggerChildren: 0.15
+                                    }
+                                }
+                            }}
+                        >
+                            {services.map((service) => {
                                 const Icon = service.icon;
                                 return (
                                     <motion.div
                                         key={service.title}
                                         className="brutalist-card p-6 md:p-8 group cursor-default"
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true, margin: '-50px' }}
-                                        transition={{ duration: 0.4, delay: i * 0.1, type: 'spring', stiffness: 200 }}
+                                        variants={{
+                                            hidden: { opacity: 0, scale: 0.9 },
+                                            visible: {
+                                                opacity: 1,
+                                                scale: 1,
+                                                transition: { type: 'spring', stiffness: 200 }
+                                            }
+                                        }}
                                     >
                                         <div className="flex items-start gap-4">
                                             <div className="w-12 h-12 bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
@@ -79,7 +95,7 @@ export default function WhatIDo() {
                                     </motion.div>
                                 );
                             })}
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

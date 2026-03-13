@@ -22,9 +22,9 @@ export default function Home() {
       </div>
 
       <main className="relative w-full min-h-screen">
-        <div className="mx-auto max-w-screen-xl w-full">
-          <Hero />
+        <Hero />
 
+        <div className="mx-auto max-w-screen-xl w-full">
           <div className="container-custom">
             <WhatIDo />
             <About />

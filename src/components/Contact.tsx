@@ -69,7 +69,7 @@ export default function Contact() {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="right">
       <section id="contact" className="section-padding overflow-hidden relative">
         {/* Background Decorative Text */}
         <div className="absolute -right-20 top-40 text-[20rem] font-black text-muted/20 pointer-events-none select-none overflow-hidden opacity-10 rotate-90 hidden xl:block">

@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Mail } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false });
 
 const roles = ['Quality Assurance Engineer', 'SDET'];
 
@@ -41,9 +44,18 @@ export default function Hero() {
       className="min-h-screen flex flex-col items-center justify-center relative w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-background overflow-hidden"
     >
       {/* Background dot grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-20"
-        style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, var(--primary) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: 'radial-gradient(circle at 50% 50%, var(--primary) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)'
+        }}
       />
+
+      {/* 3D Wireframe Scene */}
+      <HeroScene />
 
       <motion.div
         className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center"

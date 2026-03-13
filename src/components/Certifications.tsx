@@ -57,7 +57,7 @@ export default function Certifications() {
     : credentials.filter(c => c.type === filter);
 
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="up">
       <section id="certifications" className="section-padding">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto">
@@ -91,8 +91,8 @@ export default function Certifications() {
                   key={tab.key}
                   onClick={() => setFilter(tab.key)}
                   className={`px-4 py-2 text-xs font-mono font-bold uppercase tracking-widest border-2 transition-all duration-200 ${filter === tab.key
-                      ? 'bg-primary text-primary-foreground border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                      : 'bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+                    : 'bg-transparent text-muted-foreground border-border hover:border-primary hover:text-primary'
                     }`}
                 >
                   {tab.label}
@@ -114,8 +114,8 @@ export default function Certifications() {
                 >
                   <div className="flex items-start gap-3 mb-4">
                     <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 border ${cred.type === 'certification'
-                        ? 'bg-primary/10 border-primary/30'
-                        : 'bg-secondary/10 border-secondary/30'
+                      ? 'bg-primary/10 border-primary/30'
+                      : 'bg-secondary/10 border-secondary/30'
                       }`}>
                       <Award className={`w-5 h-5 ${cred.type === 'certification' ? 'text-primary' : 'text-secondary'}`} />
                     </div>

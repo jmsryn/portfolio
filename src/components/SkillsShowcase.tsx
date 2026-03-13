@@ -31,7 +31,7 @@ const skillCategories = [
 
 export default function SkillsShowcase() {
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="up">
       <section className="py-20 px-4 max-w-6xl mx-auto">
         <motion.div
           className="mb-12 text-center"

@@ -18,7 +18,7 @@ const education = {
 
 export default function Education() {
   return (
-    <SectionWrapper>
+    <SectionWrapper direction="left">
       <section id="education" className="section-padding">
         <div className="container-custom">
           <div className="max-w-2xl mx-auto">
