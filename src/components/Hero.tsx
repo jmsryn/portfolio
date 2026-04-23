@@ -51,7 +51,7 @@ export default function Hero() {
               Send Email
             </a>
             <a
-              href="/deep-dives"
+              href="#"
               className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-lg text-xs font-medium text-foreground hover:bg-secondary transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" />
