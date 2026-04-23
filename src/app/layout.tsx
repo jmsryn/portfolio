@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import VisitTracker from "@/components/VisitTracker";
+import CommandPalette from "@/components/CommandPalette";
+import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
 import "../styles/globals.css";
 
 const dmSans = DM_Sans({
@@ -112,6 +114,8 @@ export default function RootLayout({
         <ThemeProviderWrapper>
           <VisitTracker>
             <div className="min-h-screen">{children}</div>
+            <CommandPalette />
+            <CommandPaletteTrigger />
           </VisitTracker>
         </ThemeProviderWrapper>
       </body>

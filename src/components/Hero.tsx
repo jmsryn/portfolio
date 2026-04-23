@@ -1,6 +1,6 @@
 'use client';
 
-import { MapPin, Download, Mail, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { MapPin, Download, Mail, Github, Linkedin } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 export default function Hero() {
@@ -49,13 +49,6 @@ export default function Hero() {
             >
               <Mail className="w-3.5 h-3.5" />
               Send Email
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-lg text-xs font-medium text-foreground hover:bg-secondary transition-colors"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Deep Dives
             </a>
           </div>
         </div>

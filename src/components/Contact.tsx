@@ -5,6 +5,8 @@ import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 type Status = 'idle' | 'success' | 'error';
 
+const EMAIL = 'hello@jrgaid.com';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -31,11 +33,10 @@ export default function Contact() {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        const to = 'hello@jrgaid.com';
         const body = encodeURIComponent(
           `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
         );
-        window.location.href = `mailto:${to}?subject=Portfolio%20Contact&body=${body}`;
+        window.location.href = `mailto:${EMAIL}?subject=Portfolio%20Contact&body=${body}`;
         setSubmitStatus('success');
       }
     } catch {
@@ -65,7 +66,12 @@ export default function Contact() {
         contact
       </h2>
       <p className="text-xs text-muted-foreground mb-6">
-        Have a project, role, or idea? Drop a note — I reply within a day or two.
+        Have a project, role, or idea? Drop a note — I reply within a day or two. Prefer email?
+        Grab it from the ID card up top, or hit{' '}
+        <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-muted border border-border rounded">
+          ⌘K
+        </kbd>
+        .
       </p>
 
       <form onSubmit={handleSubmit} className="w-full space-y-1">
