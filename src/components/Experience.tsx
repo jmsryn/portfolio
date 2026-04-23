@@ -23,7 +23,7 @@ const work: WorkEntry[] = [
   { title: 'QA & Test Engineer', org: 'Amihan Solutions', year: '2026' },
   { title: 'Jr. SDET', org: 'Theoria Medical', year: '2025' },
   { title: 'SQA Engineer', org: 'Theoria Medical', year: '2023' },
-  { title: 'Lead QA Engineer', org: 'Innovuze Solutions', year: '2022' },
+  { title: 'Lead QA Engineer', org: 'Innovuze Solutions', year: '2023' },
   { title: 'QA Engineer', org: 'Innovuze Solutions', year: '2022' },
 ];
 
