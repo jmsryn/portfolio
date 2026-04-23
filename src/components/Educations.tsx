@@ -1,88 +1,48 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { GraduationCap, Calendar } from 'lucide-react';
-import SectionWrapper from './SectionWrapper';
+import { GraduationCap } from 'lucide-react';
 
 const education = {
   degree: 'B.S. Information Technology',
   institution: 'University of Science and Technology of Southern Philippines',
   period: '2018 – 2022',
-  description: 'Focused on Software Engineering, QA practices, and participated in competitive programming.',
+  description:
+    'Focused on Software Engineering and QA practices. Participated in competitive programming and inter-university hacking competitions hosted by DICT.',
   achievements: [
-    'Capstone project on Beauru on Fisheries Management System',
-    'Participated in inter-university hacking competitions hosted by DICT',
+    'Capstone project on Bureau of Fisheries Management System',
     '3rd place in DICT hacking competition',
   ],
 };
 
 export default function Education() {
   return (
-    <SectionWrapper direction="left">
-      <section id="education" className="section-padding">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto">
-            {/* Header */}
-            <motion.div
-              className="mb-12 md:mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground uppercase break-all md:break-normal">
-                Education
-              </h2>
-              <div className="h-2 w-24 bg-primary" />
-            </motion.div>
+    <section id="education" className="py-16 border-t border-border">
+      <h2 className="text-2xl md:text-3xl font-display text-foreground mb-8">Education</h2>
 
-            {/* Education Card */}
-            <motion.div
-              className="card-enhanced p-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <GraduationCap className="w-5 h-5 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-medium text-foreground mb-1">
-                    {education.degree}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {education.institution}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>{education.period}</span>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-sm text-muted-foreground mb-4">
-                {education.description}
-              </p>
-
-              <div className="border-t border-border pt-4">
-                <h4 className="text-xs font-medium text-foreground mb-3 uppercase tracking-wider">
-                  Achievements
-                </h4>
-                <ul className="space-y-2">
-                  {education.achievements.map((achievement, index) => (
-                    <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          </div>
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center shrink-0">
+          <GraduationCap className="w-5 h-5 text-muted-foreground" />
         </div>
-      </section>
-    </SectionWrapper>
+
+        <div>
+          <h3 className="text-base font-semibold text-foreground font-sans mb-0.5">
+            {education.degree}
+          </h3>
+          <p className="text-sm text-muted-foreground mb-1">{education.institution}</p>
+          <p className="text-xs text-muted-foreground mb-3">{education.period}</p>
+
+          <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+            {education.description}
+          </p>
+
+          <ul className="space-y-1.5">
+            {education.achievements.map((a, i) => (
+              <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-muted-foreground/40" />
+                <span>{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }

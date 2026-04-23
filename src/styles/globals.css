@@ -1,31 +1,13 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-manrope);
-  --font-display: var(--font-syne);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-instrument-serif);
   --font-mono: var(--font-jetbrains-mono);
-
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -39,8 +21,6 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
@@ -51,83 +31,62 @@
 }
 
 :root {
-  --radius: 0rem;
-  /* Brutalist = sharp corners */
+  --radius: 0.75rem;
 
-  /* Neo-Brutalist Palette (Dark Theme Default) */
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #18181b;
 
-  --card: #1a1a1a;
-  --card-foreground: #ededed;
+  --card: #fafafa;
+  --card-foreground: #18181b;
 
-  --popover: #0a0a0a;
-  --popover-foreground: #ededed;
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
 
-  --primary: #ccff00;
-  /* Neon Lime */
-  --primary-foreground: #000000;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
 
-  --secondary: #7d00ff;
-  /* Electric Purple */
-  --secondary-foreground: #ffffff;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
 
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-
-  --accent: #ff0099;
-  /* Hot Pink */
+  --accent: #2563eb;
   --accent-foreground: #ffffff;
 
-  --destructive: #ff3333;
-  --destructive-foreground: #ffffff;
+  --destructive: #ef4444;
 
-  --border: #333333;
-  --input: #1a1a1a;
-  --ring: #ccff00;
-
-  --chart-1: #ccff00;
-  --chart-2: #7d00ff;
-  --chart-3: #ff0099;
-  --chart-4: #00ccff;
-  --chart-5: #ffcc00;
-
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #ededed;
-  --sidebar-primary: #ccff00;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #262626;
-  --sidebar-accent-foreground: #ededed;
-  --sidebar-border: #333333;
-  --sidebar-ring: #ccff00;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #18181b;
 }
 
-/* Light Mode Override (if needed, but aim for dark mode) */
-.light {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --card: #f5f5f5;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #ccff00;
-  /* Keep Neon */
-  --primary-foreground: #000000;
-  --secondary: #7d00ff;
-  --secondary-foreground: #ffffff;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: #ff0099;
-  --accent-foreground: #ffffff;
-  --destructive: #ff3333;
-  --border: #e5e5e5;
-  --input: #f5f5f5;
-  --ring: #ccff00;
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+
+  --card: #18181b;
+  --card-foreground: #fafafa;
+
+  --primary: #fafafa;
+  --primary-foreground: #09090b;
+
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+
+  --accent: #60a5fa;
+  --accent-foreground: #09090b;
+
+  --destructive: #ef4444;
+
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #fafafa;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   html {
@@ -139,83 +98,24 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display tracking-tight font-bold uppercase;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
   }
 
-  /* Responsive Typography Updates */
   h1 {
-    @apply text-4xl md:text-6xl lg:text-8xl leading-none;
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
   }
 
   h2 {
-    @apply text-3xl md:text-5xl lg:text-7xl leading-tight mb-4 md:mb-8;
+    @apply text-2xl md:text-3xl leading-snug;
   }
 
   h3 {
-    @apply text-xl md:text-3xl lg:text-4xl leading-snug mb-4;
+    @apply text-xl md:text-2xl leading-snug;
   }
 
   p {
-    @apply text-sm md:text-lg leading-relaxed text-muted-foreground max-w-prose;
-  }
-
-  /* Responsive Section Padding */
-  .section-padding {
-    @apply py-12 md:py-20 lg:py-24;
-  }
-}
-
-@layer components {
-
-  /* Custom Container */
-  .container-custom {
-    @apply w-full mx-auto px-4 md:px-8 max-w-7xl;
-  }
-
-  /* Brutalist Card */
-  .brutalist-card {
-    @apply bg-card border-2 border-border p-4 md:p-6 relative transition-all duration-300;
-    box-shadow: 4px 4px 0px 0px var(--primary);
-  }
-
-  .brutalist-card:hover {
-    @apply border-primary;
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px 0px var(--primary);
-  }
-
-  /* Neon Button */
-  .btn-neon {
-    @apply inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-primary text-primary-foreground font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-300 border-2 border-transparent;
-  }
-
-  .btn-neon:hover {
-    @apply bg-transparent text-primary border-primary;
-    box-shadow: 0 0 15px var(--primary);
-  }
-
-  /* Outline Button */
-  .btn-outline-brutalist {
-    @apply inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-transparent text-foreground font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-300 border-2 border-border;
-  }
-
-  .btn-outline-brutalist:hover {
-    @apply border-primary text-primary bg-primary/10;
-  }
-
-  /* Glitch Text Effect (Optional utility) */
-  .text-glitch {
-    @apply relative inline-block;
-  }
-
-  .text-highlight {
-    @apply text-primary selection:bg-primary selection:text-black;
+    @apply text-base leading-relaxed text-muted-foreground;
   }
 }
 
@@ -223,45 +123,13 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .mask-gradient {
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  }
-
-  @keyframes music-bar {
-
-    0%,
-    100% {
-      height: 25%;
-    }
-
-    50% {
-      height: 100%;
-    }
-  }
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Fallback for card-enhanced used in Education */
-.card-enhanced {
-  @apply bg-card border-2 border-border p-4 md:p-6 relative transition-all duration-300;
-  box-shadow: 4px 4px 0px 0px var(--primary);
-}
-
-.card-enhanced:hover {
-  @apply border-primary;
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px var(--primary);
 }

@@ -1,29 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Syne, Manrope, JetBrains_Mono } from "next/font/google";
-import SideNav from "@/components/SideNav";
-import OpenToWork from "@/components/OpenToWork";
-import ScrollProgress from "@/components/ScrollProgress";
+import { DM_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import VisitTracker from "@/components/VisitTracker";
-import PageLoader from "@/components/PageLoader";
 import "../styles/globals.css";
 
-const syne = Syne({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-const manrope = Manrope({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-instrument-serif",
+  weight: "400",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500"],
 });
 
 export const viewport: Viewport = {
@@ -34,7 +31,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "James Ryan Gaid - QA Engineer & Test Automation Specialist",
-  description: "Professional QA Engineer specializing in automated testing, security testing, and quality assurance. Expert in Cypress, Selenium, API testing, and CI/CD integration.",
+  description:
+    "Professional QA Engineer specializing in automated testing, security testing, and quality assurance. Expert in Cypress, Selenium, API testing, and CI/CD integration.",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
@@ -51,16 +49,6 @@ export const metadata: Metadata = {
     "CI/CD",
     "DevOps",
     "Software Testing",
-    "Test Framework",
-    "Automation Specialist",
-    "Web Testing",
-    "Performance Testing",
-    "Bug Testing",
-    "Quality Control",
-    "Software Quality",
-    "Test Planning",
-    "Test Strategy",
-    "Agile Testing"
   ],
   authors: [{ name: "James Ryan Gaid" }],
   creator: "James Ryan Gaid",
@@ -76,7 +64,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "James Ryan Gaid - QA Engineer & Test Automation Specialist",
-    description: "Professional QA Engineer specializing in automated testing, security testing, and quality assurance. Expert in Cypress, Selenium, API testing, and CI/CD integration.",
+    description:
+      "Professional QA Engineer specializing in automated testing, security testing, and quality assurance.",
     url: "https://jrgaid.site",
     siteName: "James Ryan Gaid Portfolio",
     images: [
@@ -93,7 +82,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "James Ryan Gaid - QA Engineer & Test Automation Specialist",
-    description: "Professional QA Engineer specializing in automated testing, security testing, and quality assurance.",
+    description:
+      "Professional QA Engineer specializing in automated testing, security testing, and quality assurance.",
     images: ["/images/profile.jpg"],
   },
   robots: {
@@ -107,9 +97,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -120,18 +107,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${syne.variable} ${manrope.variable} ${jetbrainsMono.variable} antialiased w-full overflow-x-hidden font-sans bg-background text-foreground`}
+        className={`${dmSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased font-sans bg-background text-foreground`}
       >
         <ThemeProviderWrapper>
           <VisitTracker>
-            <PageLoader>
-              <SideNav />
-              <ScrollProgress />
-              <OpenToWork />
-              <div className="relative min-h-screen w-full overflow-x-hidden">
-                {children}
-              </div>
-            </PageLoader>
+            <div className="min-h-screen">{children}</div>
           </VisitTracker>
         </ThemeProviderWrapper>
       </body>
