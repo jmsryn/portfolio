@@ -8,12 +8,12 @@ const projects: Project[] = [
   {
     title: 'AutoTestGen',
     description: 'AI-powered test case generator',
-    url: 'testai.jrgaid.site',
+    url: 'testai.jrgaid.com',
   },
   {
     title: 'Smart Money Tracker',
     description: 'AI finance assistant',
-    url: 'smartmoney.jrgaid.site',
+    url: 'smartmoney.jrgaid.com',
   },
   {
     title: 'Sillage',

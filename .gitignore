@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .qodo
+
+# Docker Compose (machine-specific paths / secrets)
+docker-compose*.yml
+docker.*
+config.yml

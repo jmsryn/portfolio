@@ -28,7 +28,7 @@ export default function Contact() {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        const to = 'hello@jrgaid.site';
+        const to = 'hello@jrgaid.com';
         const body = encodeURIComponent(
           `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
         );

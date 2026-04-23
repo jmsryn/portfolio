@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://jrgaid.site"),
+  metadataBase: new URL("https://jrgaid.com"),
   alternates: {
     canonical: "/",
   },
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: "James Ryan Gaid - QA Engineer & Test Automation Specialist",
     description:
       "Professional QA Engineer specializing in automated testing, security testing, and quality assurance.",
-    url: "https://jrgaid.site",
+    url: "https://jrgaid.com",
     siteName: "James Ryan Gaid Portfolio",
     images: [
       {
