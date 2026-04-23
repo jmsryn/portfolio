@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+
+type Status = 'idle' | 'success' | 'error';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,7 +12,8 @@ export default function Contact() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<Status>('idle');
+  const [focused, setFocused] = useState<string | null>(null);
   const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,64 +50,123 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const fieldClasses =
+    'w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none font-sans';
+
+  const rowClasses = (name: string) =>
+    `group flex items-start gap-3 border-b transition-colors ${
+      focused === name ? 'border-foreground/40' : 'border-border'
+    } py-2.5`;
+
   return (
     <section id="contact" className="py-8 border-t border-border">
-      <h2 className="text-lg font-semibold text-foreground font-sans mb-4">
-        <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>contact
+      <h2 className="text-lg font-semibold text-foreground font-sans mb-1">
+        <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>
+        contact
       </h2>
+      <p className="text-xs text-muted-foreground mb-6">
+        Have a project, role, or idea? Drop a note — I reply within a day or two.
+      </p>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="px-3 py-2 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground/10"
-          placeholder="Name"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="px-3 py-2 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground/10"
-          placeholder="Email"
-        />
-        <input
-          type="text"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          className="px-3 py-2 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground/10"
-          placeholder="Message"
-        />
-        <div className="sm:col-span-3 flex items-center gap-3">
+      <form onSubmit={handleSubmit} className="w-full space-y-1">
+        <div className={rowClasses('name')}>
+          <label
+            htmlFor="contact-name"
+            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none"
+          >
+            name
+          </label>
+          <input
+            id="contact-name"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            onFocus={() => setFocused('name')}
+            onBlur={() => setFocused(null)}
+            required
+            autoComplete="name"
+            placeholder="Jane Doe"
+            className={fieldClasses}
+          />
+        </div>
+
+        <div className={rowClasses('email')}>
+          <label
+            htmlFor="contact-email"
+            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none"
+          >
+            email
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            onFocus={() => setFocused('email')}
+            onBlur={() => setFocused(null)}
+            required
+            autoComplete="email"
+            placeholder="you@domain.com"
+            className={fieldClasses}
+          />
+        </div>
+
+        <div className={rowClasses('message')}>
+          <label
+            htmlFor="contact-message"
+            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none"
+          >
+            message
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            onFocus={() => setFocused('message')}
+            onBlur={() => setFocused(null)}
+            required
+            rows={4}
+            placeholder="Tell me a little about what you have in mind…"
+            className={`${fieldClasses} resize-none leading-relaxed`}
+          />
+        </div>
+
+        <div className="pt-5 flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex items-center gap-2 min-h-[1.25rem]" aria-live="polite">
+            {submitStatus === 'success' && (
+              <span className="inline-flex items-center gap-1.5 text-xs text-foreground">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                Message sent — talk soon.
+              </span>
+            )}
+            {submitStatus === 'error' && (
+              <span className="inline-flex items-center gap-1.5 text-xs text-destructive">
+                <AlertCircle className="w-3.5 h-3.5" />
+                Something broke. Try again or email me directly.
+              </span>
+            )}
+          </div>
+
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-xs font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-xs font-medium tracking-wide hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Sending</span>
+              </>
             ) : (
-              <Send className="w-3.5 h-3.5" />
+              <>
+                <span>Send message</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </>
             )}
-            {isSubmitting ? 'Sending...' : 'Send'}
           </button>
-
-          {submitStatus === 'success' && (
-            <span className="flex items-center gap-1 text-xs text-green-600">
-              <CheckCircle className="w-3.5 h-3.5" /> Sent
-            </span>
-          )}
-          {submitStatus === 'error' && (
-            <span className="flex items-center gap-1 text-xs text-destructive">
-              <AlertCircle className="w-3.5 h-3.5" /> Failed
-            </span>
-          )}
         </div>
       </form>
     </section>
