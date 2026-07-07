@@ -212,10 +212,9 @@ export default function CommandPalette() {
         icon: Terminal,
         keywords: 'whoami identity command',
         run: () => {
-          // eslint-disable-next-line no-console
           console.log(
             '%cjames ryan gaid%c\nqa & test engineer · security enthusiast\nhello@jrgaid.com',
-            'font-weight:bold;font-size:14px;color:#10b981',
+            'font-weight:bold;font-size:14px;color:#3b5a7a',
             'color:inherit'
           );
           close();
