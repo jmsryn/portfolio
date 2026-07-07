@@ -1,30 +1,30 @@
+import SectionHeading from './SectionHeading';
+
 const stack = {
   Testing: ['Playwright', 'Cypress', 'Selenium', 'K6', 'Postman', 'APIDog'],
+  'Reporting & Management': ['Allure', 'Xray', 'Qase'],
   Languages: ['JavaScript', 'TypeScript', 'Python'],
-  'DevOps & Cloud': ['Docker', 'GitHub Actions', 'Azure DevOps', 'Git', 'Jira'],
+  'DevOps & Tooling': ['Docker', 'GitHub Actions', 'Azure DevOps', 'Jenkins', 'Git', 'Jira'],
   Security: ['OWASP ZAP', 'Burp Suite'],
 };
 
 export default function TechStack() {
   return (
-    <section id="techstack">
-      <h2 className="text-lg font-semibold text-foreground font-sans mb-4">
-        <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>stack
-      </h2>
+    <section id="techstack" className="py-14 md:py-20 border-t border-border">
+      <SectionHeading index="02" title="Stack" />
 
-      <div className="space-y-3">
+      <div className="divide-y divide-border/60">
         {Object.entries(stack).map(([category, items]) => (
-          <div key={category}>
-            <h3 className="text-xs font-semibold text-foreground mb-1.5 font-sans">
+          <div
+            key={category}
+            className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-8 py-4 first:pt-0"
+          >
+            <h3 className="text-sm font-medium text-foreground sm:w-40 shrink-0">
               {category}
             </h3>
-            <div className="flex flex-wrap gap-x-4 gap-y-0.5">
-              {items.map((item) => (
-                <span key={item} className="text-sm text-muted-foreground">
-                  {item}
-                </span>
-              ))}
-            </div>
+            <p className="text-base text-muted-foreground">
+              {items.join(' · ')}
+            </p>
           </div>
         ))}
       </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import SectionHeading from './SectionHeading';
 
 type Status = 'idle' | 'success' | 'error';
 
@@ -60,21 +61,18 @@ export default function Contact() {
     } py-2.5`;
 
   return (
-    <section id="contact" className="py-8 border-t border-border">
-      <h2 className="text-lg font-semibold text-foreground font-sans mb-1">
-        <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>
-        contact
-      </h2>
-      <p className="text-xs text-muted-foreground mb-6">
-        Have a project, role, or idea? Drop a note — I reply within a day or two. Prefer email?
-        Grab it from the ID card up top, or hit{' '}
+    <section id="contact" className="py-14 md:py-20 border-t border-border">
+      <SectionHeading index="07" title="Contact" />
+      <p className="text-base text-muted-foreground mb-8 max-w-xl">
+        Have a project, role, or idea? Drop a note — I reply within a day or
+        two. Prefer email? Use the address in the hero above, or hit{' '}
         <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-muted border border-border rounded">
           ⌘K
         </kbd>
         .
       </p>
 
-      <form onSubmit={handleSubmit} className="w-full space-y-1">
+      <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-1">
         <div className={rowClasses('name')}>
           <label
             htmlFor="contact-name"
@@ -144,7 +142,7 @@ export default function Contact() {
           <div className="flex items-center gap-2 min-h-[1.25rem]" aria-live="polite">
             {submitStatus === 'success' && (
               <span className="inline-flex items-center gap-1.5 text-xs text-foreground">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
                 Message sent — talk soon.
               </span>
             )}

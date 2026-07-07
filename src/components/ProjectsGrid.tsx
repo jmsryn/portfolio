@@ -1,7 +1,11 @@
+import { ArrowUpRight } from 'lucide-react';
+import SectionHeading from './SectionHeading';
+
 type Project = {
   title: string;
   description: string;
   url: string;
+  tags: string[];
 };
 
 const projects: Project[] = [
@@ -9,45 +13,57 @@ const projects: Project[] = [
     title: 'AutoTestGen',
     description: 'AI-powered test case generator',
     url: 'testai.jrgaid.com',
+    tags: ['AI', 'Testing'],
   },
   {
     title: 'Smart Money Tracker',
     description: 'AI finance assistant',
     url: 'smartmoney.jrgaid.com',
+    tags: ['AI', 'Finance'],
   },
   {
     title: 'Sillage',
     description: 'AI-powered fragrance curator',
     url: 'mysillage.me',
+    tags: ['AI', 'Product'],
   },
   {
     title: 'Sillage E2E Suite',
     description: 'Playwright testing suite',
     url: 'github.com/jmsryn/mysillage-playwright',
+    tags: ['Playwright', 'E2E'],
   },
 ];
 
 export default function ProjectsGrid() {
   return (
-    <section id="projects">
-      <h2 className="text-lg font-semibold text-foreground font-sans mb-4">
-        <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>projects
-      </h2>
+    <section id="projects" className="py-14 md:py-20 border-t border-border">
+      <SectionHeading index="03" title="Projects" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {projects.map((p) => (
           <a
             key={p.title}
             href={`https://${p.url}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group"
+            className="group relative block p-6 rounded-xl border border-border bg-card/40 hover:bg-card hover:border-accent/40 hover:-translate-y-0.5 transition-all duration-200"
           >
-            <h3 className="text-sm font-medium text-foreground group-hover:underline underline-offset-2 font-sans">
-              {p.title}
-            </h3>
-            <p className="text-xs text-muted-foreground mb-0.5">{p.description}</p>
-            <span className="text-xs text-muted-foreground/60 font-mono">{p.url}</span>
+            <div className="flex items-start justify-between gap-3 mb-2">
+              <h3 className="font-display text-xl text-foreground">{p.title}</h3>
+              <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">{p.description}</p>
+            <div className="flex flex-wrap items-center gap-2">
+              {p.tags.map((t) => (
+                <span
+                  key={t}
+                  className="text-[11px] font-mono text-muted-foreground/70 px-2 py-0.5 rounded-full border border-border"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </a>
         ))}
       </div>

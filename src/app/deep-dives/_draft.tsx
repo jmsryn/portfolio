@@ -5,7 +5,6 @@ import {
   ArrowLeft, Clock, User, ChevronRight, BookOpen
 } from 'lucide-react';
 import Link from 'next/link';
-import { BugOverlay } from '@/components/ui/bug-overlay';
 
 interface Metric {
   label: string;
@@ -209,7 +208,6 @@ export default function DeepDivesPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <section className="py-20 px-4 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 relative">
-        <BugOverlay count={2} />
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
             <Link 
@@ -239,7 +237,6 @@ export default function DeepDivesPage() {
 
       {/* Featured Articles */}
       <section className="py-16 px-4 relative">
-        <BugOverlay count={1} />
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">Featured Articles</h2>
           

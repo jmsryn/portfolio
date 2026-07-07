@@ -1,39 +1,27 @@
-import Hero from "@/components/Hero";
+import Sidebar from "@/components/Sidebar";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import TechStack from "@/components/TechStack";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import IdCard from "@/components/IdCard";
-import SignalPanel from "@/components/SignalPanel";
+import Reveal from "@/components/Reveal";
 
 export default function Home() {
   return (
     <main className="w-full min-h-screen">
-      <div className="mx-auto max-w-5xl px-5 md:px-8">
-        <Hero />
+      <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-16">
+        <div className="lg:flex lg:justify-between lg:gap-12 xl:gap-16">
+          <Sidebar />
 
-        {/* Main two-column body */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-10 pb-10 items-stretch">
-          {/* Left column: About, Tech Stack, Projects, Signal (stretches) */}
-          <div className="md:col-span-7 flex flex-col gap-8 h-full">
-            <About />
-            <TechStack />
-            <ProjectsGrid />
-            <SignalPanel className="flex-1" />
-          </div>
-
-          {/* Right column: ID card, Experience, Education, Credentials */}
-          <div className="md:col-span-5 space-y-8">
-            <div className="flex justify-center md:justify-start">
-              <IdCard />
-            </div>
-            <Experience />
+          <div className="lg:w-3/5 lg:py-24 pb-12">
+            <Reveal><About /></Reveal>
+            <Reveal><TechStack /></Reveal>
+            <Reveal><ProjectsGrid /></Reveal>
+            <Reveal><Experience /></Reveal>
+            <Reveal><Contact /></Reveal>
           </div>
         </div>
-
-        <Contact />
       </div>
 
       <Footer />

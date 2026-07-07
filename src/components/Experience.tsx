@@ -1,15 +1,11 @@
 import { ExternalLink } from 'lucide-react';
+import SectionHeading from './SectionHeading';
 
 interface WorkEntry {
   title: string;
   org: string;
-  year: string;
-}
-
-interface EducationEntry {
-  degree: string;
-  school: string;
-  year: string;
+  period: string;
+  points: string[];
 }
 
 interface CertEntry {
@@ -20,16 +16,61 @@ interface CertEntry {
 }
 
 const work: WorkEntry[] = [
-  { title: 'QA & Test Engineer', org: 'Amihan Solutions', year: '2026' },
-  { title: 'Jr. SDET', org: 'Theoria Medical', year: '2025' },
-  { title: 'SQA Engineer', org: 'Theoria Medical', year: '2023' },
-  { title: 'Lead QA Engineer', org: 'Innovuze Solutions', year: '2023' },
-  { title: 'QA Engineer', org: 'Innovuze Solutions', year: '2022' },
+  {
+    title: 'QA & Test Engineer',
+    org: 'Amihan Solutions',
+    period: '2026 — Present',
+    points: [
+      'Lead end-to-end and API test coverage across multi-team releases.',
+      'Design scalable Playwright frameworks with CI gating on quality metrics.',
+    ],
+  },
+  {
+    title: 'Junior SDET',
+    org: 'Theoria Medical',
+    period: '2025 — 2026',
+    points: [
+      'Built automated regression suites that cut release-validation time by ~40%.',
+      'Integrated Playwright + GitHub Actions with PR-level test reporting.',
+    ],
+  },
+  {
+    title: 'SQA Engineer',
+    org: 'Theoria Medical',
+    period: '2023 — 2025',
+    points: [
+      'Owned manual and automated QA for a HIPAA-adjacent clinical product.',
+      'Partnered with developers on test-first workflows and flake reduction.',
+    ],
+  },
+  {
+    title: 'Lead QA Engineer',
+    org: 'Innovuze Solutions',
+    period: '2023',
+    points: [
+      'Mentored the QA team; established bug triage, test-case standards, and a reporting cadence.',
+    ],
+  },
+  {
+    title: 'QA Engineer',
+    org: 'Innovuze Solutions',
+    period: '2022 — 2023',
+    points: [
+      'Authored API and UI tests (Postman, Selenium) across web and mobile projects.',
+    ],
+  },
 ];
 
-const education: EducationEntry[] = [
-  { degree: 'BS Information Technology', school: 'USTP', year: '2022' },
-];
+const education = {
+  degree: 'BS Information Technology',
+  school: 'University of Science and Technology of Southern Philippines',
+  period: '2018 — 2022',
+  points: [
+    'Focused on software engineering and QA practices; competed in DICT inter-university hacking competitions.',
+    '3rd place, DICT hacking competition.',
+    'Capstone: Bureau of Fisheries Management System.',
+  ],
+};
 
 const certs: CertEntry[] = [
   { title: 'PJPT', issuer: 'TCM Security', year: 'In Progress', link: 'https://certifications.tcm-sec.com/pjpt/' },
@@ -38,104 +79,89 @@ const certs: CertEntry[] = [
   { title: 'Introduction to Playwright', issuer: 'Applitools', year: '2024', link: 'https://testautomationu.applitools.com/certificate/?id=4a4d8ca2' },
 ];
 
-function Timeline({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative py-0.5">
-      <div
-        className="pointer-events-none absolute left-2 top-2.5 bottom-2.5 w-px bg-border"
-        aria-hidden
-      />
-      <div className="space-y-3">{children}</div>
-    </div>
-  );
-}
-
-function EntryRow({
+function DetailEntry({
   title,
   sub,
-  year,
-  link,
-  timeline,
+  period,
+  points,
 }: {
   title: string;
   sub: string;
-  year: string;
-  link?: string;
-  timeline?: boolean;
+  period: string;
+  points: string[];
 }) {
   return (
-    <div className="relative flex items-start gap-3 group">
-      <div
-        className={`flex w-4 shrink-0 justify-center pt-1.5 ${timeline ? 'relative z-10' : ''}`}
-      >
-        <div
-          className={
-            timeline
-              ? 'h-2 w-2 shrink-0 rounded-full bg-foreground/30 ring-2 ring-background'
-              : 'h-2 w-2 shrink-0 rounded-full bg-foreground/30'
-          }
-        />
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-baseline justify-between gap-2">
-          <div className="min-w-0">
-            {link ? (
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-foreground hover:underline underline-offset-2 inline-flex items-center gap-1"
-              >
-                {title}
-                <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-              </a>
-            ) : (
-              <span className="text-sm font-medium text-foreground">{title}</span>
-            )}
-            <p className="text-xs text-muted-foreground">{sub}</p>
-          </div>
-          <span className="text-xs text-muted-foreground shrink-0 tabular-nums">{year}</span>
+    <div className="py-5 border-b border-border/60 last:border-b-0">
+      <div className="flex items-baseline justify-between gap-4 mb-2">
+        <div className="min-w-0">
+          <h3 className="text-base font-medium text-foreground font-sans">{title}</h3>
+          <p className="text-sm text-muted-foreground">{sub}</p>
         </div>
+        <span className="text-xs font-mono text-muted-foreground shrink-0 tabular-nums">
+          {period}
+        </span>
       </div>
+      <ul className="space-y-1.5">
+        {points.map((p, i) => (
+          <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
+            <span className="mt-2 shrink-0 w-1 h-1 rounded-full bg-accent" />
+            <span>{p}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default function Experience() {
   return (
-    <div className="space-y-8">
-      <section id="experience">
-        <h2 className="text-lg font-semibold text-foreground font-sans mb-4">
-          <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>experience
-        </h2>
-        <Timeline>
+    <>
+      <section id="experience" className="py-14 md:py-20 border-t border-border">
+        <SectionHeading index="04" title="Experience" />
+        <div>
           {work.map((w, i) => (
-            <EntryRow key={i} title={w.title} sub={w.org} year={w.year} timeline />
-          ))}
-        </Timeline>
-      </section>
-
-      <section id="education">
-        <h2 className="text-lg font-semibold text-foreground font-sans mb-4">
-          <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>education
-        </h2>
-        <div className="space-y-3">
-          {education.map((e, i) => (
-            <EntryRow key={i} title={e.degree} sub={e.school} year={e.year} />
+            <DetailEntry key={i} title={w.title} sub={w.org} period={w.period} points={w.points} />
           ))}
         </div>
       </section>
 
-      <section id="certifications">
-        <h2 className="text-lg font-semibold text-foreground font-sans mb-4">
-          <span className="text-muted-foreground/40 font-mono font-normal text-sm mr-1.5">~/</span>credentials
-        </h2>
-        <div className="space-y-3">
+      <section id="education" className="py-14 md:py-20 border-t border-border">
+        <SectionHeading index="05" title="Education" />
+        <DetailEntry
+          title={education.degree}
+          sub={education.school}
+          period={education.period}
+          points={education.points}
+        />
+      </section>
+
+      <section id="certifications" className="py-14 md:py-20 border-t border-border">
+        <SectionHeading index="06" title="Credentials" />
+        <div>
           {certs.map((c, i) => (
-            <EntryRow key={i} title={c.title} sub={c.issuer} year={c.year} link={c.link} />
+            <div
+              key={i}
+              className="flex items-baseline justify-between gap-4 py-3 border-b border-border/60 last:border-b-0 group"
+            >
+              <div className="min-w-0">
+                <a
+                  href={c.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base font-medium text-foreground hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                >
+                  {c.title}
+                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                </a>
+                <p className="text-sm text-muted-foreground">{c.issuer}</p>
+              </div>
+              <span className="text-xs font-mono text-muted-foreground shrink-0 tabular-nums">
+                {c.year}
+              </span>
+            </div>
           ))}
         </div>
       </section>
-    </div>
+    </>
   );
 }

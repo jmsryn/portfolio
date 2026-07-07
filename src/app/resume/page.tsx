@@ -56,8 +56,9 @@ const work = [
 
 const stack = {
   Testing: ['Playwright', 'Cypress', 'Selenium', 'K6', 'Postman', 'APIDog'],
+  'Reporting & Management': ['Allure', 'Xray', 'Qase'],
   Languages: ['JavaScript', 'TypeScript', 'Python'],
-  'DevOps & Cloud': ['Docker', 'GitHub Actions', 'Azure DevOps', 'Git', 'Jira'],
+  'DevOps & Tooling': ['Docker', 'GitHub Actions', 'Azure DevOps', 'Jenkins', 'Git', 'Jira'],
   Security: ['OWASP ZAP', 'Burp Suite'],
 };
 

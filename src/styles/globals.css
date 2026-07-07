@@ -48,7 +48,7 @@
   --muted: #f4f4f5;
   --muted-foreground: #71717a;
 
-  --accent: #2563eb;
+  --accent: #3b5a7a;
   --accent-foreground: #ffffff;
 
   --destructive: #ef4444;
@@ -74,7 +74,7 @@
   --muted: #27272a;
   --muted-foreground: #a1a1aa;
 
-  --accent: #60a5fa;
+  --accent: #8fb3d9;
   --accent-foreground: #09090b;
 
   --destructive: #ef4444;
@@ -103,11 +103,11 @@
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+    @apply text-5xl md:text-6xl lg:text-7xl leading-[1.05];
   }
 
   h2 {
-    @apply text-2xl md:text-3xl leading-snug;
+    @apply text-3xl md:text-4xl leading-snug;
   }
 
   h3 {
@@ -115,7 +115,7 @@
   }
 
   p {
-    @apply text-base leading-relaxed text-muted-foreground;
+    @apply text-base md:text-lg leading-relaxed text-muted-foreground;
   }
 }
 
