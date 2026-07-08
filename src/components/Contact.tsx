@@ -57,7 +57,7 @@ export default function Contact() {
 
   const rowClasses = (name: string) =>
     `group flex items-start gap-3 border-b transition-colors ${
-      focused === name ? 'border-foreground/40' : 'border-border'
+      focused === name ? 'border-b-2 border-foreground' : 'border-border'
     } py-2.5`;
 
   return (
@@ -90,7 +90,7 @@ export default function Contact() {
             onBlur={() => setFocused(null)}
             required
             autoComplete="name"
-            placeholder="Jane Doe"
+            placeholder="Alex Rivera"
             className={fieldClasses}
           />
         </div>
@@ -157,7 +157,7 @@ export default function Contact() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-xs font-medium tracking-wide hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-xs font-medium tracking-wide hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {isSubmitting ? (
               <>

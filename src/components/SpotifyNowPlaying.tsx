@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Music2, Pause } from 'lucide-react';
+import { Music2 } from 'lucide-react';
 
 type NowPlaying = {
   isPlaying: boolean;
@@ -16,9 +16,8 @@ type NowPlaying = {
   playedAt?: string;
 };
 
-export default function SpotifyNowPlaying({ className = '', compact = false }: { className?: string; compact?: boolean }) {
+export default function SpotifyNowPlaying({ className = '' }: { className?: string }) {
   const [data, setData] = useState<NowPlaying | null>(null);
-  const [, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -28,9 +27,8 @@ export default function SpotifyNowPlaying({ className = '', compact = false }: {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json: NowPlaying = await res.json();
         if (isMounted) setData(json);
-      } catch (e) {
-        const message = e instanceof Error ? e.message : 'Error';
-        if (isMounted) setError(message);
+      } catch {
+        if (isMounted) setData(null);
       }
     };
     fetchData();
@@ -41,68 +39,63 @@ export default function SpotifyNowPlaying({ className = '', compact = false }: {
     };
   }, []);
 
-  const isPlaying = data?.isPlaying;
-  const title = data?.title ?? 'Not playing';
-  const artist = data?.artist ?? '';
+  const isPlaying = Boolean(data?.isPlaying);
+  const title = data?.title ?? 'Nothing playing';
+  const artist = data?.artist ?? 'Spotify';
   const image = data?.albumImageUrl ?? '';
-  const url = data?.songUrl ?? undefined;
+  const url = data?.songUrl;
 
-  const containerPadding = compact ? 'px-2 py-1' : 'px-4 py-3';
-  const gap = compact ? 'gap-2' : 'gap-4';
-  const imageSize = compact ? 24 : 48;
-  const imageBoxClass = compact
-    ? 'relative w-6 h-6 border border-foreground bg-muted flex items-center justify-center flex-shrink-0'
-    : 'relative w-12 h-12 border-2 border-foreground bg-muted flex items-center justify-center flex-shrink-0';
-  const titleClass = compact
-    ? 'text-xs font-bold text-foreground truncate max-w-[140px] uppercase font-mono'
-    : 'text-sm font-bold text-foreground truncate uppercase font-mono';
-  const subClass = 'text-xs text-muted-foreground truncate font-mono';
+  const Wrapper = ({ children }: { children: React.ReactNode }) =>
+    url ? (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center gap-3 min-w-0 transition-colors"
+        aria-label={`${title} by ${artist} on Spotify`}
+      >
+        {children}
+      </a>
+    ) : (
+      <div className="flex items-center gap-3 min-w-0">{children}</div>
+    );
 
   return (
-    <div className={`max-w-full flex items-center ${gap} ${containerPadding} border-2 border-foreground bg-card shadow-[4px_4px_0px_0px_var(--primary)] hover:translate-x-[2px] hover:translate-y-[2px] transition-transform duration-200 ${className}`}>
-      <div className={imageBoxClass}>
-        {image ? (
-          <Image src={image} alt={title} width={imageSize} height={imageSize} className="object-cover grayscale hover:grayscale-0 transition-all" />
-        ) : (
-          <Music2 className="w-4 h-4 text-muted-foreground" />
-        )}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center justify-between gap-2">
-          <div className="min-w-0">
-            <div className={titleClass} title={title}>
-              {url ? (
-                <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  {title}
-                </a>
-              ) : (
-                title
-              )}
-            </div>
-            {!compact && (
-              <div className={subClass}>
-                {artist}
-              </div>
-            )}
-          </div>
-
-          {!compact && (
-            <div className="flex-shrink-0">
-              {isPlaying ? (
-                <div className="flex gap-0.5 items-end h-3">
-                  <span className="w-1 bg-primary animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '0ms' }} />
-                  <span className="w-1 bg-primary animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '200ms' }} />
-                  <span className="w-1 bg-primary animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '400ms' }} />
-                </div>
-              ) : (
-                <Pause className="w-3 h-3 text-muted-foreground" />
-              )}
-            </div>
+    <div className={`flex items-center gap-3 min-w-0 ${className}`}>
+      <Wrapper>
+        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-muted">
+          {image ? (
+            <Image
+              src={image}
+              alt={`${title} album art`}
+              width={36}
+              height={36}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Music2 className="h-4 w-4 text-muted-foreground" />
           )}
-        </div>
-      </div>
+        </span>
+
+        <span className="min-w-0 flex-1">
+          <span className="flex items-center gap-1.5">
+            {isPlaying ? (
+              <span className="flex items-end gap-[2px] h-2.5" aria-hidden>
+                <span className="w-[2px] bg-accent animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '0ms' }} />
+                <span className="w-[2px] bg-accent animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '150ms' }} />
+                <span className="w-[2px] bg-accent animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '300ms' }} />
+              </span>
+            ) : null}
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground/70">
+              {isPlaying ? 'Now playing' : 'Last played'}
+            </span>
+          </span>
+          <span className="block truncate text-sm text-foreground group-hover:text-accent transition-colors">
+            {title}
+          </span>
+          <span className="block truncate text-xs text-muted-foreground">{artist}</span>
+        </span>
+      </Wrapper>
     </div>
   );
 }
-
-

@@ -1,14 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Download, Mail, Github, Linkedin } from 'lucide-react';
+import Link from 'next/link';
+import { Download, Mail, Github, Linkedin, PenLine } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import SpotifyNowPlaying from './SpotifyNowPlaying';
 
 const NAV = [
   { id: 'about', label: 'About' },
   { id: 'techstack', label: 'Stack' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
   { id: 'certifications', label: 'Credentials' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -103,7 +106,9 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      <div className="mt-10 lg:mt-0 flex flex-col gap-4">
+      <div className="mt-10 lg:mt-0 flex flex-col gap-5">
+        <SpotifyNowPlaying />
+
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           <a
             href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf"
@@ -120,6 +125,13 @@ export default function Sidebar() {
             <Mail className="w-4 h-4" />
             hello@jrgaid.com
           </a>
+          <Link
+            href="/deep-dives"
+            className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors"
+          >
+            <PenLine className="w-4 h-4" />
+            Writing
+          </Link>
         </div>
         <div className="flex items-center gap-4">
           {SOCIALS.map((s) => (

@@ -4,6 +4,7 @@ import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import VisitTracker from "@/components/VisitTracker";
 import CommandPalette from "@/components/CommandPalette";
 import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
+import BackgroundFX from "@/components/BackgroundFX";
 import "../styles/globals.css";
 
 const dmSans = DM_Sans({
@@ -112,6 +113,7 @@ export default function RootLayout({
         className={`${dmSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased font-sans bg-background text-foreground`}
       >
         <ThemeProviderWrapper>
+          <BackgroundFX />
           <VisitTracker>
             <div className="min-h-screen">{children}</div>
             <CommandPalette />

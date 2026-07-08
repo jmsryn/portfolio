@@ -25,6 +25,23 @@ export default function About() {
           testing expertise.
         </p>
       </div>
+
+      <dl className="mt-10 grid grid-cols-3 gap-px max-w-2xl bg-border/60 border border-border/60 rounded-lg overflow-hidden">
+        {[
+          { value: '3+', label: 'Years in QA & automation' },
+          { value: '~40%', label: 'Faster release validation' },
+          { value: '5', label: 'QA & SDET roles shipped' },
+        ].map((stat) => (
+          <div key={stat.label} className="bg-background px-4 py-5">
+            <dt className="font-display text-3xl md:text-4xl text-foreground tabular-nums leading-none">
+              {stat.value}
+            </dt>
+            <dd className="mt-2 text-xs text-muted-foreground leading-snug">
+              {stat.label}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }
