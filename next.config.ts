@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import { resolve } from "node:path";
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   // Allow verification builds to run without sharing the active dev server's cache.
   distDir: process.env.NEXT_OUTPUT_DIR || '.next',
   images: {
