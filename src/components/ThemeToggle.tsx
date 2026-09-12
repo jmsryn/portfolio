@@ -1,11 +1,13 @@
 'use client';
 
+'use client';
+
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
@@ -16,15 +18,19 @@ export default function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-      aria-label="Toggle theme"
+      type="button"
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors active:scale-[0.96] cursor-pointer"
+      aria-label={resolvedTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
     >
-      {theme === 'dark' ? (
-        <Sun className="w-4 h-4" />
-      ) : (
-        <Moon className="w-4 h-4" />
-      )}
+      <span className="t-icon-swap w-4 h-4" data-state={resolvedTheme === 'dark' ? 'b' : 'a'}>
+        <span className="t-icon" data-icon="a">
+          <Moon className="w-4 h-4" />
+        </span>
+        <span className="t-icon" data-icon="b">
+          <Sun className="w-4 h-4" />
+        </span>
+      </span>
     </button>
   );
 }

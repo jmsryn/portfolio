@@ -1,22 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import VisitTracker from "@/components/VisitTracker";
 import CommandPalette from "@/components/CommandPalette";
 import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
-import BackgroundFX from "@/components/BackgroundFX";
 import "../styles/globals.css";
+import "../styles/portfolio.css";
+import "../styles/transitions.css";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-dm-sans",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  weight: "400",
   display: "swap",
 });
 
@@ -29,7 +23,6 @@ const jetbrainsMono = JetBrains_Mono({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -71,23 +64,14 @@ export const metadata: Metadata = {
       "Professional QA Engineer specializing in automated testing, security testing, and quality assurance.",
     url: "https://jrgaid.com",
     siteName: "James Ryan Gaid Portfolio",
-    images: [
-      {
-        url: "/images/profile.jpg",
-        width: 1200,
-        height: 630,
-        alt: "James Ryan Gaid - QA Engineer",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "James Ryan Gaid - QA Engineer & Test Automation Specialist",
     description:
       "Professional QA Engineer specializing in automated testing, security testing, and quality assurance.",
-    images: ["/images/profile.jpg"],
   },
   robots: {
     index: true,
@@ -110,10 +94,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased font-sans bg-background text-foreground`}
+        className={`${dmSans.variable} ${jetbrainsMono.variable} antialiased font-sans bg-background text-foreground`}
       >
         <ThemeProviderWrapper>
-          <BackgroundFX />
           <VisitTracker>
             <div className="min-h-screen">{children}</div>
             <CommandPalette />

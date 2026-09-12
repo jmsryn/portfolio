@@ -1,90 +1,41 @@
-import { ArrowUpRight } from 'lucide-react';
-import SectionHeading from './SectionHeading';
-import Reveal from './Reveal';
+import { ArrowUpRight, Braces, Camera, FlaskConical, Sparkles } from 'lucide-react';
 
-type Project = {
-  title: string;
-  description: string;
-  url: string;
-  year: string;
-  role: string;
-  tags: string[];
-};
-
-const projects: Project[] = [
-  {
-    title: 'AutoTestGen',
-    description: 'AI-powered test case generator',
-    url: 'testai.jrgaid.com',
-    year: '2025',
-    role: 'Solo build',
-    tags: ['AI', 'Testing'],
-  },
-  {
-    title: 'Smart Money Tracker',
-    description: 'AI finance assistant',
-    url: 'smartmoney.jrgaid.com',
-    year: '2025',
-    role: 'Solo build',
-    tags: ['AI', 'Finance'],
-  },
-  {
-    title: 'Sillage',
-    description: 'AI-powered fragrance curator',
-    url: 'mysillage.me',
-    year: '2024',
-    role: 'Product & QA',
-    tags: ['AI', 'Product'],
-  },
-  {
-    title: 'Sillage E2E Suite',
-    description: 'Playwright testing suite',
-    url: 'github.com/jmsryn/mysillage-playwright',
-    year: '2024',
-    role: 'Test automation',
-    tags: ['Playwright', 'E2E'],
-  },
+const projects = [
+  { title: 'AutoTestGen', description: 'From requirements to test cases, with a little help from AI.', url: 'https://testai.jrgaid.com', year: '2025', role: 'AI-assisted hobby', tags: 'AI / Test generation', icon: Braces, style: 'testgen', cover: 'Better tests.\nLess busywork.' },
+  { title: 'Sillage', description: 'A personal fragrance curator. Built with AI, tested with care.', url: 'https://mysillage.me', year: '2024', role: 'AI-assisted hobby', tags: 'AI / Product', icon: Sparkles, style: 'sillage', cover: 'Find your\nsignature.' },
+  { title: 'Gunita', description: 'A guest photo app for celebrations. Scan a QR, capture moments, and reveal the shared album together.', url: 'https://getgunita.com/', role: 'AI-assisted hobby', tags: 'Photography / Events', icon: Camera, style: 'gunita' },
+  { title: 'Sillage E2E Suite', description: 'A Playwright testing suite for the Sillage experience.', url: 'https://github.com/jmsryn/mysillage-playwright', year: '2024', role: 'Test automation', tags: 'Playwright / E2E', icon: FlaskConical, style: 'suite', cover: 'Built to run.\nDesigned to catch.' },
 ];
 
 export default function ProjectsGrid() {
   return (
-    <section id="projects" className="py-14 md:py-20 border-t border-border">
-      <SectionHeading index="03" title="Projects" />
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {projects.map((p, i) => (
-          <Reveal key={p.title} delay={i * 0.07}>
+    <section id="projects" className="selected-work">
+      <div className="work-heading"><h2>Off the clock.</h2></div>
+      <p className="hobby-intro">These are hobby projects I explore through vibe coding with AI tools, plus a personal test automation suite. My professional focus is quality assurance, not product development.</p>
+      <div className="project-grid">
+        {projects.map(p => (
           <a
-            href={`https://${p.url}`}
+            key={p.title}
+            href={p.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative block h-full p-6 rounded-xl border border-border bg-card/40 hover:bg-card hover:border-accent/40 hover:-translate-y-0.5 transition-all duration-200"
+            className={`project-item group t-card-tilt ${p.style}`}
           >
-            <div className="flex items-start justify-between gap-3 mb-2">
-              <div className="min-w-0">
-                <h3 className="font-display text-xl text-foreground">{p.title}</h3>
-                <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground/70">
-                  {p.year} · {p.role}
-                </span>
+            <div className="hobby-project-heading">
+              <div className="hobby-project-title-group">
+                <p.icon size={20} strokeWidth={1.5} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-105 text-accent" />
+                <h3>{p.title}</h3>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
-            </div>
-            <p className="text-sm text-muted-foreground mb-4">{p.description}</p>
-            <div className="flex flex-wrap items-center gap-2">
-              {p.tags.map((t) => (
-                <span
-                  key={t}
-                  className="text-[11px] font-mono text-muted-foreground/70 px-2 py-0.5 rounded-full border border-border"
-                >
-                  {t}
-                </span>
-              ))}
-              <span className="ml-auto font-mono text-[11px] text-muted-foreground/50 truncate max-w-[45%]">
-                {p.url.replace(/^github\.com\//, '')}
+              <span className="project-arrow-button" aria-hidden="true">
+                <ArrowUpRight size={16} className="t-arrow-icon" />
               </span>
             </div>
+            <p>{p.description}</p>
+            <div className="hobby-project-meta">
+              <span className="project-tags">{p.tags}</span>
+              <span>{p.role}</span>
+            </div>
           </a>
-          </Reveal>
         ))}
       </div>
     </section>

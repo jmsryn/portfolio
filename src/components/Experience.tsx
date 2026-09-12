@@ -19,7 +19,7 @@ const work: WorkEntry[] = [
   {
     title: 'QA & Test Engineer',
     org: 'Amihan Solutions',
-    period: '2026 — Present',
+    period: '2026 - Present',
     points: [
       'Lead end-to-end and API test coverage across multi-team releases.',
       'Design scalable Playwright frameworks with CI gating on quality metrics.',
@@ -28,7 +28,7 @@ const work: WorkEntry[] = [
   {
     title: 'Junior SDET',
     org: 'Theoria Medical',
-    period: '2025 — 2026',
+    period: '2025 - 2026',
     points: [
       'Built automated regression suites that cut release-validation time by ~40%.',
       'Integrated Playwright + GitHub Actions with PR-level test reporting.',
@@ -37,7 +37,7 @@ const work: WorkEntry[] = [
   {
     title: 'SQA Engineer',
     org: 'Theoria Medical',
-    period: '2023 — 2025',
+    period: '2023 - 2025',
     points: [
       'Owned manual and automated QA for a HIPAA-adjacent clinical product.',
       'Partnered with developers on test-first workflows and flake reduction.',
@@ -54,7 +54,7 @@ const work: WorkEntry[] = [
   {
     title: 'QA Engineer',
     org: 'Innovuze Solutions',
-    period: '2022 — 2023',
+    period: '2022 - 2023',
     points: [
       'Authored API and UI tests (Postman, Selenium) across web and mobile projects.',
     ],
@@ -64,7 +64,7 @@ const work: WorkEntry[] = [
 const education = {
   degree: 'BS Information Technology',
   school: 'University of Science and Technology of Southern Philippines',
-  period: '2018 — 2022',
+  period: '2018 - 2022',
   points: [
     'Focused on software engineering and QA practices; competed in DICT inter-university hacking competitions.',
     '3rd place, DICT hacking competition.',

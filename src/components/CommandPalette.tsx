@@ -35,6 +35,8 @@ const EMAIL = 'hello@jrgaid.com';
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState('');
   const [activeIdx, setActiveIdx] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -43,9 +45,23 @@ export default function CommandPalette() {
   const { setTheme, resolvedTheme } = useTheme();
 
   const close = useCallback(() => {
-    setOpen(false);
-    setQuery('');
-    setActiveIdx(0);
+    if (closing || !open) return;
+    setClosing(true);
+    setTimeout(() => {
+      setOpen(false);
+      setClosing(false);
+      setMounted(false);
+      setQuery('');
+      setActiveIdx(0);
+    }, 150);
+  }, [closing, open]);
+
+  const showPalette = useCallback(() => {
+    setMounted(true);
+    setClosing(false);
+    requestAnimationFrame(() => {
+      setOpen(true);
+    });
   }, []);
 
   const goto = useCallback(
@@ -255,14 +271,15 @@ export default function CommandPalette() {
       const mod = isMac ? e.metaKey : e.ctrlKey;
       if (mod && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setOpen((v) => !v);
-      } else if (e.key === '/' && !open) {
+        if (open) close();
+        else showPalette();
+      } else if (e.key === '/' && !open && !mounted) {
         const target = e.target as HTMLElement | null;
         const tag = target?.tagName?.toLowerCase();
         const editable = target?.isContentEditable;
         if (tag !== 'input' && tag !== 'textarea' && !editable) {
           e.preventDefault();
-          setOpen(true);
+          showPalette();
         }
       } else if (e.key === 'Escape' && open) {
         e.preventDefault();
@@ -271,7 +288,7 @@ export default function CommandPalette() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, close]);
+  }, [open, close, mounted, showPalette]);
 
   useEffect(() => {
     if (open) {
@@ -302,7 +319,7 @@ export default function CommandPalette() {
     }
   };
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   let globalIdx = -1;
 
@@ -314,12 +331,18 @@ export default function CommandPalette() {
       className="fixed inset-0 z-[100] flex items-start justify-center pt-[12vh] px-4"
     >
       <div
-        className="absolute inset-0 bg-background/70 backdrop-blur-sm"
+        className={`absolute inset-0 bg-background/75 backdrop-blur-sm t-modal-backdrop ${
+          open && !closing ? 'is-open' : 'is-closing'
+        }`}
         onClick={close}
         aria-hidden
       />
 
-      <div className="relative w-full max-w-xl rounded-xl border border-border bg-card shadow-2xl overflow-hidden">
+      <div
+        className={`relative w-full max-w-xl rounded-xl border border-border bg-card shadow-2xl overflow-hidden t-modal ${
+          open && !closing ? 'is-open' : 'is-closing'
+        }`}
+      >
         <div className="flex items-center gap-2 px-3 py-2.5 border-b border-border">
           <Search className="w-4 h-4 text-muted-foreground shrink-0" />
           <input
@@ -363,7 +386,7 @@ export default function CommandPalette() {
                     data-idx={idx}
                     onMouseEnter={() => setActiveIdx(idx)}
                     onClick={row.run}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left transition-colors ${
+                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left transition-colors duration-150 ease-out active:scale-[0.99] ${
                       active ? 'bg-muted text-foreground' : 'text-foreground/80 hover:bg-muted/60'
                     }`}
                   >
