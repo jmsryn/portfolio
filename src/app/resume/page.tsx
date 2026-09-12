@@ -77,16 +77,16 @@ export default function ResumePage() {
         <div className="mx-auto max-w-3xl px-5 md:px-8 py-3 flex items-center justify-between gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors group"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 ease-out group-hover:-translate-x-1" />
             Back to portfolio
           </Link>
           <div className="flex items-center gap-2">
             <a
               href="/files/James%20Ryan%20Gaid%20-%20CV1.pdf"
               download
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-md text-xs font-medium text-foreground hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-md text-xs font-medium text-foreground hover:bg-secondary transition-all active:scale-[0.98]"
             >
               <Download className="w-3 h-3" />
               PDF

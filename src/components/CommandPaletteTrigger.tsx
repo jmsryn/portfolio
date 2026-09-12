@@ -25,7 +25,7 @@ export default function CommandPaletteTrigger() {
     <button
       type="button"
       onClick={open}
-      className="fixed bottom-4 left-4 z-40 inline-flex items-center gap-2 px-2.5 py-1.5 rounded-md border border-border bg-card/90 backdrop-blur text-muted-foreground hover:text-foreground hover:bg-card transition-colors shadow-sm"
+      className="fixed bottom-4 left-4 z-40 inline-flex items-center gap-2 px-2.5 py-1.5 rounded-md border border-border bg-card/90 backdrop-blur text-muted-foreground hover:text-foreground hover:bg-card hover:border-accent/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.96] transition-all duration-200 ease-out shadow-sm hover:shadow cursor-pointer"
       aria-label="Open command palette"
     >
       <Command className="w-3 h-3" />

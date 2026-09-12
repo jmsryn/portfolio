@@ -13,10 +13,26 @@ export default function ProjectsGrid() {
       <div className="work-heading"><h2>Off the clock.</h2></div>
       <p className="hobby-intro">These are hobby projects I explore through vibe coding with AI tools, plus a personal test automation suite. My professional focus is quality assurance, not product development.</p>
       <div className="project-grid">
-        {projects.map(p => <a key={p.title} href={p.url} target="_blank" rel="noopener noreferrer" className={`project-item ${p.style}`}>
-          <div className="hobby-project-heading"><p.icon size={20} strokeWidth={1.5} aria-hidden="true" /><h3>{p.title}</h3><ArrowUpRight size={16} aria-hidden="true" /></div>
-          <p>{p.description}</p><div className="hobby-project-meta"><span className="project-tags">{p.tags}</span><span>{p.role}</span></div>
-        </a>)}
+        {projects.map(p => (
+          <a
+            key={p.title}
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`project-item group t-arrow-glide t-card-tilt ${p.style}`}
+          >
+            <div className="hobby-project-heading">
+              <p.icon size={20} strokeWidth={1.5} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-105 text-accent" />
+              <h3>{p.title}</h3>
+              <ArrowUpRight size={16} aria-hidden="true" className="t-arrow-icon" />
+            </div>
+            <p>{p.description}</p>
+            <div className="hobby-project-meta">
+              <span className="project-tags">{p.tags}</span>
+              <span>{p.role}</span>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   );

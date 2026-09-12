@@ -10,6 +10,7 @@ const greeting: Message = { id: 0, role: 'guide', text: WELCOME_MESSAGE };
 
 export default function ProfileChat() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [draft, setDraft] = useState('');
   const [messages, setMessages] = useState<Message[]>([greeting]);
   const [suggestions, setSuggestions] = useState(STARTER_QUESTIONS);
@@ -114,7 +115,12 @@ export default function ProfileChat() {
   }
 
   function close() {
-    setIsOpen(false);
+    if (isClosing || !isOpen) return;
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      setIsOpen(false);
+    }, 150);
   }
 
   return (
@@ -124,16 +130,29 @@ export default function ProfileChat() {
         <span>Ask about James</span>
       </button>
 
-      <dialog ref={dialogRef} id="profile-chat-dialog" className="profile-chat-dialog" aria-labelledby="profile-chat-title" aria-describedby="profile-chat-description"
-        onCancel={close}
-        onClose={() => { setIsOpen(false); launcherRef.current?.focus(); }}
-        onKeyDown={event => {
+      <dialog
+        ref={dialogRef}
+        id="profile-chat-dialog"
+        className={`profile-chat-dialog ${isClosing ? 'is-closing' : ''}`}
+        aria-labelledby="profile-chat-title"
+        aria-describedby="profile-chat-description"
+        onCancel={(e) => {
+          e.preventDefault();
+          close();
+        }}
+        onClose={() => {
+          setIsOpen(false);
+          setIsClosing(false);
+          launcherRef.current?.focus();
+        }}
+        onKeyDown={(event) => {
           // Keep the site's global command shortcut from opening another dialog over this one.
           if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
             event.preventDefault();
             event.stopPropagation();
           }
-        }}>
+        }}
+      >
         <div className="profile-chat-panel">
           <header className="profile-chat-header">
             <div><h2 id="profile-chat-title">About James</h2><p id="profile-chat-description">A guide to his résumé & portfolio</p></div>
@@ -156,7 +175,13 @@ export default function ProfileChat() {
                 </a>)}
               </div>}
             </div>)}
-            {isLoading && <div className="profile-chat-loading" role="status"><Loader2 size={14} className="animate-spin" aria-hidden="true" />Checking James’s profile…<button type="button" onClick={() => { cancel(); setNotice('Answer stopped. You can ask another question.'); }}>Stop</button></div>}
+            {isLoading && (
+              <div className="profile-chat-loading" role="status">
+                <Loader2 size={14} className="animate-spin text-accent" aria-hidden="true" />
+                <span className="t-shimmer-text">Checking James’s profile…</span>
+                <button type="button" onClick={() => { cancel(); setNotice('Answer stopped. You can ask another question.'); }}>Stop</button>
+              </div>
+            )}
           </div>
 
           <div className="profile-chat-suggestions" aria-label="Suggested questions">

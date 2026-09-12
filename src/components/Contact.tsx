@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { ArrowUpRight, AlertCircle, Loader2 } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 
 type Status = 'idle' | 'success' | 'error';
@@ -49,6 +49,7 @@ export default function Contact() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -56,9 +57,9 @@ export default function Contact() {
     'w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none font-sans';
 
   const rowClasses = (name: string) =>
-    `group flex items-start gap-3 border-b transition-colors ${
-      focused === name ? 'border-b-2 border-foreground' : 'border-border'
-    } py-2.5`;
+    `group relative flex items-start gap-3 border-b py-2.5 transition-colors duration-200 ${
+      focused === name ? 'border-foreground' : 'border-border'
+    }`;
 
   return (
     <section id="contact" className="py-14 md:py-20 border-t border-border">
@@ -71,7 +72,7 @@ export default function Contact() {
         <div className={rowClasses('name')}>
           <label
             htmlFor="contact-name"
-            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none"
+            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none transition-colors group-focus-within:text-foreground"
           >
             name
           </label>
@@ -93,7 +94,7 @@ export default function Contact() {
         <div className={rowClasses('email')}>
           <label
             htmlFor="contact-email"
-            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none"
+            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none transition-colors group-focus-within:text-foreground"
           >
             email
           </label>
@@ -115,7 +116,7 @@ export default function Contact() {
         <div className={rowClasses('message')}>
           <label
             htmlFor="contact-message"
-            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none"
+            className="font-mono text-xs text-muted-foreground/70 pt-0.5 w-16 shrink-0 select-none transition-colors group-focus-within:text-foreground"
           >
             message
           </label>
@@ -134,17 +135,21 @@ export default function Contact() {
         </div>
 
         <div className="pt-5 flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-2 min-h-[1.25rem]" aria-live="polite">
+          <div className="flex items-center gap-2 min-h-[1.5rem]" aria-live="polite">
             {submitStatus === 'success' && (
-              <span className="inline-flex items-center gap-1.5 text-xs text-foreground">
-                <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                {formspreeId ? 'Message sent. Talk soon.' : 'Email draft opened. Send it from your email app.'}
+              <span className="inline-flex items-center gap-2 text-xs text-foreground">
+                <span className="t-success-check" data-state="in" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                    <path d="M3.5 8.5L6.5 11.5L12.5 4.5" />
+                  </svg>
+                </span>
+                <span>{formspreeId ? 'Message sent. Talk soon.' : 'Email draft opened. Send it from your email app.'}</span>
               </span>
             )}
             {submitStatus === 'error' && (
               <span className="inline-flex items-center gap-1.5 text-xs text-destructive">
                 <AlertCircle className="w-3.5 h-3.5" />
-                Something broke. Try again or email me directly.
+                <span>Something broke. Try again or email me directly.</span>
               </span>
             )}
           </div>
@@ -152,7 +157,7 @@ export default function Contact() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-xs font-medium tracking-wide hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="group inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-xs font-medium tracking-wide hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-pointer"
           >
             {isSubmitting ? (
               <>
@@ -162,7 +167,7 @@ export default function Contact() {
             ) : (
               <>
                 <span>Send message</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <ArrowUpRight className="w-3.5 h-3.5 t-arrow-icon" />
               </>
             )}
           </button>

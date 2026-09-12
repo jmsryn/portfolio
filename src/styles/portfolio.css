@@ -7,13 +7,21 @@
 .portfolio h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 500; line-height: 1.15; letter-spacing: -.045em; }
 .portfolio p { font-size: 15px; line-height: 1.75; }
 .portfolio a, .portfolio button { -webkit-tap-highlight-color: transparent; }
-.portfolio a { transition: color .2s; }
+.portfolio a { transition: color var(--duration-fast) var(--ease-smooth-out); }
 .portfolio a:hover { color: var(--accent); }
 .portfolio-header { position: sticky; top: 0; z-index: 20; background: var(--background); border-bottom: 1px solid var(--border); }
 .nav-inner { display: flex; align-items: center; gap: 30px; height: 80px; }
 .wordmark { font-weight: 750; font-size: 35px; letter-spacing: -.08em; line-height: 1; }
 .wordmark span { color: var(--accent); }
 .portfolio-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; font-size: 13px; }
+@media (min-width: 768px) {
+  .portfolio-nav.t-dropdown {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
 .nav-contact { display: inline-flex; gap: 15px; align-items: center; padding-left: 30px; border-left: 1px solid var(--border); }
 .nav-controls { display: flex; gap: 12px; align-items: center; }
 .nav-controls button { min-width: 40px; min-height: 40px; border-radius: 6px; cursor: pointer; }
@@ -26,9 +34,11 @@
 .hero-copy h1 span { color: var(--accent); }
 .hero-copy > p { max-width: 410px; font-size: 17px; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 28px; margin-top: 34px; }
-.portfolio-button { display: inline-flex; align-items: center; gap: 24px; padding: 15px 20px; background: var(--foreground); color: var(--background); border-radius: 6px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.portfolio-button { display: inline-flex; align-items: center; gap: 24px; padding: 15px 20px; background: var(--foreground); color: var(--background); border-radius: 6px; font-size: 13px; font-weight: 500; white-space: nowrap; transition: background-color var(--duration-fast) var(--ease-smooth-out), color var(--duration-fast) var(--ease-smooth-out), transform var(--duration-fast) var(--ease-smooth-out), box-shadow var(--duration-fast) var(--ease-smooth-out); }
 .portfolio .portfolio-button:hover { background: var(--accent); color: var(--background); }
-.text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.portfolio-button:active { transform: scale(0.98); }
+.text-link { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 500; white-space: nowrap; transition: color var(--duration-fast) var(--ease-smooth-out), transform var(--duration-fast) var(--ease-smooth-out); }
+.text-link:active { transform: scale(0.98); }
 .hero-focus { border-left: 1px solid var(--border); padding: 10px 0 10px 36px; }
 .hero-focus h2 { font-size: 16px; font-weight: 500; letter-spacing: -.02em; margin-bottom: 30px; }
 .hero-focus dl { display: grid; gap: 25px; }
@@ -45,8 +55,10 @@
 .hobby-project-heading > svg:first-child { color: var(--accent); }
 .hobby-project-heading > svg:last-child { margin-left: auto; }
 .hobby-project-meta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; color: var(--muted-foreground); font-size: 10px; }
-.project-item { border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
-.project-item:hover { background: var(--card); }
+.project-item { border: 1px solid var(--border); border-radius: 8px; padding: 24px; transition: border-color var(--duration-fast) var(--ease-smooth-out), background-color var(--duration-fast) var(--ease-smooth-out), transform var(--duration-fast) var(--ease-smooth-out), box-shadow var(--duration-fast) var(--ease-smooth-out); }
+.project-item:hover { background: var(--card); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.06); }
+.dark .project-item:hover { box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35); }
+.project-item:active { transform: translateY(0) scale(0.99); }
 .project-item > p { margin-block: 14px 20px !important; }
 .work-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
 .work-heading h2 { font-size: 32px; }
@@ -98,9 +110,9 @@
 .skip-link { position: fixed; top: -100px; left: 16px; padding: 12px 20px; background: var(--foreground); color: var(--background); z-index: 30; }
 .skip-link:focus { top: 12px; }
 @media (prefers-reduced-motion: no-preference) {
-  .hero-copy, .hero-focus { animation: portfolio-enter .65s both; }
-  .hero-focus { animation-delay: .1s; }
-  @keyframes portfolio-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-copy, .hero-focus { animation: portfolio-enter var(--duration-very-slow) var(--ease-smooth-out) both; }
+  .hero-focus { animation-delay: var(--duration-micro); }
+  @keyframes portfolio-enter { from { opacity: 0; transform: translateY(var(--distance-medium)); filter: blur(var(--blur-medium)); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 }
 @media (max-width: 1023px) {
   .portfolio-container { width: calc(100% - 64px); }
@@ -113,9 +125,23 @@
   .nav-inner { height: 68px; justify-content: space-between; }
   .nav-controls { margin-left: auto; }
   .menu-toggle { display: grid; place-items: center; }
-  .portfolio-nav { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 20px; background: var(--background); border-bottom: 1px solid var(--border); margin: 0; }
-  .portfolio-nav.is-open { display: flex; flex-direction: column; gap: 0; align-items: stretch; }
-  .portfolio-nav a { padding: 14px 10px; }
+  .portfolio-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12);
+    margin: 0;
+  }
+  .portfolio-nav a { padding: 14px 10px; border-radius: 6px; transition: background-color var(--duration-fast) var(--ease-smooth-out), color var(--duration-fast) var(--ease-smooth-out); }
+  .portfolio-nav a:hover { background-color: var(--secondary); }
   .nav-contact { border: 0; }
   .portfolio-hero { grid-template-columns: 1fr; gap: 36px; padding: 44px 0 30px; }
   .hero-copy h1 { font-size: clamp(40px, 10vw, 66px); }

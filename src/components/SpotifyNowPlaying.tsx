@@ -81,9 +81,9 @@ export default function SpotifyNowPlaying({ className = '' }: { className?: stri
           <span className="flex items-center gap-1.5">
             {isPlaying ? (
               <span className="flex items-end gap-[2px] h-2.5" aria-hidden>
-                <span className="w-[2px] bg-accent animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '0ms' }} />
-                <span className="w-[2px] bg-accent animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '150ms' }} />
-                <span className="w-[2px] bg-accent animate-[music-bar_1s_ease-in-out_infinite]" style={{ animationDelay: '300ms' }} />
+                <span className="w-[2px] h-full bg-accent origin-bottom animate-[music-bar_0.9s_ease-in-out_infinite]" style={{ animationDelay: '0ms' }} />
+                <span className="w-[2px] h-full bg-accent origin-bottom animate-[music-bar_0.9s_ease-in-out_infinite]" style={{ animationDelay: '180ms' }} />
+                <span className="w-[2px] h-full bg-accent origin-bottom animate-[music-bar_0.9s_ease-in-out_infinite]" style={{ animationDelay: '360ms' }} />
               </span>
             ) : null}
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground/70">
