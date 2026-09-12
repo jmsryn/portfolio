@@ -1,33 +1,10 @@
-import SectionHeading from './SectionHeading';
-
 const stack = {
-  Testing: ['Playwright', 'Cypress', 'Selenium', 'K6', 'Postman', 'APIDog'],
-  'Reporting & Management': ['Allure', 'Xray', 'Qase'],
-  Languages: ['JavaScript', 'TypeScript', 'Python'],
-  'DevOps & Tooling': ['Docker', 'GitHub Actions', 'Azure DevOps', 'Jenkins', 'Git', 'Jira'],
-  Security: ['OWASP ZAP', 'Burp Suite'],
+  'Test automation': ['Playwright', 'Cypress', 'Selenium', 'K6', 'Postman', 'APIDog'],
+  'Languages': ['TypeScript', 'JavaScript', 'Python'],
+  'CI/CD & tooling': ['GitHub Actions', 'Docker', 'Azure DevOps', 'Jenkins', 'Git', 'Jira'],
+  'Security & reporting': ['OWASP ZAP', 'Burp Suite', 'Allure', 'Xray', 'Qase'],
 };
 
 export default function TechStack() {
-  return (
-    <section id="techstack" className="py-14 md:py-20 border-t border-border">
-      <SectionHeading index="02" title="Stack" />
-
-      <div className="divide-y divide-border/60">
-        {Object.entries(stack).map(([category, items]) => (
-          <div
-            key={category}
-            className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-8 py-4 first:pt-0"
-          >
-            <h3 className="text-sm font-medium text-foreground sm:w-40 shrink-0">
-              {category}
-            </h3>
-            <p className="text-base text-muted-foreground">
-              {items.join(' · ')}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+  return <section id="techstack" className="stack-section"><h2>The tools behind it.</h2><div className="stack-groups">{Object.entries(stack).map(([category, items]) => <div key={category}><h3>{category}</h3><ul>{items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>;
 }

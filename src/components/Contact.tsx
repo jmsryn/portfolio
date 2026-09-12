@@ -64,12 +64,7 @@ export default function Contact() {
     <section id="contact" className="py-14 md:py-20 border-t border-border">
       <SectionHeading index="07" title="Contact" />
       <p className="text-base text-muted-foreground mb-8 max-w-xl">
-        Have a project, role, or idea? Drop a note — I reply within a day or
-        two. Prefer email? Use the address in the hero above, or hit{' '}
-        <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-muted border border-border rounded">
-          ⌘K
-        </kbd>
-        .
+        Drop me a note. I usually reply within a day or two.
       </p>
 
       <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-1">
@@ -143,7 +138,7 @@ export default function Contact() {
             {submitStatus === 'success' && (
               <span className="inline-flex items-center gap-1.5 text-xs text-foreground">
                 <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                Message sent — talk soon.
+                {formspreeId ? 'Message sent. Talk soon.' : 'Email draft opened. Send it from your email app.'}
               </span>
             )}
             {submitStatus === 'error' && (

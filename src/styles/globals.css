@@ -6,7 +6,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-instrument-serif);
+  --font-display: var(--font-dm-sans);
   --font-mono: var(--font-jetbrains-mono);
 
   --color-ring: var(--ring);
@@ -33,8 +33,8 @@
 :root {
   --radius: 0.75rem;
 
-  --background: #ffffff;
-  --foreground: #18181b;
+  --background: #f7f8f5;
+  --foreground: #202923;
 
   --card: #fafafa;
   --card-foreground: #18181b;
@@ -46,9 +46,9 @@
   --secondary-foreground: #18181b;
 
   --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  --muted-foreground: #626a64;
 
-  --accent: #3b5a7a;
+  --accent: #3f674d;
   --accent-foreground: #ffffff;
 
   --destructive: #ef4444;
@@ -59,7 +59,7 @@
 }
 
 .dark {
-  --background: #09090b;
+  --background: #151c18;
   --foreground: #fafafa;
 
   --card: #18181b;
@@ -74,7 +74,7 @@
   --muted: #27272a;
   --muted-foreground: #a1a1aa;
 
-  --accent: #8fb3d9;
+  --accent: #abd0b3;
   --accent-foreground: #09090b;
 
   --destructive: #ef4444;
