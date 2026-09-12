@@ -50,23 +50,108 @@
 .hero-bottom a { display: flex; align-items: center; gap: 9px; font-size: 12px; }
 .selected-work { padding: 56px 0 90px; border-top: 1px solid var(--border); }
 .hobby-intro { max-width: 650px; margin: -10px 0 32px; }
-.hobby-project-heading { display: flex; align-items: center; gap: 12px; }
-.hobby-project-heading h3 { font-size: 18px; font-weight: 500; }
-.hobby-project-heading > svg:first-child { color: var(--accent); }
-.hobby-project-heading > svg:last-child { margin-left: auto; }
-.hobby-project-meta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; color: var(--muted-foreground); font-size: 10px; }
-.project-item { border: 1px solid var(--border); border-radius: 8px; padding: 24px; transition: border-color var(--duration-fast) var(--ease-smooth-out), background-color var(--duration-fast) var(--ease-smooth-out), transform var(--duration-fast) var(--ease-smooth-out), box-shadow var(--duration-fast) var(--ease-smooth-out); }
-.project-item:hover { background: var(--card); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.06); }
-.dark .project-item:hover { box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35); }
-.project-item:active { transform: translateY(0) scale(0.99); }
-.project-item > p { margin-block: 14px 20px !important; }
 .work-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
 .work-heading h2 { font-size: 32px; }
 .work-heading > span { font-size: 12px; color: var(--muted-foreground); }
-.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px 28px; }
-.project-item { min-width: 0; }
-.project-item > p { font-size: 13px; margin: 5px 0 12px; }
-.project-tags { font-family: var(--font-jetbrains-mono), monospace; font-size: 10px; color: var(--muted-foreground); }
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.project-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  background: transparent;
+  transition:
+    border-color var(--duration-fast) var(--ease-smooth-out),
+    background-color var(--duration-fast) var(--ease-smooth-out),
+    transform var(--duration-fast) var(--ease-smooth-out),
+    box-shadow var(--duration-fast) var(--ease-smooth-out);
+}
+.project-item:hover {
+  background: var(--card);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.06);
+}
+.dark .project-item:hover {
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35);
+}
+.project-item:active {
+  transform: translateY(0) scale(0.99);
+}
+.hobby-project-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+.hobby-project-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.hobby-project-title-group h3 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.hobby-project-title-group > svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.project-arrow-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+  transition:
+    background-color var(--duration-fast) var(--ease-smooth-out),
+    border-color var(--duration-fast) var(--ease-smooth-out),
+    color var(--duration-fast) var(--ease-smooth-out),
+    transform var(--duration-fast) var(--ease-smooth-out);
+}
+.project-item:hover .project-arrow-button {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.project-arrow-button .t-arrow-icon {
+  transition: transform var(--learn-out) var(--learn-ease);
+}
+.project-item:hover .project-arrow-button .t-arrow-icon {
+  transform: translate(2px, -2px);
+  transition: transform var(--learn-in) var(--learn-ease);
+}
+.project-item > p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  margin: 16px 0 24px;
+  flex: 1;
+}
+.hobby-project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  color: var(--muted-foreground);
+  font-size: 10px;
+}
+.project-tags {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
 .about-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 100px; border-block: 1px solid var(--border); padding: 90px 0; }
 .section-kicker { display: block; font-family: var(--font-jetbrains-mono), monospace; color: var(--accent); font-size: 10px; letter-spacing: .12em; margin-bottom: 22px; }
 .about-section h2 { margin-bottom: 26px; }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUp, ArrowUpRight, Loader2, MessageCircle, RotateCcw, X } from 'lucide-react';
+import { ArrowUp, ArrowUpRight, Loader2, RotateCcw, X } from 'lucide-react';
 import { answerProfileQuestion, isProfileAnswer, MAX_QUESTION_LENGTH, STARTER_QUESTIONS, WELCOME_MESSAGE, type ProfileAnswer } from '@/lib/profile-guide';
 import '@/styles/profile-chat.css';
 
@@ -125,10 +125,40 @@ export default function ProfileChat() {
 
   return (
     <div className="profile-chat">
-      <button ref={launcherRef} className="profile-chat-launcher" onClick={() => setIsOpen(true)} aria-haspopup="dialog" aria-expanded={isOpen} aria-controls="profile-chat-dialog">
-        <MessageCircle size={19} strokeWidth={1.7} aria-hidden="true" />
-        <span>Ask about James</span>
-      </button>
+      <div className={`profile-chat-launcher-wrap t-tt-wrap ${isOpen ? 'is-open' : ''}`}>
+        <button
+          ref={launcherRef}
+          type="button"
+          className="profile-chat-launcher t-tt-trigger"
+          onClick={() => setIsOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
+          aria-controls="profile-chat-dialog"
+          aria-label="Ask about James"
+        >
+          <span className="profile-chat-status-dot" aria-hidden="true" />
+          <svg
+            className="profile-chat-icon"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            <circle className="profile-chat-dot profile-chat-dot--1" cx="8.5" cy="11.5" r="1.15" fill="currentColor" stroke="none" />
+            <circle className="profile-chat-dot profile-chat-dot--2" cx="12" cy="11.5" r="1.15" fill="currentColor" stroke="none" />
+            <circle className="profile-chat-dot profile-chat-dot--3" cx="15.5" cy="11.5" r="1.15" fill="currentColor" stroke="none" />
+          </svg>
+        </button>
+        <span className="profile-chat-tooltip t-tt" role="tooltip">
+          Ask about James
+        </span>
+      </div>
 
       <dialog
         ref={dialogRef}

@@ -100,6 +100,16 @@
 
   /* Thinking shimmer */
   --think-shimmer: 2000ms;
+
+  /* Tooltip open / close */
+  --tt-in-dur: 150ms;
+  --tt-out-dur: 50ms;
+  --tt-scale: 0.98;
+  --tt-delay: 80ms;
+  --tt-in-ease: ease-out;
+  --tt-out-ease: ease-out;
+  --tt-bg: var(--card);
+  --tt-fg: var(--foreground);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -288,6 +298,7 @@
 .group:hover .t-arrow-glide svg,
 .portfolio-button:hover svg,
 .text-link:hover svg,
+.project-item:hover .project-arrow-button .t-arrow-icon,
 .project-item:hover .hobby-project-heading > svg:last-child {
   transform: translate(2px, -2px);
   transition: transform var(--learn-in) var(--learn-ease);
@@ -295,6 +306,56 @@
 .portfolio-button:hover svg[data-dir="down"],
 a[href="#experience"]:hover svg {
   transform: translate(2px, 2px);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   17. Tooltip Open / Close
+   ───────────────────────────────────────────────────────────────── */
+.t-tt-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.t-tt {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  transform: translateY(0) scale(var(--tt-scale));
+  transform-origin: bottom right;
+  padding: 6px 11px;
+  border-radius: 8px;
+  background: var(--tt-bg);
+  color: var(--tt-fg);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity   var(--tt-out-dur) var(--tt-out-ease),
+    transform var(--tt-out-dur) var(--tt-out-ease);
+  will-change: transform, opacity;
+  z-index: 50;
+}
+.t-tt[data-align="center"] {
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, 0) scale(var(--tt-scale));
+  transform-origin: bottom center;
+}
+.t-tt-wrap:hover .t-tt,
+.t-tt-trigger:focus-visible + .t-tt {
+  opacity: 1;
+  transform: translateY(-2px) scale(1);
+  transition-duration: var(--tt-in-dur);
+  transition-timing-function: var(--tt-in-ease);
+  transition-delay: var(--tt-delay);
+}
+.t-tt-wrap:hover .t-tt[data-align="center"],
+.t-tt-trigger:focus-visible + .t-tt[data-align="center"] {
+  transform: translate(-50%, -2px) scale(1);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -424,7 +485,10 @@ a[href="#experience"]:hover svg {
   .t-arrow-icon,
   .t-arrow-glide svg,
   .t-card-tilt,
-  .t-stagger-line {
+  .t-stagger-line,
+  .t-tt,
+  .project-arrow-button,
+  .project-arrow-button .t-arrow-icon {
     transition: none !important;
     animation: none !important;
     transform: none !important;

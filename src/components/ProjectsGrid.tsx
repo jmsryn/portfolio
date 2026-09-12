@@ -19,12 +19,16 @@ export default function ProjectsGrid() {
             href={p.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`project-item group t-arrow-glide t-card-tilt ${p.style}`}
+            className={`project-item group t-card-tilt ${p.style}`}
           >
             <div className="hobby-project-heading">
-              <p.icon size={20} strokeWidth={1.5} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-105 text-accent" />
-              <h3>{p.title}</h3>
-              <ArrowUpRight size={16} aria-hidden="true" className="t-arrow-icon" />
+              <div className="hobby-project-title-group">
+                <p.icon size={20} strokeWidth={1.5} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-105 text-accent" />
+                <h3>{p.title}</h3>
+              </div>
+              <span className="project-arrow-button" aria-hidden="true">
+                <ArrowUpRight size={16} className="t-arrow-icon" />
+              </span>
             </div>
             <p>{p.description}</p>
             <div className="hobby-project-meta">
