@@ -1,7 +1,7 @@
 /* A spacious developer portfolio: variance 6, motion 4, density 3.
    Surfaces use 8px corners; buttons use 6px. Layer 20 is navigation. */
-.portfolio { --cover-bg: #e9eee6; --cover-ink: #294335; }
-.dark .portfolio { --cover-bg: #263a2d; --cover-ink: #d2e3d3; }
+.portfolio { --cover-bg: #e8ecf3; --cover-ink: #1d3aa8; }
+.dark .portfolio { --cover-bg: #172036; --cover-ink: #c9d5ff; }
 .portfolio-container { width: min(1200px, calc(100% - 96px)); margin-inline: auto; }
 .portfolio section { scroll-margin-top: 110px; }
 .portfolio h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 500; line-height: 1.15; letter-spacing: -.045em; }

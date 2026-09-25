@@ -91,7 +91,7 @@ function DetailEntry({
   points: string[];
 }) {
   return (
-    <div className="py-5 border-b border-border/60 last:border-b-0">
+    <div className="career-entry py-5 border-b border-border/60 last:border-b-0" data-reveal>
       <div className="flex items-baseline justify-between gap-4 mb-2">
         <div className="min-w-0">
           <h3 className="text-base font-medium text-foreground font-sans">{title}</h3>

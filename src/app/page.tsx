@@ -9,14 +9,18 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SpotifyNowPlaying from '@/components/SpotifyNowPlaying';
 import ProfileChat from '@/components/ProfileChat';
+import HeroStage from '@/components/HeroStage';
+import ImmersiveLayer from '@/components/ImmersiveLayer';
 
 export default function Home() {
   return (
     <div className="portfolio">
       <a href="#main-content" className="skip-link">Skip to content</a>
+      <ImmersiveLayer />
       <PortfolioNav />
       <main id="main-content" className="portfolio-container">
         <section className="portfolio-hero" aria-labelledby="hero-title">
+          <HeroStage />
           <div className="hero-copy">
             <div className="hero-intro">
               <span className="availability-beacon" aria-hidden="true">
@@ -55,9 +59,9 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="about-layout"><About /><TechStack /></div>
+        <div className="about-layout" data-reveal="stagger"><About /><TechStack /></div>
         <div className="career-layout">
-          <div className="career-intro">
+          <div className="career-intro" data-reveal>
             <h2>A career in<br />quality assurance.</h2>
             <p>From hands-on testing to scalable automation and QA team leadership.</p>
             <Link href="/resume" className="text-link group t-arrow-glide">
@@ -67,7 +71,7 @@ export default function Home() {
           <div className="career-details"><Experience /></div>
         </div>
         <ProjectsGrid />
-        <div className="writing-strip">
+        <div className="writing-strip" data-reveal>
           <div>
             <h2>A closer look at the work.</h2>
             <p>Deep dives on testing and engineering. New writing coming soon.</p>
@@ -76,7 +80,7 @@ export default function Home() {
             Visit deep dives <ArrowUpRight size={18} className="t-arrow-icon" />
           </Link>
         </div>
-        <div className="contact-layout">
+        <div className="contact-layout" data-reveal="stagger">
           <div className="contact-intro">
             <span className="section-kicker">LET’S CONNECT</span>
             <h2>Your next release.<br />More confidence.</h2>

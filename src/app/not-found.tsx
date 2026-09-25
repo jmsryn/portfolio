@@ -35,7 +35,7 @@ export default function NotFound() {
         <div className="flex items-center gap-1.5 px-3 py-2 border-b border-border bg-muted/40">
           <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-accent/80" />
           <span className="ml-2 font-mono text-[11px] text-muted-foreground">
             guest@jrgaid.com: ~{target}
           </span>
@@ -46,7 +46,7 @@ export default function NotFound() {
 
         <div className="p-5 md:p-6 font-mono text-[13px] leading-relaxed space-y-3">
           <div>
-            <span className="text-emerald-500">guest</span>
+            <span className="text-accent">guest</span>
             <span className="text-muted-foreground">@</span>
             <span className="text-sky-500">jrgaid</span>
             <span className="text-muted-foreground">:</span>
@@ -65,7 +65,7 @@ export default function NotFound() {
           </div>
 
           <div className="pt-2">
-            <span className="text-emerald-500">guest</span>
+            <span className="text-accent">guest</span>
             <span className="text-muted-foreground">@</span>
             <span className="text-sky-500">jrgaid</span>
             <span className="text-muted-foreground">:</span>
@@ -81,8 +81,8 @@ export default function NotFound() {
                   href={s.href}
                   className="group inline-flex items-center gap-2 text-foreground/80 hover:text-foreground"
                 >
-                  <s.icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-emerald-500 transition-colors" />
-                  <span className="text-emerald-500">{s.label}/</span>
+                  <s.icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-accent transition-colors" />
+                  <span className="text-accent">{s.label}/</span>
                   <span className="text-muted-foreground/60">— {s.cmd}</span>
                 </Link>
               </li>
@@ -90,7 +90,7 @@ export default function NotFound() {
           </ul>
 
           <div className="pt-3">
-            <span className="text-emerald-500">guest</span>
+            <span className="text-accent">guest</span>
             <span className="text-muted-foreground">@</span>
             <span className="text-sky-500">jrgaid</span>
             <span className="text-muted-foreground">:</span>
