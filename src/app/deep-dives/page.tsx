@@ -15,7 +15,7 @@ export default function DeepDivesComingSoon() {
         <div className="flex items-center gap-1.5 px-3 py-2 border-b border-border bg-muted/40">
           <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-accent/80" />
           <span className="ml-2 font-mono text-[11px] text-muted-foreground">
             guest@jrgaid.com: ~/deep-dives
           </span>
@@ -26,7 +26,7 @@ export default function DeepDivesComingSoon() {
 
         <div className="p-5 md:p-6 font-mono text-[13px] leading-relaxed space-y-3">
           <div>
-            <span className="text-emerald-500">guest</span>
+            <span className="text-accent">guest</span>
             <span className="text-muted-foreground">@</span>
             <span className="text-sky-500">jrgaid</span>
             <span className="text-muted-foreground">:</span>
@@ -48,7 +48,7 @@ export default function DeepDivesComingSoon() {
           </div>
 
           <div className="pt-2">
-            <span className="text-emerald-500">guest</span>
+            <span className="text-accent">guest</span>
             <span className="text-muted-foreground">@</span>
             <span className="text-sky-500">jrgaid</span>
             <span className="text-muted-foreground">:</span>
@@ -61,7 +61,7 @@ export default function DeepDivesComingSoon() {
             <li>
               <Link href="/#projects" className="hover:text-foreground group inline-flex items-center gap-2">
                 <span className="text-muted-foreground/60">→</span>
-                <span className="text-emerald-500 group-hover:underline underline-offset-2">
+                <span className="text-accent group-hover:underline underline-offset-2">
                   check the projects
                 </span>
               </Link>
@@ -69,7 +69,7 @@ export default function DeepDivesComingSoon() {
             <li>
               <Link href="/#experience" className="hover:text-foreground group inline-flex items-center gap-2">
                 <span className="text-muted-foreground/60">→</span>
-                <span className="text-emerald-500 group-hover:underline underline-offset-2">
+                <span className="text-accent group-hover:underline underline-offset-2">
                   read the experience
                 </span>
               </Link>
@@ -77,7 +77,7 @@ export default function DeepDivesComingSoon() {
             <li>
               <Link href="/#contact" className="hover:text-foreground group inline-flex items-center gap-2">
                 <span className="text-muted-foreground/60">→</span>
-                <span className="text-emerald-500 group-hover:underline underline-offset-2">
+                <span className="text-accent group-hover:underline underline-offset-2">
                   say hi
                 </span>
               </Link>

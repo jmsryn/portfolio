@@ -7,6 +7,7 @@ import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
 import "../styles/globals.css";
 import "../styles/portfolio.css";
 import "../styles/transitions.css";
+import "../styles/immersive.css";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
