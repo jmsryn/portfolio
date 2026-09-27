@@ -1,13 +1,26 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#3b5a7a"/>
-  <text
-    x="16"
-    y="22"
-    text-anchor="middle"
-    font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-    font-size="17"
-    font-weight="700"
-    letter-spacing="-0.5"
-    fill="#ffffff"
-  >JG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- "Tile", the portfolio mascot, reduced for browser tabs. -->
+  <style>
+    .bg { fill: #141a26; }
+    .face { fill: #f6f7f9; }
+    .shade { fill: #9fb4ff; }
+    .eye { fill: #141a26; }
+    .signal { fill: #2f5bff; }
+    .stalk { stroke: #f6f7f9; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #e8ecf3; }
+      .face { fill: #141a26; }
+      .shade { fill: #3a4ea8; }
+      .eye { fill: #e8ecf3; }
+      .signal { fill: #7c9bff; }
+      .stalk { stroke: #141a26; }
+    }
+  </style>
+  <rect width="64" height="64" rx="15" class="bg"/>
+  <line x1="32" y1="17" x2="32" y2="11" class="stalk" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="32" cy="9.5" r="4.5" class="signal"/>
+  <rect x="12" y="21" width="40" height="33" rx="10" class="shade"/>
+  <rect x="12" y="16" width="40" height="33" rx="10" class="face"/>
+  <ellipse cx="24.5" cy="32" rx="4" ry="5" class="eye"/>
+  <ellipse cx="39.5" cy="32" rx="4" ry="5" class="eye"/>
 </svg>

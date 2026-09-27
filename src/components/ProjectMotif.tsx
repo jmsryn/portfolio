@@ -3,7 +3,7 @@
    the animation lives in immersive.css (.m-*) and settles on its final
    frame for reduced motion. */
 
-type Motif = 'testgen' | 'sillage' | 'gunita' | 'suite';
+export type Motif = 'testgen' | 'sillage' | 'gunita' | 'suite' | 'contextdeck';
 
 const VIEW = '0 0 520 132';
 
@@ -146,6 +146,43 @@ function Suite() {
   );
 }
 
+// Each active app on the desktop swaps the phone deck to a matching button layout.
+const DECK_BUTTONS = [
+  [0, 0], [1, 0], [0, 1], [1, 1], [0, 2], [1, 2],
+];
+const DECK_STATES = [
+  { lit: [0, 3, 4], glyph: <circle cx="160" cy="62" r="13" /> },
+  { lit: [1, 2, 5], glyph: <rect x="147" y="49" width="26" height="26" rx="7" /> },
+  { lit: [0, 1, 4, 5], glyph: <path d="M160 48 L174 75 L146 75 Z" /> },
+];
+
+function ContextDeck() {
+  return (
+    <>
+      <rect x="70" y="20" width="180" height="82" rx="6" className="m-line" />
+      <line x1="84" x2="236" y1="34" y2="34" className="m-line m-faint" />
+      <line x1="160" x2="160" y1="102" y2="112" className="m-line" />
+      <line x1="136" x2="184" y1="112" y2="112" className="m-line" />
+      {[0, 1, 2].map((i) => (
+        <circle key={i} cx="272" cy="62" r="3" className="m-flow" style={{ animationDelay: `${i * 0.4}s` }} />
+      ))}
+      <rect x="370" y="12" width="72" height="108" rx="11" className="m-line" />
+      <line x1="396" x2="416" y1="20" y2="20" className="m-line m-faint" />
+      {DECK_BUTTONS.map(([c, r]) => (
+        <rect key={`${c}-${r}`} x={384 + c * 26} y={32 + r * 26} width="18" height="18" rx="4" className="m-line m-faint" />
+      ))}
+      {DECK_STATES.map((state, i) => (
+        <g key={i} className={`m-cycle ${i === 0 ? 'm-cycle-first' : ''}`} style={{ animationDelay: `${i * 2}s` }}>
+          <g className="m-app">{state.glyph}</g>
+          {state.lit.map((b) => (
+            <rect key={b} x={384 + DECK_BUTTONS[b][0] * 26} y={32 + DECK_BUTTONS[b][1] * 26} width="18" height="18" rx="4" className="m-box" />
+          ))}
+        </g>
+      ))}
+    </>
+  );
+}
+
 export default function ProjectMotif({ motif }: { motif: Motif }) {
   return (
     <div className={`project-motif motif-${motif}`} aria-hidden="true">
@@ -154,6 +191,7 @@ export default function ProjectMotif({ motif }: { motif: Motif }) {
         {motif === 'sillage' && <Sillage />}
         {motif === 'gunita' && <Gunita />}
         {motif === 'suite' && <Suite />}
+        {motif === 'contextdeck' && <ContextDeck />}
       </svg>
     </div>
   );

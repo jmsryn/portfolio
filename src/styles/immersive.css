@@ -126,6 +126,22 @@
   }
 }
 
+/* ── Off the clock: Labs + QA tooling groups ─────────────────────── */
+.work-heading { align-items: center; }
+.labs-link { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 999px; font-size: 13px; font-weight: 500; white-space: nowrap; transition: border-color var(--duration-fast) var(--ease-smooth-out), color var(--duration-fast) var(--ease-smooth-out), background-color var(--duration-fast) var(--ease-smooth-out); }
+.portfolio .labs-link:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.hobby-intro a { color: var(--foreground); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent); text-underline-offset: 3px; }
+.project-group + .project-group { margin-top: 48px; }
+.portfolio .project-group-label { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.project-group-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.project-grid--labs { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.project-grid--labs .project-item { padding: 20px; }
+.project-grid--labs .project-motif { height: 116px; }
+.project-status { padding: 2px 8px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); color: var(--accent); font-family: var(--font-jetbrains-mono), monospace; font-size: 10px; letter-spacing: .04em; }
+@media (max-width: 1023px) {
+  .project-grid--labs { grid-template-columns: 1fr 1fr; }
+}
+
 /* ── Project motifs ──────────────────────────────────────────────── */
 .project-motif {
   height: 132px;
@@ -168,6 +184,9 @@
 .m-label { fill: currentColor; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; letter-spacing: .04em; }
 .m-result { fill: var(--accent); }
 .m-pop, .m-scan, .m-runner { transform-box: fill-box; transform-origin: center; }
+.m-app { fill: none; stroke: var(--accent); stroke-width: 2; }
+.m-cycle { opacity: 0; }
+.m-cycle-first { opacity: 1; }
 
 /* Final frame: what shows without motion. */
 .m-check { stroke-dashoffset: 0; }
@@ -184,6 +203,7 @@
   .m-runner { animation: m-run 6s cubic-bezier(.45, 0, .55, 1) infinite; }
   .m-progress { stroke-dashoffset: 1; animation: m-progress 6s cubic-bezier(.45, 0, .55, 1) infinite; }
   .m-result { animation: m-result 6s ease infinite; }
+  .m-cycle { opacity: 0; animation: m-cycle 6s var(--ease-smooth-out) infinite; }
   /* Only animate while the grid is on screen. */
   .reveal-ready .project-grid:not(.is-inview) .project-motif * { animation-play-state: paused; }
 }
@@ -196,6 +216,7 @@
 @keyframes m-flash { 0%, 25% { opacity: 0; } 27% { opacity: .12; } 34%, 100% { opacity: 0; } }
 @keyframes m-run { 0% { transform: translateX(0); opacity: 1; } 70% { transform: translateX(440px); opacity: 1; } 76%, 100% { transform: translateX(440px); opacity: 0; } }
 @keyframes m-progress { 0% { stroke-dashoffset: 1; opacity: 1; } 70% { stroke-dashoffset: 0; opacity: 1; } 90% { stroke-dashoffset: 0; opacity: 0; } 100% { stroke-dashoffset: 1; opacity: 0; } }
+@keyframes m-cycle { 0% { opacity: 0; } 3%, 31% { opacity: 1; } 34%, 100% { opacity: 0; } }
 @keyframes m-result { 0%, 64% { opacity: 0; } 70%, 92% { opacity: 1; } 100% { opacity: 0; } }
 
 @media (max-width: 767px) {
@@ -211,4 +232,6 @@
   .portfolio .hero-focus { padding: 24px 22px 26px; border: 1px solid var(--border); border-radius: 10px; }
   .career-details { padding-left: 26px; }
   .career-entry::before { left: -30px; }
+  .project-grid--labs { grid-template-columns: 1fr; }
+  .work-heading { flex-wrap: wrap; }
 }

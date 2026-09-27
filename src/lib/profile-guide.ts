@@ -9,12 +9,13 @@ type Topic = ProfileAnswer & { id: string; phrases: string[] };
 const resume = { label: 'Read résumé', href: '/resume' };
 const experience = { label: 'QA experience', href: '/#experience' };
 const skills = { label: 'Testing toolkit', href: '/#techstack' };
-const projects = { label: 'Hobby projects', href: '/#projects' };
+const projects = { label: 'Side projects', href: '/#projects' };
+const labs = { label: 'JR Gaid Labs', href: 'https://jrgaidlabs.dev' };
 const contact = { label: 'Email James', href: 'mailto:hello@jrgaid.com' };
 
-export const STARTER_QUESTIONS = ['What is his QA experience?', 'Which testing tools does he use?', 'Tell me about his hobby projects', 'How can I contact him?'];
+export const STARTER_QUESTIONS = ['What is his QA experience?', 'Which testing tools does he use?', 'Tell me about his side projects', 'How can I contact him?'];
 export const MAX_QUESTION_LENGTH = 400;
-export const WELCOME_MESSAGE = 'Hi! I can help you explore James’s QA background, testing skills, education, and hobby projects. What would you like to know?';
+export const WELCOME_MESSAGE = 'Hi! I can help you explore James’s QA background, testing skills, education, and side projects at JR Gaid Labs. What would you like to know?';
 
 const topics: Topic[] = [
   {
@@ -74,23 +75,33 @@ const topics: Topic[] = [
   },
   {
     id: 'projects', phrases: ['projects', 'hobby', 'hobbies', 'side projects', 'built', 'building', 'apps', 'portfolio projects'],
-    text: 'His personal projects include AutoTestGen (AI-assisted test case generation), Sillage (fragrance curation), and Gunita (guest photos for celebrations). He also has a Sillage E2E testing suite using Playwright. The apps are AI-assisted hobby projects; his career and job search focus on QA and SDET work.',
-    sources: [projects], suggestions: ['What is Gunita?', 'Tell me about Sillage', 'What is AutoTestGen?'],
+    text: 'James builds small, independent products under JR Gaid Labs (jrgaidlabs.dev):\n\n• Gunita: a shared event photo album guests join by QR code\n• Sillage: a fragrance collection catalog with what-to-wear suggestions\n• ContextDeck: a Windows beta that turns a phone into a context-aware control deck\n\nOn the QA side, he built AutoTestGen (AI-assisted test case generation) and a Playwright E2E suite for Sillage. These are AI-assisted hobby projects; his career and job search focus on QA and SDET work.',
+    sources: [labs, projects], suggestions: ['What is JR Gaid Labs?', 'What is ContextDeck?', 'What is AutoTestGen?'],
   },
   {
     id: 'gunita', phrases: ['gunita', 'photography', 'guest photo', 'celebration'],
-    text: 'Gunita is James’s AI-assisted hobby project for guest photos at celebrations. Guests scan a QR code, take photos in their browser, and view the shared album when the host reveals it.',
-    sources: [{ label: 'Visit Gunita', href: 'https://getgunita.com/' }, projects], suggestions: ['Tell me about his hobby projects', 'What is his QA experience?'],
+    text: 'Gunita is a JR Gaid Labs product and one of James’s AI-assisted hobby projects, built for guest photos at celebrations. Guests scan a QR code, take photos in their browser, and view the shared album when the host reveals it.',
+    sources: [{ label: 'Visit Gunita', href: 'https://getgunita.com/' }, labs], suggestions: ['What is JR Gaid Labs?', 'What is his QA experience?'],
   },
   {
     id: 'sillage', phrases: ['sillage', 'fragrance', 'perfume'],
-    text: 'Sillage is an AI-powered fragrance curator and an AI-assisted hobby project. James also maintains a separate personal Playwright E2E testing suite for Sillage. The application is a hobby build; the suite demonstrates his interest in test automation.',
+    text: 'Sillage is a JR Gaid Labs product and an AI-assisted hobby project. It catalogs your fragrance collection and suggests what to wear based on the weather and your day. James also maintains a separate personal Playwright E2E testing suite for Sillage. The application is a hobby build; the suite demonstrates his interest in test automation.',
     sources: [{ label: 'Visit Sillage', href: 'https://mysillage.me' }, { label: 'Playwright suite', href: 'https://github.com/jmsryn/mysillage-playwright' }], suggestions: ['What is Gunita?', 'Which testing tools does he use?'],
   },
   {
     id: 'autotestgen', phrases: ['autotestgen', 'testai', 'test case generator', 'test generation'],
     text: 'AutoTestGen is an AI-assisted hobby project that generates test cases from requirements. It reflects James’s interest in exploring tools for testing alongside his professional QA work.',
-    sources: [{ label: 'Visit AutoTestGen', href: 'https://testai.jrgaid.com' }, projects], suggestions: ['Tell me about his hobby projects', 'What is his QA experience?'],
+    sources: [{ label: 'Visit AutoTestGen', href: 'https://testai.jrgaid.com' }, projects], suggestions: ['Tell me about his side projects', 'What is his QA experience?'],
+  },
+  {
+    id: 'labs', phrases: ['jr gaid labs', 'jrgaidlabs', 'jrgaidlabs dev', 'labs', 'studio', 'products', 'independent'],
+    text: 'JR Gaid Labs is James’s independent software studio at jrgaidlabs.dev. It focuses on small, useful apps across web, mobile, and desktop. Available now: Gunita and Sillage on the web, and ContextDeck on Windows (beta). Screenshot Organizer and Folder Butler are in development, alongside a few experiments. These are AI-assisted hobby projects; his professional focus remains QA and SDET work.',
+    sources: [labs, projects], suggestions: ['What is ContextDeck?', 'What is Gunita?'],
+  },
+  {
+    id: 'contextdeck', phrases: ['contextdeck', 'context deck', 'control deck', 'stream deck'],
+    text: 'ContextDeck is a JR Gaid Labs product for Windows, currently in beta. It turns your phone into a control deck whose buttons change to match whichever app is active on your computer. Like his other Labs products, it is an AI-assisted hobby project.',
+    sources: [{ label: 'Visit ContextDeck', href: 'https://contextdeck.jrgaidlabs.dev' }, labs], suggestions: ['What is JR Gaid Labs?', 'Tell me about Sillage'],
   },
   {
     id: 'location', phrases: ['based', 'location', 'live', 'country', 'philippines', 'remote', 'timezone', 'time zone'],
@@ -153,8 +164,8 @@ export function answerProfileQuestion(input: string): ProfileAnswer {
     .filter(match => match.score > 0)
     .sort((a, b) => b.score - a.score || Number(a.topic.id === 'identity') - Number(b.topic.id === 'identity'));
   // Named subjects beat broad words such as "experience" or "projects".
-  const named = matches.find(({ topic }) => ['gunita', 'sillage', 'autotestgen', 'current', 'theoria', 'leadership', 'credentials', 'education'].includes(topic.id));
+  const named = matches.find(({ topic }) => ['gunita', 'sillage', 'autotestgen', 'contextdeck', 'labs', 'current', 'theoria', 'leadership', 'credentials', 'education'].includes(topic.id));
   const selected = named?.topic ?? matches[0]?.topic;
   if (selected) return { text: selected.text, sources: selected.sources, suggestions: selected.suggestions };
-  return { text: 'I couldn’t find an answer to that in James’s public profile. I can help with his QA experience, testing tools, education, credentials, hobby projects, or contact details.', sources: [resume, contact], suggestions: STARTER_QUESTIONS };
+  return { text: 'I couldn’t find an answer to that in James’s public profile. I can help with his QA experience, testing tools, education, credentials, side projects, or contact details.', sources: [resume, contact], suggestions: STARTER_QUESTIONS };
 }

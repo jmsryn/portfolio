@@ -66,3 +66,11 @@ test('all suggested follow-ups resolve to a documented topic', () => {
   }
   assert.ok(visited.size >= 10);
 });
+
+test('JR Gaid Labs and its products resolve to sourced answers', () => {
+  const labs = answerProfileQuestion('What is JR Gaid Labs?');
+  assert.match(labs.text, /independent software studio/);
+  assert.ok(labs.sources.some(source => source.href === 'https://jrgaidlabs.dev'));
+  assert.match(answerProfileQuestion('What is ContextDeck?').text, /beta/);
+  assert.match(answerProfileQuestion('Tell me about his side projects').text, /JR Gaid Labs/);
+});
