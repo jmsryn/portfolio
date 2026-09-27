@@ -1,0 +1,11 @@
+# Local records, secrets, and design working files are not deployment inputs.
+data/
+design/
+.env*
+.next/
+.next-preview/
+build/
+node_modules/
+docker-compose*.yml
+Dockerfile
+*.tsbuildinfo

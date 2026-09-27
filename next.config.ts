@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   // Allow verification builds to run without sharing the active dev server's cache.
   distDir: process.env.NEXT_OUTPUT_DIR || '.next',
+  outputFileTracingExcludes: {
+    '/api/visit': ['./data/**/*'],
+  },
   images: {
     domains: [
       "www.pngall.com",

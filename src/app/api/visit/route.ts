@@ -120,6 +120,11 @@ async function storeVisitData(visitData: VisitData): Promise<void> {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  // Vercel functions have no persistent local filesystem for visitor records.
+  if (process.env.VERCEL) {
+    return new NextResponse(null, { status: 204 });
+  }
+
   try {
     const ip = getClientIP(request);
     const userAgent = request.headers.get('user-agent') || 'unknown';
@@ -161,6 +166,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 }
 
 export async function GET(): Promise<NextResponse> {
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      { error: 'File-based visitor analytics are unavailable on Vercel' },
+      { status: 503, headers: { 'Cache-Control': 'no-store' } },
+    );
+  }
+
   try {
     const dataDir = path.join(process.cwd(), 'data');
     const visitsFile = path.join(dataDir, 'visits.json');
