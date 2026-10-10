@@ -11,6 +11,9 @@ import SpotifyNowPlaying from '@/components/SpotifyNowPlaying';
 import ProfileChat from '@/components/ProfileChat';
 import HeroStage from '@/components/HeroStage';
 import ImmersiveLayer from '@/components/ImmersiveLayer';
+import HeroTitle from '@/components/HeroTitle';
+import SectionMotif from '@/components/SectionMotif';
+import CareerTrajectory from '@/components/CareerTrajectory';
 
 export default function Home() {
   return (
@@ -28,7 +31,7 @@ export default function Home() {
               </span>
               Open to QA & SDET opportunities
             </div>
-            <h1 id="hero-title">QA at heart.<br /><span>Quality by design.</span></h1>
+            <HeroTitle />
             <p>I’m James Ryan Gaid, a QA Engineer. I test software, automate checks, and help teams release with confidence.</p>
             <div className="hero-actions">
               <a href="#experience" className="portfolio-button group t-arrow-glide">
@@ -67,6 +70,7 @@ export default function Home() {
             <Link href="/resume" className="text-link group t-arrow-glide">
               View full résumé <ArrowUpRight size={16} className="t-arrow-icon" />
             </Link>
+            <CareerTrajectory />
           </div>
           <div className="career-details"><Experience /></div>
         </div>
@@ -82,6 +86,7 @@ export default function Home() {
         </div>
         <div className="contact-layout" data-reveal="stagger">
           <div className="contact-intro">
+            <SectionMotif motif="release" />
             <span className="section-kicker">LET’S CONNECT</span>
             <h2>Your next release.<br />More confidence.</h2>
             <p>Looking for a QA Engineer or SDET? Let’s talk about your team and its testing challenges.</p>

@@ -7,6 +7,7 @@ import { useEffect } from 'react';
    - [data-reveal] / [data-reveal="stagger"]: enter as they scroll into view
    - [data-count]: counts up once visible
    - .career-details: --rail tracks how far the timeline has been read
+   - .career-trajectory: follows the .career-entry being read (year, role, --reach)
    - .project-item: pointer-driven tilt and glare
    - nav links: data-active follows the section in view */
 export default function ImmersiveLayer() {
@@ -60,6 +61,29 @@ export default function ImmersiveLayer() {
 
     // Scroll progress and the career timeline rail.
     const rail = document.querySelector<HTMLElement>('.career-details');
+    const layout = rail?.closest<HTMLElement>('.career-layout');
+    const entries = rail ? Array.from(rail.querySelectorAll<HTMLElement>('.career-entry')) : [];
+    const dots = Array.from(document.querySelectorAll<SVGCircleElement>('[data-ct-dot]'));
+    const readout = document.querySelector<HTMLElement>('[data-ct-readout]');
+    const pulse = document.querySelector<SVGCircleElement>('[data-ct-pulse]');
+    let activeEntry = 0;
+    const showEntry = (index: number) => {
+      const dot = dots[index];
+      if (!dot || !layout || !readout) return;
+      activeEntry = index;
+      const { year = '', title = '', org = '', reach = '0' } = dot.dataset;
+      layout.style.setProperty('--reach', reach);
+      dots.forEach((d, i) => d.toggleAttribute('data-on', i <= index));
+      pulse?.setAttribute('cx', dot.getAttribute('cx') ?? '0');
+      readout.querySelector('[data-ct-year]')!.textContent = year;
+      readout.querySelector('[data-ct-title]')!.textContent = title;
+      readout.querySelector('[data-ct-org]')!.textContent = org;
+      if (!reduce) {
+        readout.classList.remove('is-ticking');
+        void readout.offsetWidth;
+        readout.classList.add('is-ticking');
+      }
+    };
     let frame = 0;
     const onScroll = () => {
       cancelAnimationFrame(frame);
@@ -70,6 +94,9 @@ export default function ImmersiveLayer() {
           const rect = rail.getBoundingClientRect();
           const read = (window.innerHeight * 0.6 - rect.top) / rect.height;
           rail.style.setProperty('--rail', String(Math.min(1, Math.max(0, read))));
+          const line = window.innerHeight * 0.6;
+          const index = entries.reduce((found, entry, i) => (entry.getBoundingClientRect().top < line ? i : found), 0);
+          if (index !== activeEntry) showEntry(index);
         }
       });
     };

@@ -235,3 +235,117 @@
   .project-grid--labs { grid-template-columns: 1fr; }
   .work-heading { flex-wrap: wrap; }
 }
+
+/* ── Kinetic hero title ──────────────────────────────────────────── */
+.kinetic-title { position: relative; }
+.kt-word { display: inline-block; clip-path: inset(-.2em -.15em -.24em -.15em); }
+.kt-word > span { display: inline-block; }
+.kt-accent {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 100% .05em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.kinetic-title::after {
+  content: '';
+  position: absolute;
+  top: -.04em; bottom: .04em; left: -3em;
+  width: 3em;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 13%, transparent) calc(100% - 2px), var(--accent) calc(100% - 2px));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .kt-word > span { animation: kt-rise 1.1s var(--ease-smooth-out) both; animation-delay: calc(120ms + var(--w, 0) * 75ms); }
+  .kinetic-title::after { animation: kt-scan 1.5s cubic-bezier(.6, 0, .3, 1) 1s both; }
+  .kt-accent { animation: kt-underline 1s var(--ease-smooth-out) 2.1s both; }
+}
+@keyframes kt-rise { from { transform: translateY(135%) rotate(5deg); } to { transform: none; } }
+@keyframes kt-scan { 0% { left: -3em; opacity: 0; } 12%, 80% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes kt-underline { from { background-size: 0% .05em; } to { background-size: 100% .05em; } }
+
+/* ── Section motifs ──────────────────────────────────────────────── */
+.section-motif { height: 112px; margin: 0 0 30px; }
+.m-flag { stroke: var(--accent); opacity: 0; }
+.m-accent-text { fill: var(--accent); }
+.m-label-on { fill: var(--accent-foreground); }
+.m-bug { opacity: 0; }
+.m-arc-track { stroke: var(--border); stroke-width: 7; stroke-linecap: round; }
+.m-arc { stroke: var(--accent); stroke-width: 7; stroke-dasharray: 1; stroke-dashoffset: .04; }
+.m-needle { stroke: currentColor; stroke-width: 2; transform-box: view-box; transform-origin: 120px 104px; transform: rotate(83deg); }
+.m-bug, .m-fixed { transform-box: fill-box; transform-origin: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .m-scan-code { animation-name: m-scan-code; }
+  .m-flag { animation: m-flag 6s ease infinite; }
+  .m-bug { animation: m-bug 6s var(--ease-smooth-out) infinite; }
+  .m-fixed { animation: m-fixed 6s var(--ease-smooth-out) infinite; }
+  .m-runner-pipe { animation-name: m-run-pipe; }
+  /* Stages light as the runner reaches them (0, 23, 47, 70%) and reset together. */
+  .m-stage { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .m-stage-0 { animation: m-stage-0 6s var(--ease-smooth-out) infinite; }
+  .m-stage-1 { animation: m-stage-1 6s var(--ease-smooth-out) infinite; }
+  .m-stage-2 { animation: m-stage-2 6s var(--ease-smooth-out) infinite; }
+  .m-stage-3 { animation: m-stage-3 6s var(--ease-smooth-out) infinite; }
+  .m-arc { animation: m-gauge 6s var(--ease-smooth-out) infinite; }
+  .m-needle { animation: m-needle 6s var(--ease-smooth-out) infinite; }
+  .reveal-ready [data-reveal]:not(.is-inview) .section-motif * { animation-play-state: paused; }
+}
+@keyframes m-scan-code { 0% { transform: translateY(0); opacity: 0; } 3% { opacity: 1; } 30% { transform: translateY(60px); opacity: 1; } 34%, 100% { transform: translateY(60px); opacity: 0; } }
+@keyframes m-flag { 0%, 16% { opacity: 0; } 19%, 50% { opacity: 1; } 58%, 100% { opacity: 0; } }
+@keyframes m-bug { 0%, 18% { opacity: 0; transform: scale(.7); } 22%, 50% { opacity: 1; transform: scale(1); } 54%, 100% { opacity: 0; transform: scale(1); } }
+@keyframes m-fixed { 0%, 54% { opacity: 0; transform: scale(.7); } 58%, 90% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; transform: scale(1); } }
+@keyframes m-run-pipe { 0% { transform: translateX(0); opacity: 1; } 70% { transform: translateX(372px); opacity: 1; } 76%, 100% { transform: translateX(372px); opacity: 0; } }
+@keyframes m-stage-0 { 0% { opacity: 0; transform: scale(.85); } 4%, 90% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; } }
+@keyframes m-stage-1 { 0%, 23% { opacity: 0; transform: scale(.85); } 27%, 90% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; } }
+@keyframes m-stage-2 { 0%, 46% { opacity: 0; transform: scale(.85); } 50%, 90% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; } }
+@keyframes m-stage-3 { 0%, 69% { opacity: 0; transform: scale(.85); } 73%, 90% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; } }
+@keyframes m-gauge { 0% { stroke-dashoffset: 1; } 55%, 90% { stroke-dashoffset: .04; } 100% { stroke-dashoffset: 1; } }
+@keyframes m-needle { 0% { transform: rotate(-90deg); } 55%, 90% { transform: rotate(83deg); } 100% { transform: rotate(-90deg); } }
+
+/* ── Stat charts ─────────────────────────────────────────────────── */
+.stat-chart { display: grid; margin-top: 16px; font-family: var(--font-jetbrains-mono), monospace; font-size: 9px; letter-spacing: .04em; color: var(--muted-foreground); }
+.stat-chart i { display: block; border-radius: 2px; background: color-mix(in srgb, var(--accent) 28%, var(--border)); }
+.stat-years { grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; align-items: end; max-width: 180px; }
+.stat-years > span { display: grid; gap: 6px; justify-items: start; }
+.stat-years i { width: 100%; transform-origin: bottom; }
+.stat-years > span:last-child i { background: var(--accent); }
+.stat-compare { gap: 7px; max-width: 220px; }
+.stat-compare > span { display: grid; grid-template-columns: 44px 1fr; align-items: center; }
+.stat-compare i { height: 6px; transform-origin: left; }
+.stat-compare > span:last-child i { background: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready .stat-chart i { transform: scale(0); }
+  .reveal-ready .stat-years.is-inview i { animation: stat-grow-y .9s var(--ease-smooth-out) both; animation-delay: calc(250ms + var(--i, 0) * 90ms); }
+  .reveal-ready .stat-compare.is-inview i { animation: stat-grow-x 1.1s var(--ease-smooth-out) both; animation-delay: calc(250ms + var(--i, 0) * 220ms); }
+}
+@keyframes stat-grow-y { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes stat-grow-x { from { transform: scaleX(0); } to { transform: none; } }
+
+/* ── Career trajectory (scroll-driven) ───────────────────────────── */
+.career-trajectory { margin-top: 48px; max-width: 300px; }
+.ct-readout { display: grid; gap: 2px; }
+.ct-year { font-size: 64px; font-weight: 500; line-height: 1.05; letter-spacing: -.06em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.ct-role { font-size: 13px; font-weight: 500; margin-top: 6px; }
+.ct-org { font-size: 12px; color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.career-trajectory svg { display: block; width: 100%; margin-top: 20px; overflow: visible; }
+.ct-track { stroke: var(--border); stroke-width: 1.5; }
+.ct-reach { stroke: var(--accent); stroke-width: 2; transform-box: fill-box; transform-origin: right; transform: scaleX(var(--reach, 0)); }
+.ct-tick { fill: var(--muted-foreground); font-family: var(--font-jetbrains-mono), monospace; font-size: 9px; }
+.ct-dot { fill: var(--background); stroke: var(--muted-foreground); stroke-width: 1.5; }
+.ct-dot[data-on] { fill: var(--accent); stroke: var(--accent); }
+.ct-pulse { fill: color-mix(in srgb, var(--accent) 22%, transparent); transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .ct-reach { transition: transform .8s var(--ease-smooth-out); }
+  .ct-dot { transition: fill var(--duration-slow) var(--ease-smooth-out), stroke var(--duration-slow) var(--ease-smooth-out); }
+  .ct-pulse { animation: ct-pulse 2.4s var(--ease-smooth-out) infinite; }
+  .ct-readout.is-ticking > * { animation: ct-tick .55s var(--ease-smooth-out) both; }
+  .ct-readout.is-ticking > :nth-child(2) { animation-delay: 60ms; }
+  .ct-readout.is-ticking > :nth-child(3) { animation-delay: 110ms; }
+}
+@keyframes ct-pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(3); opacity: 0; } }
+@keyframes ct-tick { from { opacity: 0; translate: 0 .4em; filter: blur(3px); } }
+
+@media (max-width: 767px) {
+  .career-trajectory { display: none; }
+  .section-motif { height: 92px; margin-bottom: 24px; }
+}

@@ -5,6 +5,8 @@ const stack = {
   'Security & reporting': ['OWASP ZAP', 'Burp Suite', 'Allure', 'Xray', 'Qase'],
 };
 
+import SectionMotif from './SectionMotif';
+
 export default function TechStack() {
-  return <section id="techstack" className="stack-section"><h2>The tools behind it.</h2><div className="stack-groups">{Object.entries(stack).map(([category, items]) => <div key={category}><h3>{category}</h3><ul>{items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>;
+  return <section id="techstack" className="stack-section"><SectionMotif motif="pipeline" /><h2>The tools behind it.</h2><div className="stack-groups">{Object.entries(stack).map(([category, items]) => <div key={category}><h3>{category}</h3><ul>{items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>;
 }

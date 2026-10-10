@@ -79,6 +79,12 @@ const certs: CertEntry[] = [
   { title: 'Introduction to Playwright', issuer: 'Applitools', year: '2024', link: 'https://testautomationu.applitools.com/certificate/?id=4a4d8ca2' },
 ];
 
+// One milestone per .career-entry, in render order (CareerTrajectory mirrors these).
+export const careerMilestones = [
+  ...work.map((w) => ({ year: parseInt(w.period, 10), title: w.title, org: w.org })),
+  { year: parseInt(education.period, 10), title: education.degree, org: education.school },
+];
+
 function DetailEntry({
   title,
   sub,
